@@ -1,0 +1,1157 @@
+<!doctype html>
+<html lang="es">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>Migración a Google Cloud Platform - Presentación Ejecutiva</title>
+
+    <!-- Reveal.js CSS -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/reveal.js/4.3.1/reset.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/reveal.js/4.3.1/reveal.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/reveal.js/4.3.1/theme/white.min.css">
+
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700;800&family=JetBrains+Mono:wght@400;600&display=swap" rel="stylesheet">
+
+    <style>
+        :root {
+            /* Color Palette - Professional Blue/Green */
+            --primary-blue: #1a73e8;
+            --dark-blue: #0d47a1;
+            --success-green: #34a853;
+            --warning-orange: #fbbc04;
+            --alert-red: #ea4335;
+            --text-dark: #202124;
+            --text-gray: #5f6368;
+            --bg-light: #f8f9fa;
+
+            /* Typography */
+            --r-main-font: 'Inter', sans-serif;
+            --r-heading-font: 'Inter', sans-serif;
+            --r-code-font: 'JetBrains Mono', monospace;
+            --r-heading-text-transform: none;
+            --r-heading-font-weight: 700;
+
+            /* Colors */
+            --r-main-color: var(--text-dark);
+            --r-heading-color: var(--dark-blue);
+            --r-link-color: var(--primary-blue);
+            --r-selection-background-color: rgba(26, 115, 232, 0.2);
+        }
+
+        /* Base styles */
+        .reveal {
+            font-size: 32px;
+            font-weight: 400;
+        }
+
+        .reveal .slides {
+            text-align: left;
+        }
+
+        .reveal h1, .reveal h2, .reveal h3, .reveal h4 {
+            text-align: center;
+            margin-bottom: 1em;
+        }
+
+        .reveal h1 {
+            font-size: 2.2em;
+            font-weight: 800;
+            color: var(--dark-blue);
+            margin-bottom: 0.5em;
+        }
+
+        .reveal h2 {
+            font-size: 1.8em;
+            font-weight: 700;
+            color: var(--primary-blue);
+            border-bottom: 3px solid var(--primary-blue);
+            padding-bottom: 0.3em;
+            margin-bottom: 0.8em;
+        }
+
+        .reveal h3 {
+            font-size: 1.4em;
+            font-weight: 700;
+            color: var(--text-dark);
+            margin: 0.8em 0 0.5em 0;
+        }
+
+        .reveal h4 {
+            font-size: 1.1em;
+            font-weight: 600;
+            color: var(--text-gray);
+            margin: 0.6em 0 0.4em 0;
+        }
+
+        /* Utilities */
+        .reveal .small { font-size: 0.7em; }
+        .reveal .tiny { font-size: 0.5em; }
+        .reveal .center-text { text-align: center !important; }
+        .reveal .right-text { text-align: right !important; }
+
+        /* Key metrics */
+        .key-metric {
+            color: var(--success-green);
+            font-size: 2.5em;
+            font-weight: 800;
+            margin: 0.2em 0;
+            text-align: center;
+        }
+
+        .key-result {
+            font-size: 1.1em;
+            color: var(--text-gray);
+            text-align: center;
+            margin: 0;
+        }
+
+        /* Boxes and cards */
+        .info-box {
+            background: var(--bg-light);
+            border-left: 4px solid var(--primary-blue);
+            padding: 1em 1.5em;
+            margin: 1em 0;
+            border-radius: 4px;
+        }
+
+        .success-box {
+            background: rgba(52, 168, 83, 0.1);
+            border-left: 4px solid var(--success-green);
+            padding: 1em 1.5em;
+            margin: 1em 0;
+            border-radius: 4px;
+        }
+
+        .warning-box {
+            background: rgba(251, 188, 4, 0.1);
+            border-left: 4px solid var(--warning-orange);
+            padding: 1em 1.5em;
+            margin: 1em 0;
+            border-radius: 4px;
+        }
+
+        .alert-box {
+            background: rgba(234, 67, 53, 0.1);
+            border-left: 4px solid var(--alert-red);
+            padding: 1em 1.5em;
+            margin: 1em 0;
+            border-radius: 4px;
+        }
+
+        /* Tables */
+        .reveal table {
+            margin: 1em auto;
+            font-size: 0.75em;
+            border-collapse: collapse;
+            width: 100%;
+        }
+
+        .reveal table th {
+            background: var(--dark-blue);
+            color: white;
+            font-weight: 700;
+            padding: 0.6em;
+            text-align: left;
+        }
+
+        .reveal table td {
+            padding: 0.5em;
+            border-bottom: 1px solid #e0e0e0;
+        }
+
+        .reveal table tr:hover {
+            background: var(--bg-light);
+        }
+
+        /* Lists */
+        .reveal ul, .reveal ol {
+            margin: 0.5em 0;
+        }
+
+        .reveal li {
+            margin: 0.4em 0;
+            line-height: 1.4;
+        }
+
+        .reveal ul ul, .reveal ol ol {
+            font-size: 0.9em;
+            margin-top: 0.3em;
+        }
+
+        /* Code blocks */
+        .reveal pre {
+            background: #2d2d2d;
+            color: #f8f8f2;
+            padding: 1em;
+            border-radius: 8px;
+            font-size: 0.55em;
+            line-height: 1.4;
+            margin: 1em 0;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+        }
+
+        .reveal code {
+            font-family: var(--r-code-font);
+            background: rgba(0,0,0,0.05);
+            padding: 0.2em 0.4em;
+            border-radius: 3px;
+        }
+
+        /* Mermaid diagrams */
+        .reveal .mermaid {
+            background: white;
+            padding: 1em;
+            border-radius: 8px;
+            margin: 1em auto;
+            width: 100%;
+            max-width: 100%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .reveal .mermaid svg {
+            max-width: 100%;
+            height: auto;
+        }
+
+        /* Flex layouts */
+        .flex-container {
+            display: flex;
+            justify-content: space-around;
+            align-items: flex-start;
+            gap: 2em;
+            margin: 1.5em 0;
+        }
+
+        .flex-item {
+            flex: 1;
+            text-align: center;
+        }
+
+        /* Two-column layout */
+        .two-columns {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 2em;
+            margin: 1em 0;
+        }
+
+        /* Badges */
+        .badge {
+            display: inline-block;
+            padding: 0.3em 0.8em;
+            border-radius: 12px;
+            font-size: 0.7em;
+            font-weight: 600;
+            margin: 0 0.3em;
+        }
+
+        .badge-success { background: var(--success-green); color: white; }
+        .badge-warning { background: var(--warning-orange); color: var(--text-dark); }
+        .badge-alert { background: var(--alert-red); color: white; }
+        .badge-info { background: var(--primary-blue); color: white; }
+
+        /* Title slide */
+        .title-slide h1 {
+            font-size: 2.5em;
+            margin-top: 1em;
+        }
+
+        .title-slide h2 {
+            font-size: 1.5em;
+            border: none;
+            color: var(--text-gray);
+            font-weight: 400;
+        }
+
+        .title-slide p {
+            text-align: center;
+            color: var(--text-gray);
+            font-size: 0.9em;
+        }
+
+        /* Footer info */
+        .slide-footer {
+            position: absolute;
+            bottom: 1em;
+            right: 1em;
+            font-size: 0.5em;
+            color: var(--text-gray);
+        }
+
+        /* Emphasis */
+        .reveal strong {
+            color: var(--dark-blue);
+            font-weight: 700;
+        }
+
+        .highlight {
+            background: rgba(251, 188, 4, 0.3);
+            padding: 0.1em 0.3em;
+            border-radius: 3px;
+        }
+
+        /* Timeline */
+        .timeline {
+            font-family: var(--r-code-font);
+            font-size: 0.6em;
+            line-height: 1.8;
+            background: #2d2d2d;
+            color: #f8f8f2;
+            padding: 1em;
+            border-radius: 8px;
+            white-space: pre;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="reveal">
+        <div class="slides">
+
+            <!-- Slide 1: Título -->
+            <section class="title-slide">
+                <h1>Migración a Google Cloud Platform</h1>
+                <h2>Plataforma Cloud Híbrida Edge-First</h2>
+                <p style="margin-top: 3em;">Presentación para el Comité Ejecutivo</p>
+                <p><strong>Fecha:</strong> 2025-11-01 | <strong>Versión:</strong> 1.0</p>
+                <p style="margin-top: 2em; font-size: 0.8em;"><em>Presentado por: Líder de Arquitectura Cloud & FinOps</em></p>
+            </section>
+
+            <!-- Slide 2: Decisión Requerida -->
+            <section>
+                <h2>Decisión Requerida</h2>
+
+                <div class="success-box" style="margin: 2em 0; text-align: center;">
+                    <h3 style="margin-top: 0;">Aprobación de Migración a Plataforma Cloud Híbrida (GCP)</h3>
+                    <p style="font-size: 1.3em; margin: 0.5em 0;">
+                        <strong>Inversión:</strong> $2.15M CAPEX |
+                        <strong>ROI:</strong> 114% a 3 años |
+                        <strong>Payback:</strong> 11 meses
+                    </p>
+                </div>
+
+                <h3>¿Qué estamos solicitando?</h3>
+                <ul>
+                    <li>✅ Aprobación del proyecto y cronograma (18 meses)</li>
+                    <li>✅ Autorización de inversión (CAPEX $2.15M)</li>
+                    <li>✅ Aprobación del plan de capacitación y staffing</li>
+                </ul>
+
+                <h3>¿Por qué ahora?</h3>
+                <div class="alert-box">
+                    <ul style="margin: 0;">
+                        <li>⚠️ <strong>35% de bases de datos fuera de soporte</strong> (riesgo de seguridad crítico)</li>
+                        <li>⚠️ <strong>$3.2M anuales perdidos</strong> por cortes de energía en plantas</li>
+                        <li>⚠️ <strong>87% de costos TI son fijos</strong> (imposibilita agilidad de negocio)</li>
+                    </ul>
+                </div>
+
+                <p class="center-text small"><em>[DATO VALIDADO - modelo-financiero.md] Ahorro proyectado: <strong>$8.4M a 3 años</strong></em></p>
+            </section>
+
+            <!-- Slide 3: El Problema -->
+            <section>
+                <h2>El Problema - Situación Actual</h2>
+
+                <h3>Infraestructura Envejecida y en Riesgo</h3>
+                <pre style="font-size: 0.45em;">
+🏭 PLANTA MONTERREY        🏭 PLANTA GUADALAJARA      🏭 PLANTA TIJUANA
+    ├─ 127 servidores          ├─ 126 servidores          ├─ 127 servidores
+    ├─ 103 BDs SQL Server      ├─ 103 BDs SQL Server      ├─ 104 BDs SQL Server
+    ├─ 23 SCADA                ├─ 24 SCADA                ├─ 23 SCADA
+    └─ DC sub-Tier 3           └─ DC sub-Tier 3           └─ DC sub-Tier 3 ⚠️
+        (sin redundancia)          (sin redundancia)          (4 cortes en 2024)</pre>
+
+                <p class="center-text small"><em>[DATO VALIDADO] Total: <strong>380 servidores | 310 BDs SQL | 70 SCADA</strong></em></p>
+
+                <h3>Cinco Riesgos Críticos</h3>
+                <table style="font-size: 0.65em;">
+                    <thead>
+                        <tr>
+                            <th style="width: 5%; text-align: center;">#</th>
+                            <th style="width: 50%;">Riesgo</th>
+                            <th style="width: 35%;">Impacto Anual</th>
+                            <th style="width: 10%; text-align: center;">Estado</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td style="text-align: center;">1</td>
+                            <td><strong>100 SQL 2008/2012 sin soporte</strong></td>
+                            <td>Exposición a vulnerabilidades sin parches</td>
+                            <td style="text-align: center; font-size: 1.5em;">❌</td>
+                        </tr>
+                        <tr>
+                            <td style="text-align: center;">2</td>
+                            <td><strong>Cortes de energía (Tijuana)</strong></td>
+                            <td>$3.2M pérdida de producción</td>
+                            <td style="text-align: center; font-size: 1.5em;">❌</td>
+                        </tr>
+                        <tr>
+                            <td style="text-align: center;">3</td>
+                            <td><strong>87% costos fijos</strong></td>
+                            <td>Imposibilita escalar según demanda</td>
+                            <td style="text-align: center; font-size: 1.5em;">❌</td>
+                        </tr>
+                        <tr>
+                            <td style="text-align: center;">4</td>
+                            <td><strong>200+ Stored Procedures con .exe</strong></td>
+                            <td>Deuda técnica, bloquea modernización</td>
+                            <td style="text-align: center; font-size: 1.5em;">❌</td>
+                        </tr>
+                        <tr>
+                            <td style="text-align: center;">5</td>
+                            <td><strong>Silos de datos (sin consolidación)</strong></td>
+                            <td>Imposibilita analítica multi-planta</td>
+                            <td style="text-align: center; font-size: 1.5em;">❌</td>
+                        </tr>
+                    </tbody>
+                </table>
+
+                <div class="warning-box center-text" style="margin-top: 1em;">
+                    <strong>Costo de No Hacer Nada:</strong> $15.7M a 3 años + riesgo de incidente de seguridad ($5M+)
+                </div>
+            </section>
+
+            <!-- Slide 4: La Solución -->
+            <section>
+                <h2>La Solución - Arquitectura "Edge-First"</h2>
+
+                <h3>Principios de Diseño</h3>
+                <div class="mermaid">
+flowchart LR
+    subgraph edge["EDGE (3 Plantas - GDC Edge)"]
+        direction LR
+        E1[GKE + Kafka Edge] -->|RPO/RTO=0| E2[Operación Autónoma]
+    end
+
+    subgraph cloud["CLOUD (GCP us-central1)"]
+        direction LR
+        C1[Kafka Hub] --> C2[Data Lakehouse] --> C3[BigQuery] --> C4[Analítica Multi-Planta]
+    end
+
+    edge -.->|Cluster Linking<br/>RPO segundos| cloud
+
+    style E2 fill:#4CAF50,color:#fff,stroke:#2E7D32,stroke-width:3px
+    style C4 fill:#2196F3,color:#fff,stroke:#1565C0,stroke-width:3px
+                </div>
+
+                <h3>Componentes Clave</h3>
+                <table style="font-size: 0.65em;">
+                    <thead>
+                        <tr>
+                            <th style="width: 30%;">Componente</th>
+                            <th style="width: 30%;">Tecnología</th>
+                            <th style="width: 40%;">Beneficio Clave</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td><strong>Operación Local</strong></td>
+                            <td>Google Distributed Cloud (GDC) Edge</td>
+                            <td>RPO/RTO=0 para producción</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Plataforma de Eventos</strong></td>
+                            <td>Confluent Kafka (5 clusters Hub-and-Spoke)</td>
+                            <td>Desacopla sistemas, habilita innovación</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Conectividad Privada</strong></td>
+                            <td>Dual Interconnect 2x1Gbps + PSC</td>
+                            <td>Sin IPs públicas, cifrado mTLS</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Datos Consolidados</strong></td>
+                            <td>Lakehouse (GCS) + Data Warehouse (BigQuery)</td>
+                            <td>Analítica multi-planta por primera vez</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Gobierno Unificado</strong></td>
+                            <td>Anthos + GitOps + OPA</td>
+                            <td>Gestión consistente edge + cloud</td>
+                        </tr>
+                    </tbody>
+                </table>
+
+                <p class="center-text small" style="margin-top: 1em;">
+                    <em>[DATO VALIDADO] Arquitectura validada por 8 agentes especializados y consensuada por equipo multidisciplinario</em>
+                </p>
+            </section>
+
+            <!-- Slide 5: Caso de Negocio -->
+            <section>
+                <h2>Caso de Negocio - ROI Excepcional</h2>
+
+                <h3>Comparativa de TCO a 3 Años</h3>
+                <div class="two-columns" style="font-size: 0.7em;">
+                    <div>
+                        <h4>ON-PREMISE (Actual)</h4>
+                        <div style="background: #ffebee; padding: 1em; border-radius: 8px;">
+                            <p style="font-size: 2em; font-weight: 800; color: var(--alert-red); text-align: center; margin: 0;">$15,735,000</p>
+                            <ul style="margin-top: 1em;">
+                                <li>Hardware: $5.9M (38%)</li>
+                                <li>Licencias: $4.5M (29%)</li>
+                                <li>Personal: $3.6M (23%)</li>
+                                <li>Red/Otros: $1.7M (10%)</li>
+                            </ul>
+                        </div>
+                    </div>
+                    <div>
+                        <h4>CLOUD (Proyectado)</h4>
+                        <div style="background: #e8f5e9; padding: 1em; border-radius: 8px;">
+                            <p style="font-size: 2em; font-weight: 800; color: var(--success-green); text-align: center; margin: 0;">$7,358,462</p>
+                            <ul style="margin-top: 1em;">
+                                <li>CAPEX (one-time): $2.15M</li>
+                                <li>Cómputo/Storage: $2.8M</li>
+                                <li>Confluent/Harness: $0.9M</li>
+                                <li>Personal: $1.5M</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="success-box center-text" style="margin: 1em 0; font-size: 1.3em;">
+                    <strong>AHORRO: $8.4M (53.2%)</strong>
+                </div>
+
+                <h3>Métricas Financieras</h3>
+                <table style="font-size: 0.7em;">
+                    <thead>
+                        <tr>
+                            <th style="width: 30%;">Métrica</th>
+                            <th style="width: 20%; text-align: right;">Objetivo</th>
+                            <th style="width: 20%; text-align: right;">Resultado</th>
+                            <th style="width: 30%; text-align: center;">Estado</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td><strong>ROI a 3 Años</strong></td>
+                            <td style="text-align: right;">&gt;15%</td>
+                            <td style="text-align: right; color: var(--success-green); font-weight: 700; font-size: 1.2em;">113.8%</td>
+                            <td style="text-align: center;">✅ <strong>Excede 7.5x</strong></td>
+                        </tr>
+                        <tr>
+                            <td><strong>Payback</strong></td>
+                            <td style="text-align: right;">&lt;24 meses</td>
+                            <td style="text-align: right; color: var(--success-green); font-weight: 700; font-size: 1.2em;">11 meses</td>
+                            <td style="text-align: center;">✅ <strong>Excede 2x</strong></td>
+                        </tr>
+                        <tr>
+                            <td><strong>OPEX Anual</strong></td>
+                            <td style="text-align: right;">&lt;$5.2M</td>
+                            <td style="text-align: right; color: var(--success-green); font-weight: 700; font-size: 1.2em;">$2.3M</td>
+                            <td style="text-align: center;">✅ <strong>Reducción 56%</strong></td>
+                        </tr>
+                        <tr>
+                            <td><strong>CAPEX</strong></td>
+                            <td style="text-align: right;">&lt;$2.0M</td>
+                            <td style="text-align: right; color: var(--warning-orange); font-weight: 700; font-size: 1.2em;">$2.15M</td>
+                            <td style="text-align: center;">⚠️ <strong>Déficit $150K</strong></td>
+                        </tr>
+                    </tbody>
+                </table>
+
+                <p class="center-text small" style="margin-top: 1em;">
+                    <strong>Reducción de Costo por Unidad Producida:</strong> $3.36 → $1.54 (54% ahorro)<br>
+                    <em>[DATO VALIDADO - modelo-financiero.md] Calculado con script Python auditable sobre datos validados</em>
+                </p>
+            </section>
+
+            <!-- Slide 6: Análisis de Sensibilidad -->
+            <section>
+                <h2>Análisis de Sensibilidad - Robustez Financiera</h2>
+
+                <h3>¿Qué pasa si los supuestos están equivocados?</h3>
+                <table style="font-size: 0.7em;">
+                    <thead>
+                        <tr>
+                            <th style="width: 15%;">Escenario</th>
+                            <th style="width: 40%;">Supuestos</th>
+                            <th style="width: 15%; text-align: right;">ROI</th>
+                            <th style="width: 15%; text-align: right;">Payback</th>
+                            <th style="width: 15%; text-align: center;">¿Cumple?</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr style="background: rgba(52, 168, 83, 0.1);">
+                            <td><strong>Mejor Caso</strong></td>
+                            <td>GDC=$100K/planta, Confluent=$150K/año, 6 FTEs</td>
+                            <td style="text-align: right; font-weight: 700; font-size: 1.2em; color: var(--success-green);">144%</td>
+                            <td style="text-align: right; font-weight: 700;">8 meses</td>
+                            <td style="text-align: center; font-size: 1.5em;">✅</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Caso Base</strong></td>
+                            <td>GDC=$150K/planta, Confluent=$200K/año, 8 FTEs</td>
+                            <td style="text-align: right; font-weight: 700; font-size: 1.2em; color: var(--success-green);">114%</td>
+                            <td style="text-align: right; font-weight: 700;">11 meses</td>
+                            <td style="text-align: center; font-size: 1.5em;">✅</td>
+                        </tr>
+                        <tr style="background: rgba(251, 188, 4, 0.1);">
+                            <td><strong>Peor Caso</strong></td>
+                            <td>GDC=$200K/planta, Confluent=$300K/año, 10 FTEs</td>
+                            <td style="text-align: right; font-weight: 700; font-size: 1.2em; color: var(--warning-orange);">84%</td>
+                            <td style="text-align: right; font-weight: 700;">15 meses</td>
+                            <td style="text-align: center; font-size: 1.5em;">✅</td>
+                        </tr>
+                    </tbody>
+                </table>
+
+                <h3 style="margin-top: 1.5em;">Sensibilidad al Costo de GDC Edge (Supuesto Crítico)</h3>
+                <pre style="font-size: 0.5em; line-height: 1.6;">
+ROI según Costo de Hardware GDC Edge por Planta
+
+160% │
+     │
+140% │                    ● $100K (optimista)
+     │
+120% │              ● $150K (caso base)
+     │
+100% │        ● $200K (pesimista)
+     │
+ 80% ├────┼────┼────┼────┼────┼────►
+     $100K   $150K   $200K
+
+     OBJETIVO: >15% ────────────────────
+                </pre>
+
+                <div class="success-box" style="margin-top: 1em;">
+                    <h3 style="margin-top: 0;">Conclusión Crítica</h3>
+                    <p style="margin: 0; font-size: 1.1em;">
+                        <strong>Incluso en el peor escenario razonable</strong> (todos los supuestos críticos se desvían -33%),
+                        el proyecto sigue generando <strong>ROI del 84%</strong> (5.6x el objetivo) y <strong>payback de 15 meses</strong>
+                        (dentro del objetivo de 24 meses).
+                    </p>
+                    <p class="center-text" style="margin-top: 0.5em; font-size: 1.3em; font-weight: 700; color: var(--success-green);">
+                        El proyecto es financieramente robusto.
+                    </p>
+                </div>
+            </section>
+
+            <!-- Slide 7: Arquitectura de Alto Nivel -->
+            <section>
+                <h2>Arquitectura de Alto Nivel</h2>
+
+                <h3>Vista End-to-End: Del Sensor al Dashboard Ejecutivo</h3>
+                <div class="mermaid">
+flowchart LR
+    subgraph edge["EDGE (Planta)"]
+        direction LR
+        A[Sensor SCADA] -->|OPC-UA| B[Kafka Connect] --> C[Kafka-Edge] --> D["Spark<br/>BRONZE"]
+    end
+
+    subgraph cloud["CLOUD (GCP)"]
+        direction LR
+        E["Kafka-Hub"] --> F["Spark<br/>SILVER"] --> G["Spark<br/>GOLD"] --> H[BigQuery] --> I[Looker]
+    end
+
+    subgraph dr["DR"]
+        J[Kafka-DR]
+    end
+
+    D -.->|Cluster Linking| E
+    E -.->|Replicación| J
+
+    style D fill:#4CAF50,color:#fff,stroke:#2E7D32,stroke-width:3px
+    style I fill:#2196F3,color:#fff,stroke:#1565C0,stroke-width:3px
+    style J fill:#FF9800,color:#fff,stroke:#EF6C00,stroke-width:3px
+                </div>
+
+                <h3>Beneficios de la Arquitectura Medallion Distribuida</h3>
+                <table style="font-size: 0.7em;">
+                    <thead>
+                        <tr>
+                            <th style="width: 25%;">Capa</th>
+                            <th style="width: 25%;">Ubicación</th>
+                            <th style="width: 50%;">Beneficio</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td><strong>RAW + BRONZE</strong></td>
+                            <td>Edge (Plantas)</td>
+                            <td>Reduce tráfico en Interconnect en <strong>60-70%</strong></td>
+                        </tr>
+                        <tr>
+                            <td><strong>SILVER + GOLD</strong></td>
+                            <td>Cloud (GCP)</td>
+                            <td>Analítica multi-planta con datos consolidados</td>
+                        </tr>
+                    </tbody>
+                </table>
+
+                <p class="center-text small" style="margin-top: 1em;">
+                    <em>[DATO VALIDADO - decisiones-consensuadas.md] Diseño consensuado por el equipo multidisciplinario tras debate técnico</em>
+                </p>
+            </section>
+
+            <!-- Slide 8: Plan de Migración -->
+            <section>
+                <h2>Plan de Migración - 3 Ondas en 18 Meses</h2>
+
+                <h3>Timeline y Presupuesto por Onda</h3>
+                <div class="timeline">MES:  1   2   3   4   5   6   7   8   9  10  11  12  13  14  15  16  17  18
+
+ONDA 1 (30%): ████████████████░░░░░░░░░░░░░░░░░░░░░░░░
+- 100 SQL 2008/2012 ⚠️ FUERA DE SOPORTE
+- Presupuesto: $1.1M | Go/No-Go: PoC Debezium <5% impacto
+
+ONDA 2 (60%):         ░░░░░░░░░░░░████████████████████░░░░
+- 90 SQL 2019 no críticas + 60 apps IIS
+- Presupuesto: $920K
+
+ONDA 3 (10%):                     ░░░░░░░░░░░░████████████
+- 120 SQL críticas + 40 SCADA antiguos
+- Presupuesto: $950K | Ventanas de mantenimiento dominicales
+
+FREEZE:   ░░░░░░░░ (15-Nov a 05-Ene - Sin cambios críticos)</div>
+
+                <h3>Hitos Go/No-Go Críticos</h3>
+                <table style="font-size: 0.65em;">
+                    <thead>
+                        <tr>
+                            <th style="width: 10%; text-align: center;">Mes</th>
+                            <th style="width: 25%;">Hito</th>
+                            <th style="width: 35%;">Criterio de Éxito</th>
+                            <th style="width: 30%;">Consecuencia si Falla</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td style="text-align: center; font-weight: 700; font-size: 1.2em;">3</td>
+                            <td><strong>PoC Debezium</strong></td>
+                            <td>Impacto &lt;5% CPU/IO en DB origen</td>
+                            <td><span class="badge badge-alert">CRÍTICO</span> Cambiar a estrategia snapshot+downtime</td>
+                        </tr>
+                        <tr>
+                            <td style="text-align: center; font-weight: 700; font-size: 1.2em;">6</td>
+                            <td><strong>100 SQL 2008-12 migradas</strong></td>
+                            <td>100% migradas, calidad &gt;98%</td>
+                            <td>Pausar Onda 2 hasta resolver</td>
+                        </tr>
+                        <tr>
+                            <td style="text-align: center; font-weight: 700; font-size: 1.2em;">18</td>
+                            <td><strong>Decomisionamiento on-prem</strong></td>
+                            <td>100% sistemas en cloud</td>
+                            <td>Operación BAU retrasada</td>
+                        </tr>
+                    </tbody>
+                </table>
+
+                <p class="center-text small" style="margin-top: 1em;">
+                    <em>[DATO VALIDADO - Plan_Gantt.md] Presupuesto total: <strong>$5.76M a 18 meses</strong> (incluye OPEX on-prem residual)</em>
+                </p>
+            </section>
+
+            <!-- Slide 9: Riesgos y Mitigaciones -->
+            <section>
+                <h2>Riesgos y Mitigaciones</h2>
+
+                <h3>Top 5 Riesgos Críticos/Altos</h3>
+                <table style="font-size: 0.6em;">
+                    <thead>
+                        <tr>
+                            <th style="width: 8%; text-align: center;">ID</th>
+                            <th style="width: 27%;">Riesgo</th>
+                            <th style="width: 10%; text-align: center;">Prob.</th>
+                            <th style="width: 10%; text-align: center;">Impacto</th>
+                            <th style="width: 25%;">Mitigación</th>
+                            <th style="width: 20%;">Acción Inmediata</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td style="text-align: center; font-weight: 700;">R-10</td>
+                            <td>Costo GDC Edge excede $150K/planta</td>
+                            <td style="text-align: center;">Med</td>
+                            <td style="text-align: center;"><span class="badge badge-alert">Alto</span></td>
+                            <td>Cotización formal de Google</td>
+                            <td>✅ <strong>Día 20</strong></td>
+                        </tr>
+                        <tr>
+                            <td style="text-align: center; font-weight: 700;">R-04</td>
+                            <td>Brecha de habilidades retrasa adopción</td>
+                            <td style="text-align: center;">Alta</td>
+                            <td style="text-align: center;"><span class="badge badge-alert">Alto</span></td>
+                            <td>Capacitación + expertos externos</td>
+                            <td>✅ <strong>Día 25</strong></td>
+                        </tr>
+                        <tr>
+                            <td style="text-align: center; font-weight: 700;">R-13</td>
+                            <td>Hardware GDC Edge llega con &gt;3 meses retraso</td>
+                            <td style="text-align: center;">Med</td>
+                            <td style="text-align: center;"><span class="badge badge-alert">Alto</span></td>
+                            <td>Confirmar cronograma con Google</td>
+                            <td>✅ <strong>Día 7</strong></td>
+                        </tr>
+                        <tr>
+                            <td style="text-align: center; font-weight: 700;">R-05</td>
+                            <td>Picos de tráfico saturan Interconnect 2Gbps</td>
+                            <td style="text-align: center;">Med</td>
+                            <td style="text-align: center;"><span class="badge badge-alert">Alto</span></td>
+                            <td>QoS + throttling en Kafka</td>
+                            <td>Durante Onda 1</td>
+                        </tr>
+                        <tr>
+                            <td style="text-align: center; font-weight: 700;">R-02</td>
+                            <td>RPO segundos para DR no satisface</td>
+                            <td style="text-align: center;">Baja</td>
+                            <td style="text-align: center;"><span class="badge badge-alert">Alto</span></td>
+                            <td>Comunicar que RPO=0 es solo local</td>
+                            <td>Antes de Onda 3</td>
+                        </tr>
+                    </tbody>
+                </table>
+
+                <h3 style="margin-top: 1.5em;">Plan de Rollback por Onda</h3>
+                <table style="font-size: 0.7em;">
+                    <thead>
+                        <tr>
+                            <th style="width: 15%; text-align: center;">Onda</th>
+                            <th style="width: 40%;">Escenario de Falla</th>
+                            <th style="width: 20%; text-align: center;">Tiempo de Rollback</th>
+                            <th style="width: 25%;">Impacto</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td style="text-align: center; font-weight: 700; font-size: 1.2em;">1</td>
+                            <td>PoC Debezium falla</td>
+                            <td style="text-align: center; font-weight: 700;">Inmediato</td>
+                            <td>Cambiar estrategia, +2 meses</td>
+                        </tr>
+                        <tr>
+                            <td style="text-align: center; font-weight: 700; font-size: 1.2em;">2</td>
+                            <td>App migrada con bug crítico</td>
+                            <td style="text-align: center; font-weight: 700;">&lt;30 minutos</td>
+                            <td>Solo esa app vuelve a on-prem</td>
+                        </tr>
+                        <tr>
+                            <td style="text-align: center; font-weight: 700; font-size: 1.2em;">3</td>
+                            <td>Cutover de sistema crítico falla</td>
+                            <td style="text-align: center; font-weight: 700;">&lt;2 horas</td>
+                            <td>Reintentar en próxima ventana</td>
+                        </tr>
+                    </tbody>
+                </table>
+
+                <p class="center-text small" style="margin-top: 1em;">
+                    <em>[DATO VALIDADO - matriz-riesgos.md] 13 riesgos identificados y mitigados. Los 3 críticos tienen acciones en primeros 30 días.</em>
+                </p>
+            </section>
+
+            <!-- Slide 10: Decisión y Próximos 30 Días -->
+            <section>
+                <h2>Decisión Requerida y Próximos 30 Días</h2>
+
+                <h3>¿Qué necesitamos del Comité Ejecutivo HOY?</h3>
+                <div class="info-box">
+                    <ol style="font-size: 1.1em; line-height: 1.6;">
+                        <li><strong>✅ Aprobación del Proyecto</strong> - Luz verde para iniciar Fase de Movilización (Onda 1)</li>
+                        <li><strong>✅ Aprobación de Inversión</strong> - CAPEX de $2.15M (o estrategia de ajuste a $2.0M)</li>
+                        <li><strong>✅ Aprobación de Staffing</strong> - Capacitación de 12 FTEs existentes + Contratación de 1-2 expertos externos GCP/Anthos</li>
+                    </ol>
+                </div>
+
+                <h3>Acciones Críticas - Primeros 30 Días</h3>
+                <table style="font-size: 0.7em;">
+                    <thead>
+                        <tr>
+                            <th style="width: 8%; text-align: center;">#</th>
+                            <th style="width: 40%;">Acción</th>
+                            <th style="width: 32%;">Responsable</th>
+                            <th style="width: 20%; text-align: center;">Fecha Límite</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td style="text-align: center; font-weight: 700; font-size: 1.2em;">1</td>
+                            <td><strong>Presentar Caso de Negocio</strong></td>
+                            <td>CIO</td>
+                            <td style="text-align: center; font-weight: 700;">Día 15</td>
+                        </tr>
+                        <tr>
+                            <td style="text-align: center; font-weight: 700; font-size: 1.2em;">2</td>
+                            <td><strong>Cotización GDC Edge</strong></td>
+                            <td>Arquitecto Cloud</td>
+                            <td style="text-align: center; font-weight: 700;">Día 20</td>
+                        </tr>
+                        <tr>
+                            <td style="text-align: center; font-weight: 700; font-size: 1.2em;">3</td>
+                            <td><strong>Cotización Confluent</strong></td>
+                            <td>FinOps Lead</td>
+                            <td style="text-align: center; font-weight: 700;">Día 20</td>
+                        </tr>
+                        <tr>
+                            <td style="text-align: center; font-weight: 700; font-size: 1.2em;">4</td>
+                            <td><strong>Kick-off Capacitación</strong></td>
+                            <td>CIO</td>
+                            <td style="text-align: center; font-weight: 700;">Día 25</td>
+                        </tr>
+                        <tr>
+                            <td style="text-align: center; font-weight: 700; font-size: 1.2em;">5</td>
+                            <td><strong>Contratación Expertos</strong></td>
+                            <td>RRHH</td>
+                            <td style="text-align: center; font-weight: 700;">Día 30</td>
+                        </tr>
+                    </tbody>
+                </table>
+
+                <div class="two-columns" style="margin-top: 1.5em; font-size: 0.85em;">
+                    <div class="success-box">
+                        <h4 style="margin-top: 0;">¿Qué pasa si aprobamos?</h4>
+                        <ul style="margin: 0;">
+                            <li><strong>Día 30:</strong> Expertos GCP contratados, equipo entrenado</li>
+                            <li><strong>Día 60:</strong> Hardware GDC Edge ordenado, Interconnect activo</li>
+                            <li><strong>Día 90:</strong> Primeras 10 BDs migradas, primeros resultados visibles</li>
+                            <li><strong>Mes 18:</strong> 100% en cloud, ahorro de $2.9M/año comienza a materializarse</li>
+                        </ul>
+                    </div>
+                    <div class="alert-box">
+                        <h4 style="margin-top: 0;">¿Qué pasa si NO aprobamos?</h4>
+                        <ul style="margin: 0;">
+                            <li>Continuar con riesgo de seguridad en 100 BDs sin soporte</li>
+                            <li>Continuar perdiendo $3.2M/año por cortes de energía</li>
+                            <li>Perder oportunidad de ahorro de $8.4M a 3 años</li>
+                            <li>Imposibilitar analítica multi-planta y futuras iniciativas de IA</li>
+                        </ul>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Slide 11: Recomendación Final -->
+            <section>
+                <h2>Recomendación Final</h2>
+
+                <div class="success-box center-text" style="margin: 2em 0; padding: 2em;">
+                    <h1 style="margin: 0; font-size: 2.5em; color: var(--success-green);">APROBAR</h1>
+                    <p style="font-size: 1.3em; margin: 0.5em 0 0 0;">el Proyecto de Migración a GCP</p>
+                </div>
+
+                <h3>Resumen Ejecutivo</h3>
+                <table style="font-size: 0.7em;">
+                    <thead>
+                        <tr>
+                            <th style="width: 30%;">Aspecto</th>
+                            <th style="width: 70%;">Evaluación</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td><strong>Caso Financiero</strong></td>
+                            <td>✅ <strong>ROI 114%</strong>, payback 11 meses, robusto incluso en peor escenario (ROI 84%)</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Caso Técnico</strong></td>
+                            <td>✅ Arquitectura validada por 8 especialistas, consensuada por equipo multidisciplinario</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Gestión de Riesgos</strong></td>
+                            <td>✅ 13 riesgos identificados con mitigaciones claras, 3 críticos con acciones en primeros 30 días</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Presupuesto</strong></td>
+                            <td>⚠️ $2.15M (déficit $150K) - Resoluble con cotización de Google o ajuste de supuesto</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Impacto en Personal</strong></td>
+                            <td>✅ Plan de capacitación de 6 meses, plan para 4 FTEs redundantes, soporte externo</td>
+                        </tr>
+                    </tbody>
+                </table>
+
+                <div class="info-box" style="margin-top: 1.5em; font-size: 1.1em;">
+                    <h4 style="margin-top: 0;">El Análisis de Sensibilidad Demuestra:</h4>
+                    <p style="margin: 0.5em 0;">
+                        <strong>Incluso si todos los supuestos están equivocados en -33%, el proyecto sigue generando ROI del 84%</strong>
+                        (5.6x el objetivo de 15%).
+                    </p>
+                    <p class="center-text" style="margin: 1em 0 0 0; font-size: 1.2em; font-weight: 700; color: var(--success-green);">
+                        El riesgo de inversión es mínimo. El potencial de retorno es excepcional.
+                    </p>
+                </div>
+
+                <div class="success-box center-text" style="margin-top: 1.5em; font-size: 1.2em;">
+                    <strong>La Recomendación es APROBAR y Proceder</strong><br>
+                    <span style="font-size: 0.9em;"><em>Siguiente Paso: Contactar Google (Día 7) y validar supuestos críticos (Día 20-30)</em></span>
+                </div>
+            </section>
+
+            <!-- Slide 12: Preguntas -->
+            <section class="title-slide">
+                <h1>¿Preguntas?</h1>
+                <p style="margin-top: 3em; font-size: 1.2em;">Gracias por su atención</p>
+                <hr style="width: 50%; margin: 2em auto; border: 1px solid var(--primary-blue);">
+                <p style="font-size: 0.8em; color: var(--text-gray);">
+                    <strong>Documentación Completa Disponible en:</strong> <code>/entregables/</code>
+                </p>
+                <ul style="text-align: center; list-style: none; font-size: 0.8em; color: var(--text-gray); margin-top: 1em;">
+                    <li>Caso de Negocio (36K palabras)</li>
+                    <li>Plan Gantt (16K palabras)</li>
+                    <li>Memo Ejecutivo (6.5K palabras)</li>
+                </ul>
+            </section>
+
+            <!-- Slide 13: Apéndice - Glosario -->
+            <section>
+                <h2>Apéndice: Glosario para Ejecutivos</h2>
+
+                <table style="font-size: 0.6em;">
+                    <thead>
+                        <tr>
+                            <th style="width: 30%;">Término</th>
+                            <th style="width: 70%;">Definición Simple</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td><strong>GDC Edge</strong></td>
+                            <td>Hardware de Google que permite ejecutar cloud en nuestras plantas, garantizando operación autónoma</td>
+                        </tr>
+                        <tr>
+                            <td><strong>RPO/RTO=0</strong></td>
+                            <td>Cero pérdida de datos y cero tiempo de inactividad en caso de falla local</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Kafka</strong></td>
+                            <td>Plataforma de eventos que actúa como "sistema nervioso" conectando todos los sistemas</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Cluster Linking</strong></td>
+                            <td>Tecnología para replicar datos de plantas a la nube en tiempo real con baja latencia</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Medallion (RAW/BRONZE/SILVER/GOLD)</strong></td>
+                            <td>Capas de procesamiento de datos desde crudo hasta métricas de negocio</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Anthos</strong></td>
+                            <td>Plataforma de Google para gestionar aplicaciones consistentemente en edge y cloud</td>
+                        </tr>
+                        <tr>
+                            <td><strong>GitOps</strong></td>
+                            <td>Modelo donde toda la configuración se define en Git y se despliega automáticamente</td>
+                        </tr>
+                        <tr>
+                            <td><strong>OPA (Open Policy Agent)</strong></td>
+                            <td>Motor que valida automáticamente que las configuraciones cumplan las políticas de seguridad/costos</td>
+                        </tr>
+                        <tr>
+                            <td><strong>IAP (Identity-Aware Proxy)</strong></td>
+                            <td>Acceso Zero-Trust para usuarios sin necesidad de VPN tradicional</td>
+                        </tr>
+                        <tr>
+                            <td><strong>TCO (Total Cost of Ownership)</strong></td>
+                            <td>Costo total de propiedad a 3 años, incluyendo hardware, licencias, personal, etc.</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </section>
+
+        </div>
+    </div>
+
+    <!-- Reveal.js Scripts -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/reveal.js/4.3.1/reveal.min.js"></script>
+    <script type="module">
+        import mermaid from 'https://cdn.jsdelivr.net/npm/mermaid@11/dist/mermaid.esm.min.mjs';
+
+        // Initialize Mermaid
+        mermaid.initialize({
+            startOnLoad: false,
+            theme: 'default',
+            themeVariables: {
+                primaryColor: '#e3f2fd',
+                primaryTextColor: '#0d47a1',
+                primaryBorderColor: '#1976d2',
+                lineColor: '#1976d2',
+                secondaryColor: '#f1f8e9',
+                tertiaryColor: '#fff3e0',
+                fontSize: '14px',
+                fontFamily: 'Inter, sans-serif'
+            },
+            flowchart: {
+                useMaxWidth: true,
+                htmlLabels: true,
+                curve: 'basis',
+                padding: 15,
+                nodeSpacing: 50,
+                rankSpacing: 80,
+                diagramPadding: 20
+            }
+        });
+
+        // Initialize Reveal
+        Reveal.initialize({
+            hash: true,
+            slideNumber: 'c/t',
+            transition: 'slide',
+            transitionSpeed: 'fast',
+            backgroundTransition: 'fade',
+            center: false,
+            width: 1280,
+            height: 720,
+            margin: 0.04,
+            minScale: 0.2,
+            maxScale: 2.0,
+            controls: true,
+            progress: true,
+            history: true,
+            keyboard: true,
+            overview: true,
+            touch: true,
+            loop: false,
+            rtl: false,
+            fragments: true,
+            embedded: false,
+            help: true,
+            showNotes: false,
+            autoPlayMedia: null,
+            preloadIframes: null,
+            autoSlide: 0,
+            autoSlideStoppable: true,
+            mouseWheel: false,
+            hideInactiveCursor: true,
+            hideCursorTime: 5000,
+            previewLinks: false,
+
+            // Mermaid plugin
+            mermaid: {
+                theme: 'default'
+            }
+        });
+
+        // Function to render Mermaid diagrams
+        let mermaidCounter = 0;
+        async function renderMermaidDiagrams() {
+            const currentSlide = Reveal.getCurrentSlide();
+            const mermaidDivs = currentSlide.querySelectorAll('.mermaid:not([data-processed])');
+
+            for (const div of mermaidDivs) {
+                try {
+                    const uniqueId = `mermaid-diagram-${mermaidCounter++}`;
+                    const { svg } = await mermaid.render(uniqueId, div.textContent);
+                    div.innerHTML = svg;
+                    div.setAttribute('data-processed', 'true');
+                } catch (error) {
+                    console.error('Mermaid rendering error:', error);
+                    div.innerHTML = `<pre style="color: red;">Error rendering diagram: ${error.message}</pre>`;
+                }
+            }
+        }
+
+        // Render Mermaid diagrams after each slide change
+        Reveal.on('slidechanged', renderMermaidDiagrams);
+
+        // Initial render for first slide
+        Reveal.on('ready', renderMermaidDiagrams);
+    </script>
+</body>
+</html>
