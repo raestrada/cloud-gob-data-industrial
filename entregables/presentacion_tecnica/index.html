@@ -1,0 +1,1248 @@
+<!doctype html>
+<html lang="es">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>Arquitectura Técnica - Migración GCP | Presentación CTO/CIO</title>
+
+    <!-- Reveal.js CSS -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/reveal.js/4.3.1/reset.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/reveal.js/4.3.1/reveal.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/reveal.js/4.3.1/theme/black.min.css">
+
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto+Mono:wght@400;700&family=Roboto:wght@300;400;700;900&display=swap" rel="stylesheet">
+
+    <style>
+        :root {
+            /* Technical color palette - Dark theme */
+            --tech-blue: #00d9ff;
+            --tech-green: #00ff88;
+            --tech-purple: #bd93f9;
+            --tech-orange: #ffb86c;
+            --tech-red: #ff5555;
+            --tech-yellow: #f1fa8c;
+            --dark-bg: #0a0e27;
+            --dark-surface: #1a1e35;
+            --text-bright: #f8f8f2;
+            --text-dim: #6272a4;
+
+            /* Typography */
+            --r-main-font: 'Roboto', sans-serif;
+            --r-heading-font: 'Roboto', sans-serif;
+            --r-code-font: 'Roboto Mono', monospace;
+            --r-heading-text-transform: uppercase;
+            --r-heading-font-weight: 900;
+            --r-heading-letter-spacing: 0.05em;
+
+            /* Colors */
+            --r-background-color: var(--dark-bg);
+            --r-main-color: var(--text-bright);
+            --r-heading-color: var(--tech-blue);
+            --r-link-color: var(--tech-green);
+            --r-selection-background-color: rgba(0, 217, 255, 0.3);
+        }
+
+        .reveal {
+            font-size: 28px;
+            font-weight: 300;
+        }
+
+        .reveal .slides {
+            text-align: left;
+        }
+
+        .reveal h1, .reveal h2, .reveal h3 {
+            text-align: center;
+        }
+
+        .reveal h1 {
+            font-size: 2.5em;
+            font-weight: 900;
+            text-shadow: 0 0 20px rgba(0, 217, 255, 0.5);
+        }
+
+        .reveal h2 {
+            font-size: 1.8em;
+            font-weight: 700;
+            border-bottom: 3px solid var(--tech-blue);
+            padding-bottom: 0.3em;
+            margin-bottom: 0.8em;
+        }
+
+        .reveal h3 {
+            font-size: 1.3em;
+            font-weight: 700;
+            color: var(--tech-green);
+            margin: 0.8em 0 0.5em 0;
+        }
+
+        .reveal h4 {
+            font-size: 1em;
+            font-weight: 700;
+            color: var(--tech-purple);
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+        }
+
+        /* Technical boxes */
+        .tech-box {
+            background: var(--dark-surface);
+            border-left: 4px solid var(--tech-blue);
+            padding: 1em 1.5em;
+            margin: 1em 0;
+            border-radius: 4px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.3);
+        }
+
+        .warning-box {
+            background: rgba(255, 184, 108, 0.1);
+            border-left: 4px solid var(--tech-orange);
+            padding: 1em 1.5em;
+            margin: 1em 0;
+            border-radius: 4px;
+        }
+
+        .critical-box {
+            background: rgba(255, 85, 85, 0.1);
+            border-left: 4px solid var(--tech-red);
+            padding: 1em 1.5em;
+            margin: 1em 0;
+            border-radius: 4px;
+        }
+
+        /* Tables */
+        .reveal table {
+            margin: 1em auto;
+            font-size: 0.65em;
+            border-collapse: collapse;
+            width: 100%;
+        }
+
+        .reveal table th {
+            background: var(--tech-blue);
+            color: var(--dark-bg);
+            font-weight: 700;
+            padding: 0.6em;
+            text-align: left;
+            text-transform: uppercase;
+            font-size: 0.9em;
+            letter-spacing: 0.05em;
+        }
+
+        .reveal table td {
+            padding: 0.5em;
+            border-bottom: 1px solid var(--dark-surface);
+        }
+
+        .reveal table tr:hover {
+            background: rgba(0, 217, 255, 0.05);
+        }
+
+        /* Code */
+        .reveal pre {
+            background: #282a36;
+            color: #f8f8f2;
+            padding: 1em;
+            border-radius: 8px;
+            font-size: 0.5em;
+            line-height: 1.5;
+            margin: 1em 0;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.4);
+            border-left: 4px solid var(--tech-purple);
+        }
+
+        .reveal code {
+            font-family: var(--r-code-font);
+            background: rgba(189, 147, 249, 0.2);
+            padding: 0.2em 0.4em;
+            border-radius: 3px;
+            color: var(--tech-purple);
+        }
+
+        /* Mermaid */
+        .reveal .mermaid {
+            background: rgba(255, 255, 255, 0.05);
+            padding: 1em;
+            border-radius: 8px;
+            margin: 1em auto;
+            width: 100%;
+            max-width: 100%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            border: 1px solid rgba(0, 217, 255, 0.2);
+        }
+
+        .reveal .mermaid svg {
+            max-width: 100%;
+            height: auto;
+        }
+
+        /* Badges */
+        .badge {
+            display: inline-block;
+            padding: 0.3em 0.8em;
+            border-radius: 12px;
+            font-size: 0.7em;
+            font-weight: 700;
+            margin: 0 0.3em;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+        }
+
+        .badge-critical { background: var(--tech-red); color: #fff; }
+        .badge-high { background: var(--tech-orange); color: #000; }
+        .badge-medium { background: var(--tech-yellow); color: #000; }
+        .badge-low { background: var(--tech-green); color: #000; }
+        .badge-validated { background: var(--tech-green); color: #000; }
+        .badge-assumption { background: var(--tech-purple); color: #fff; }
+
+        /* Grid layout */
+        .grid-2 {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 2em;
+            margin: 1em 0;
+        }
+
+        .grid-3 {
+            display: grid;
+            grid-template-columns: 1fr 1fr 1fr;
+            gap: 1.5em;
+            margin: 1em 0;
+        }
+
+        /* Highlight */
+        .highlight {
+            color: var(--tech-blue);
+            font-weight: 700;
+        }
+
+        .small { font-size: 0.75em; }
+        .tiny { font-size: 0.6em; }
+
+        /* Lists */
+        .reveal ul, .reveal ol {
+            margin: 0.5em 0;
+        }
+
+        .reveal li {
+            margin: 0.5em 0;
+            line-height: 1.5;
+        }
+
+        /* Title slide */
+        .title-slide h1 {
+            font-size: 3em;
+            margin-top: 1em;
+            text-shadow: 0 0 30px rgba(0, 217, 255, 0.8);
+        }
+
+        .title-slide h2 {
+            border: none;
+            color: var(--text-dim);
+            font-weight: 400;
+            text-transform: none;
+        }
+
+        /* Stack item */
+        .stack-item {
+            background: var(--dark-surface);
+            padding: 0.8em;
+            border-radius: 6px;
+            border-left: 3px solid var(--tech-blue);
+            margin: 0.5em 0;
+        }
+
+        .stack-item h4 {
+            margin: 0 0 0.3em 0;
+            font-size: 0.9em;
+        }
+
+        .stack-item p {
+            margin: 0;
+            font-size: 0.8em;
+            color: var(--text-dim);
+        }
+    </style>
+</head>
+
+<body>
+    <div class="reveal">
+        <div class="slides">
+
+            <!-- Slide 1: Portada -->
+            <section class="title-slide">
+                <h1>Arquitectura Técnica</h1>
+                <h2>Migración a Google Cloud Platform</h2>
+                <h2>Plataforma Industrial Edge-First</h2>
+                <p style="text-align: center; margin-top: 3em; font-size: 0.8em;">
+                    <strong>Presentación Técnica para CTO, CIO y Arquitectos</strong>
+                </p>
+                <p style="text-align: center; font-size: 0.7em; color: var(--text-dim);">
+                    Fecha: 2025-11-01 | Versión: 1.0
+                </p>
+            </section>
+
+            <!-- Slide 2: Agenda -->
+            <section>
+                <h2>Agenda Técnica</h2>
+                <div class="grid-2">
+                    <div>
+                        <h4>Arquitectura</h4>
+                        <ol style="font-size: 0.9em;">
+                            <li>Contexto Técnico Actual</li>
+                            <li>Arquitectura Global Edge-First</li>
+                            <li>Topología Kafka (Hub-and-Spoke)</li>
+                            <li>Arquitectura de Red</li>
+                            <li>Arquitectura de Datos (Medallion)</li>
+                        </ol>
+                    </div>
+                    <div>
+                        <h4>Implementación</h4>
+                        <ol start="6" style="font-size: 0.9em;">
+                            <li>Stack Tecnológico Completo</li>
+                            <li>Sizing y Dimensionamiento</li>
+                            <li>DevSecOps y GitOps</li>
+                            <li>Estrategia de Migración Técnica</li>
+                            <li>Decisiones Críticas y Supuestos</li>
+                        </ol>
+                    </div>
+                </div>
+                <p class="small" style="text-align: center; margin-top: 2em; color: var(--text-dim);">
+                    <strong>Objetivo:</strong> Validar decisiones de arquitectura y obtener aprobación técnica del diseño
+                </p>
+            </section>
+
+            <!-- Slide 3: Contexto Técnico Actual -->
+            <section>
+                <h2>Contexto Técnico Actual</h2>
+
+                <h3>Inventario de Sistemas</h3>
+                <table style="font-size: 0.7em;">
+                    <thead>
+                        <tr>
+                            <th>Categoría</th>
+                            <th style="text-align: right;">Cantidad</th>
+                            <th>Estado</th>
+                            <th>Criticidad</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td><strong>SQL Server 2008/2012</strong></td>
+                            <td style="text-align: right;">100</td>
+                            <td><span class="badge badge-critical">EOL</span></td>
+                            <td>RPO/RTO=0</td>
+                        </tr>
+                        <tr>
+                            <td><strong>SQL Server 2019</strong></td>
+                            <td style="text-align: right;">210</td>
+                            <td><span class="badge badge-high">Soportado</span></td>
+                            <td>Mixta</td>
+                        </tr>
+                        <tr>
+                            <td><strong>SCADA Legacy</strong></td>
+                            <td style="text-align: right;">40</td>
+                            <td><span class="badge badge-critical">Antiguo</span></td>
+                            <td>RPO/RTO=0</td>
+                        </tr>
+                        <tr>
+                            <td><strong>SCADA Modernos</strong></td>
+                            <td style="text-align: right;">30</td>
+                            <td><span class="badge badge-medium">OK</span></td>
+                            <td>Alta</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Apps IIS/.NET</strong></td>
+                            <td style="text-align: right;">60</td>
+                            <td><span class="badge badge-medium">Soportado</span></td>
+                            <td>Media</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Stored Procedures + .exe</strong></td>
+                            <td style="text-align: right;">200+</td>
+                            <td><span class="badge badge-critical">Deuda Técnica</span></td>
+                            <td>Alta</td>
+                        </tr>
+                    </tbody>
+                </table>
+
+                <div class="critical-box" style="margin-top: 1em;">
+                    <strong>Desafío Técnico Principal:</strong> 160 sistemas misión crítica (RPO/RTO=0) + Deuda técnica masiva (200+ stored procedures con .exe) + Infraestructura EOL
+                </div>
+            </section>
+
+            <!-- Slide 4: Arquitectura Global Edge-First -->
+            <section>
+                <h2>Arquitectura Global: Modelo Edge-First</h2>
+
+                <h3>Principios de Diseño</h3>
+                <div class="mermaid">
+flowchart LR
+    subgraph edge1["PLANTA MONTERREY"]
+        direction TB
+        GDC1["GDC Edge<br/>GKE + Kafka"] --> OPS1["Operación Autónoma<br/>100% Local"]
+    end
+
+    subgraph edge2["PLANTA GUADALAJARA"]
+        direction TB
+        GDC2["GDC Edge<br/>GKE + Kafka"] --> OPS2["Operación Autónoma<br/>100% Local"]
+    end
+
+    subgraph edge3["PLANTA TIJUANA"]
+        direction TB
+        GDC3["GDC Edge<br/>GKE + Kafka"] --> OPS3["Operación Autónoma<br/>100% Local"]
+    end
+
+    subgraph gcp["GOOGLE CLOUD PLATFORM"]
+        direction TB
+        HUB["Kafka Hub<br/>us-central1"] --> LAKE[Data Lakehouse<br/>BigQuery]
+        DR["Kafka DR<br/>us-west1"]
+    end
+
+    edge1 -.->|"Cluster Linking<br/>Dual Interconnect 2Gbps"| HUB
+    edge2 -.->|"Cluster Linking<br/>Dual Interconnect 2Gbps"| HUB
+    edge3 -.->|"Cluster Linking<br/>Dual Interconnect 2Gbps"| HUB
+    HUB -.->|Replicación| DR
+
+    style OPS1 fill:#00ff88,color:#000,stroke:#00ff88,stroke-width:3px
+    style OPS2 fill:#00ff88,color:#000,stroke:#00ff88,stroke-width:3px
+    style OPS3 fill:#00ff88,color:#000,stroke:#00ff88,stroke-width:3px
+    style LAKE fill:#00d9ff,color:#000,stroke:#00d9ff,stroke-width:3px
+                </div>
+
+                <div class="tech-box">
+                    <strong>Edge-First:</strong> Cada planta opera 100% autónoma con GDC Edge. RPO/RTO=0 garantizado localmente. Cloud para analítica multi-planta y DR.
+                </div>
+            </section>
+
+            <!-- Slide 5: Topología Kafka Detallada -->
+            <section>
+                <h2>Topología Kafka: Hub-and-Spoke</h2>
+
+                <h3>5 Clusters con Cluster Linking</h3>
+                <table style="font-size: 0.6em;">
+                    <thead>
+                        <tr>
+                            <th>Cluster ID</th>
+                            <th>Ubicación</th>
+                            <th>Plataforma</th>
+                            <th>Rol</th>
+                            <th>RF</th>
+                            <th>Retención</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td><code>kafka-edge-mty</code></td>
+                            <td>Monterrey (Edge)</td>
+                            <td><span class="badge badge-assumption">Confluent Platform on GKE Edge</span></td>
+                            <td>Spoke</td>
+                            <td>3</td>
+                            <td>7 días</td>
+                        </tr>
+                        <tr>
+                            <td><code>kafka-edge-gdl</code></td>
+                            <td>Guadalajara (Edge)</td>
+                            <td><span class="badge badge-assumption">Confluent Platform on GKE Edge</span></td>
+                            <td>Spoke</td>
+                            <td>3</td>
+                            <td>7 días</td>
+                        </tr>
+                        <tr>
+                            <td><code>kafka-edge-tij</code></td>
+                            <td>Tijuana (Edge)</td>
+                            <td><span class="badge badge-assumption">Confluent Platform on GKE Edge</span></td>
+                            <td>Spoke</td>
+                            <td>3</td>
+                            <td>7 días</td>
+                        </tr>
+                        <tr>
+                            <td><code>kafka-hub-central1</code></td>
+                            <td>GCP us-central1</td>
+                            <td><span class="badge badge-validated">Confluent Cloud</span></td>
+                            <td>Hub Primario</td>
+                            <td>3 (multi-AZ)</td>
+                            <td>30d hot + ∞ cold</td>
+                        </tr>
+                        <tr>
+                            <td><code>kafka-dr-west1</code></td>
+                            <td>GCP us-west1</td>
+                            <td><span class="badge badge-validated">Confluent Cloud</span></td>
+                            <td>Hub DR</td>
+                            <td>3 (multi-AZ)</td>
+                            <td>30d hot + ∞ cold</td>
+                        </tr>
+                    </tbody>
+                </table>
+
+                <h3 style="margin-top: 1.5em;">Características Técnicas</h3>
+                <div class="grid-2" style="font-size: 0.8em;">
+                    <div class="tech-box">
+                        <h4>Cluster Linking</h4>
+                        <ul style="margin: 0;">
+                            <li>Replicación asíncrona edge → cloud</li>
+                            <li>Latencia objetivo: <strong>&lt;50ms</strong> (+ overhead geo ~35ms = 85ms total)</li>
+                            <li>Exactly-once semantics con idempotencia</li>
+                        </ul>
+                    </div>
+                    <div class="tech-box">
+                        <h4>Tiered Storage</h4>
+                        <ul style="margin: 0;">
+                            <li>Cloud: 30 días hot (NVMe) + infinito cold (GCS)</li>
+                            <li>Edge: 7 días local (buffer autonomía)</li>
+                            <li>Ahorro: 50-70% vs hot-only</li>
+                        </ul>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Slide 6: Arquitectura de Red -->
+            <section>
+                <h2>Arquitectura de Red: Conectividad Privada</h2>
+
+                <h3>Componentes de Red</h3>
+                <div class="mermaid">
+flowchart LR
+    subgraph onprem["ON-PREMISE (3 Plantas)"]
+        direction LR
+        APP[Apps/SCADA] --> GKE_EDGE[GKE Edge]
+    end
+
+    subgraph interconnect["DUAL INTERCONNECT"]
+        IC1["Interconnect 1<br/>1Gbps"]
+        IC2["Interconnect 2<br/>1Gbps"]
+    end
+
+    subgraph gcp["GOOGLE CLOUD (Private)"]
+        direction LR
+        PSC[Private Service Connect] --> SERVICES["GKE Cloud<br/>Cloud SQL<br/>BigQuery"]
+    end
+
+    GKE_EDGE --> IC1
+    GKE_EDGE --> IC2
+    IC1 --> PSC
+    IC2 --> PSC
+
+    style GKE_EDGE fill:#bd93f9,color:#fff,stroke:#bd93f9,stroke-width:3px
+    style PSC fill:#00ff88,color:#000,stroke:#00ff88,stroke-width:3px
+                </div>
+
+                <h3 style="margin-top: 1em;">Stack de Seguridad de Red</h3>
+                <table style="font-size: 0.65em;">
+                    <thead>
+                        <tr>
+                            <th>Capa</th>
+                            <th>Tecnología</th>
+                            <th>Propósito</th>
+                            <th>Estado</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td><strong>L3 - Conectividad</strong></td>
+                            <td>Dual Interconnect 2x1Gbps</td>
+                            <td>Redundancia + throughput 50-150 Mbps/planta</td>
+                            <td><span class="badge badge-assumption">Requiere upgrade</span></td>
+                        </tr>
+                        <tr>
+                            <td><strong>L4 - Service Mesh</strong></td>
+                            <td>Private Service Connect (PSC)</td>
+                            <td>Comunicación privada sin IPs públicas</td>
+                            <td><span class="badge badge-validated">Nativo GCP</span></td>
+                        </tr>
+                        <tr>
+                            <td><strong>L7 - mTLS</strong></td>
+                            <td>Anthos Service Mesh (Istio)</td>
+                            <td>Cifrado end-to-end, zero-trust</td>
+                            <td><span class="badge badge-validated">Nativo GCP</span></td>
+                        </tr>
+                        <tr>
+                            <td><strong>Identity</strong></td>
+                            <td>Identity-Aware Proxy (IAP)</td>
+                            <td>Acceso usuarios sin VPN tradicional</td>
+                            <td><span class="badge badge-validated">Nativo GCP</span></td>
+                        </tr>
+                    </tbody>
+                </table>
+
+                <div class="warning-box" style="margin-top: 1em; font-size: 0.8em;">
+                    <strong>Supuesto Crítico AP-3:</strong> Upgrade a Dual Interconnect 2x1Gbps requiere aprobación CFO/CIO. Costo: $72K/año. Sin esto, replicación edge→cloud severamente limitada.
+                </div>
+            </section>
+
+            <!-- Slide 7: Arquitectura de Datos (Medallion) -->
+            <section>
+                <h2>Arquitectura de Datos: Medallion Distribuida</h2>
+
+                <h3>4 Capas: RAW → BRONZE → SILVER → GOLD</h3>
+                <div class="mermaid">
+flowchart LR
+    subgraph edge["EDGE (Plantas)"]
+        direction LR
+        RAW[RAW<br/>SCADA/SQL] --> BRONZE[BRONZE<br/>Limpieza]
+    end
+
+    subgraph cloud["CLOUD (GCP)"]
+        direction LR
+        SILVER[SILVER<br/>Enriquecimiento] --> GOLD[GOLD<br/>Agregación]
+        GOLD --> BQ[BigQuery DW]
+    end
+
+    BRONZE -.->|"Cluster Linking<br/>Solo datos limpios"| SILVER
+
+    style BRONZE fill:#00ff88,color:#000,stroke:#00ff88,stroke-width:3px
+    style GOLD fill:#00d9ff,color:#000,stroke:#00d9ff,stroke-width:3px
+                </div>
+
+                <h3>Distribución de Procesamiento</h3>
+                <table style="font-size: 0.65em;">
+                    <thead>
+                        <tr>
+                            <th>Capa</th>
+                            <th>Ubicación</th>
+                            <th>Procesamiento</th>
+                            <th>Beneficio</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td><strong>RAW</strong></td>
+                            <td>Edge (GDC)</td>
+                            <td>Ingesta SCADA/SQL vía Kafka Connect</td>
+                            <td>Baja latencia, operación local</td>
+                        </tr>
+                        <tr>
+                            <td><strong>BRONZE</strong></td>
+                            <td>Edge (GDC)</td>
+                            <td>Spark: Validación, limpieza, deduplicación</td>
+                            <td><strong>Reduce tráfico WAN 60-70%</strong></td>
+                        </tr>
+                        <tr>
+                            <td><strong>SILVER</strong></td>
+                            <td>Cloud (GCP)</td>
+                            <td>Spark: Join multi-planta, normalización</td>
+                            <td>Analítica consolidada</td>
+                        </tr>
+                        <tr>
+                            <td><strong>GOLD</strong></td>
+                            <td>Cloud (GCP)</td>
+                            <td>Spark: Agregaciones negocio, KPIs</td>
+                            <td>BI/ML ready</td>
+                        </tr>
+                    </tbody>
+                </table>
+
+                <div class="tech-box" style="margin-top: 1em; font-size: 0.85em;">
+                    <strong>Ventaja Clave:</strong> Procesar BRONZE en edge reduce drásticamente tráfico en Interconnect (60-70% reducción). Solo datos limpios y relevantes se envían a cloud.
+                </div>
+            </section>
+
+            <!-- Slide 8: Stack Tecnológico Completo -->
+            <section>
+                <h2>Stack Tecnológico Completo</h2>
+
+                <div class="grid-2" style="font-size: 0.75em;">
+                    <div>
+                        <h4>EDGE (On-Premise)</h4>
+                        <div class="stack-item">
+                            <h4>Compute</h4>
+                            <p><strong>Google Distributed Cloud (GDC) Edge</strong> - GKE local, operación autónoma</p>
+                        </div>
+                        <div class="stack-item">
+                            <h4>Eventos</h4>
+                            <p><strong>Confluent Platform on K8s</strong> - Kafka + KSQL + Connect</p>
+                        </div>
+                        <div class="stack-item">
+                            <h4>Procesamiento</h4>
+                            <p><strong>Dataproc on GKE</strong> - Spark para capa BRONZE</p>
+                        </div>
+                        <div class="stack-item">
+                            <h4>Storage</h4>
+                            <p><strong>Local SSD NVMe</strong> - 7 días retención Kafka</p>
+                        </div>
+                    </div>
+
+                    <div>
+                        <h4>CLOUD (GCP)</h4>
+                        <div class="stack-item">
+                            <h4>Compute</h4>
+                            <p><strong>GKE Autopilot</strong> - Serverless K8s para apps</p>
+                        </div>
+                        <div class="stack-item">
+                            <h4>Eventos</h4>
+                            <p><strong>Confluent Cloud</strong> - Kafka managed, Tiered Storage</p>
+                        </div>
+                        <div class="stack-item">
+                            <h4>Procesamiento</h4>
+                            <p><strong>Dataproc Serverless</strong> - Spark SILVER/GOLD</p>
+                        </div>
+                        <div class="stack-item">
+                            <h4>Storage/Analytics</h4>
+                            <p><strong>BigQuery + GCS</strong> - Data Warehouse + Lakehouse</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="grid-2" style="font-size: 0.75em; margin-top: 1em;">
+                    <div>
+                        <h4>GESTIÓN Y GOBIERNO</h4>
+                        <div class="stack-item">
+                            <h4>Plano de Control</h4>
+                            <p><strong>Anthos</strong> - Gestión unificada edge + cloud</p>
+                        </div>
+                        <div class="stack-item">
+                            <h4>GitOps</h4>
+                            <p><strong>Anthos Config Management</strong> - Everything-as-Code</p>
+                        </div>
+                    </div>
+
+                    <div>
+                        <h4>SEGURIDAD Y POLÍTICAS</h4>
+                        <div class="stack-item">
+                            <h4>Políticas</h4>
+                            <p><strong>OPA (Open Policy Agent)</strong> - Validación pipeline + runtime</p>
+                        </div>
+                        <div class="stack-item">
+                            <h4>CI/CD</h4>
+                            <p><strong>Harness</strong> - Deployment automation con OPA</p>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Slide 9: Sizing y Dimensionamiento -->
+            <section>
+                <h2>Sizing y Dimensionamiento</h2>
+
+                <h3>GDC Edge por Planta</h3>
+                <table style="font-size: 0.65em;">
+                    <thead>
+                        <tr>
+                            <th>Componente</th>
+                            <th>Nodos</th>
+                            <th>Tipo</th>
+                            <th>vCPU</th>
+                            <th>RAM</th>
+                            <th>Storage</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td><strong>Compute</strong></td>
+                            <td>4-6</td>
+                            <td>n2-standard-16</td>
+                            <td>16</td>
+                            <td>64GB</td>
+                            <td>-</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Control Plane</strong></td>
+                            <td>2</td>
+                            <td>n2-standard-4</td>
+                            <td>4</td>
+                            <td>16GB</td>
+                            <td>-</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Storage (Kafka)</strong></td>
+                            <td>-</td>
+                            <td>Local SSD</td>
+                            <td>-</td>
+                            <td>-</td>
+                            <td>3-5 TB NVMe</td>
+                        </tr>
+                    </tbody>
+                </table>
+
+                <p class="small" style="margin-top: 0.5em;"><strong>Total por planta:</strong> 64-96 vCPU + 256-384GB RAM + 3-5TB SSD</p>
+
+                <h3 style="margin-top: 1.5em;">Workloads por Planta (Edge)</h3>
+                <div class="grid-3" style="font-size: 0.7em;">
+                    <div class="tech-box">
+                        <h4>Confluent Platform</h4>
+                        <ul style="margin: 0; font-size: 0.9em;">
+                            <li>3 Kafka brokers (RF=3)</li>
+                            <li>2 KSQL servers</li>
+                            <li>Kafka Connect cluster</li>
+                        </ul>
+                    </div>
+                    <div class="tech-box">
+                        <h4>Apps Industriales</h4>
+                        <ul style="margin: 0; font-size: 0.9em;">
+                            <li>~30 apps IIS containerizadas</li>
+                            <li>Ejecutables .exe legacy</li>
+                            <li>Microservicios nuevos</li>
+                        </ul>
+                    </div>
+                    <div class="tech-box">
+                        <h4>Procesamiento</h4>
+                        <ul style="margin: 0; font-size: 0.9em;">
+                            <li>Dataproc (Spark BRONZE)</li>
+                            <li>Jobs ETL locales</li>
+                            <li>Validación/limpieza datos</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="warning-box" style="margin-top: 1em; font-size: 0.8em;">
+                    <strong>Supuesto AP-6:</strong> Sizing 4-6 nodos requiere validación en PoC real. Right-sizing post-migración puede ajustar ±30%.
+                </div>
+            </section>
+
+            <!-- Slide 10: DevSecOps y GitOps -->
+            <section>
+                <h2>DevSecOps: GitOps con OPA</h2>
+
+                <h3>Flujo GitOps Completo</h3>
+                <div class="mermaid">
+flowchart LR
+    DEV[Developer] -->|1. Git Push| REPO[Git Repo]
+    REPO -->|2. Trigger| HARNESS[Harness CI/CD]
+    HARNESS -->|3. OPA Validation| OPA1[OPA Pipeline]
+    OPA1 -->|4. Deploy if OK| ACM[Anthos Config Mgmt]
+    ACM -->|5. Sync| GKE_EDGE[GKE Edge]
+    ACM -->|5. Sync| GKE_CLOUD[GKE Cloud]
+    GKE_EDGE -->|6. Runtime OPA| OPA2[Policy Controller]
+    GKE_CLOUD -->|6. Runtime OPA| OPA2
+
+    style OPA1 fill:#ff5555,color:#fff,stroke:#ff5555,stroke-width:3px
+    style OPA2 fill:#ff5555,color:#fff,stroke:#ff5555,stroke-width:3px
+                </div>
+
+                <h3>Validación Dual OPA</h3>
+                <table style="font-size: 0.65em;">
+                    <thead>
+                        <tr>
+                            <th>Fase</th>
+                            <th>Herramienta</th>
+                            <th>Políticas Validadas</th>
+                            <th>Acción si Falla</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td><strong>Pipeline (CI/CD)</strong></td>
+                            <td>Harness + OPA</td>
+                            <td>Etiquetas obligatorias (cost-center, env, owner), Imágenes permitidas, Límites recursos</td>
+                            <td>Bloqueo deploy</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Runtime (Cluster)</strong></td>
+                            <td>Anthos Policy Controller</td>
+                            <td>No privileged pods, Network policies, Service mesh enforcement</td>
+                            <td>Rechazo admisión</td>
+                        </tr>
+                    </tbody>
+                </table>
+
+                <div class="tech-box" style="margin-top: 1em; font-size: 0.85em;">
+                    <strong>Everything-as-Code:</strong> Toda configuración (apps, infra, políticas) vive en Git. Cambios auditables, rollback automático, compliance garantizado.
+                </div>
+            </section>
+
+            <!-- Slide 11: Estrategia de Migración Técnica -->
+            <section>
+                <h2>Estrategia de Migración Técnica</h2>
+
+                <h3>3 Ondas en 18 Meses</h3>
+                <table style="font-size: 0.6em;">
+                    <thead>
+                        <tr>
+                            <th>Onda</th>
+                            <th>Duración</th>
+                            <th>Sistemas</th>
+                            <th>Estrategia Técnica</th>
+                            <th>Go/No-Go</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td><strong>Onda 1<br/>(30%)</strong></td>
+                            <td>Meses 1-6</td>
+                            <td>100 SQL 2008/2012 EOL</td>
+                            <td><strong>CDC con Debezium</strong> (&lt;5% impacto performance)<br/>Migración a Cloud SQL</td>
+                            <td>PoC Debezium exitoso</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Onda 2<br/>(60%)</strong></td>
+                            <td>Meses 7-12</td>
+                            <td>90 SQL 2019 + 60 IIS</td>
+                            <td><strong>Containerización .NET</strong> (Docker + GKE)<br/>Refactor apps IIS a microservicios</td>
+                            <td>10 apps IIS en prod sin issues</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Onda 3<br/>(10%)</strong></td>
+                            <td>Meses 13-18</td>
+                            <td>120 SQL críticas + 40 SCADA legacy</td>
+                            <td><strong>Cutover planificado</strong> (ventanas dominicales)<br/>Rollback &lt;2h si falla</td>
+                            <td>100% Onda 1+2 estable</td>
+                        </tr>
+                    </tbody>
+                </table>
+
+                <h3 style="margin-top: 1.5em;">Técnicas de Migración</h3>
+                <div class="grid-2" style="font-size: 0.75em;">
+                    <div class="tech-box">
+                        <h4>Change Data Capture (CDC)</h4>
+                        <ul style="margin: 0;">
+                            <li><strong>Debezium</strong> para SQL Server</li>
+                            <li>Captura binlog → Kafka topic</li>
+                            <li>Migración sin downtime objetivo</li>
+                            <li>PoC crítico: validar &lt;5% CPU/IO impact</li>
+                        </ul>
+                    </div>
+                    <div class="tech-box">
+                        <h4>Containerización Legacy</h4>
+                        <ul style="margin: 0;">
+                            <li><strong>Windows Container</strong> para .exe</li>
+                            <li>Docker Desktop + GKE Windows nodes</li>
+                            <li>API wrapper para stored procs + .exe</li>
+                            <li>Kafka event-driven orchestration</li>
+                        </ul>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Slide 12: Decisiones de Arquitectura Consensuadas -->
+            <section>
+                <h2>Decisiones de Arquitectura Consensuadas</h2>
+
+                <h3>4 Decisiones Clave del Equipo Multidisciplinario</h3>
+
+                <div class="tech-box" style="margin-bottom: 1em;">
+                    <h4>Decisión 1: RPO/RTO=0 Interpretación</h4>
+                    <p style="margin: 0.5em 0; font-size: 0.85em;">
+                        <strong>Consenso:</strong> RPO/RTO=0 se refiere a <strong>operación local</strong> (planta). Para DR a nivel negocio, RPO=segundos es aceptable (Cluster Linking edge→cloud).
+                    </p>
+                    <p style="margin: 0; font-size: 0.75em; color: var(--text-dim);">
+                        Participantes: @arquitecto-plataforma, @admin-legados, @experto-redes, @finanzas
+                    </p>
+                </div>
+
+                <div class="tech-box" style="margin-bottom: 1em;">
+                    <h4>Decisión 2: Medallion 4 Capas (RAW/BRONZE/SILVER/GOLD)</h4>
+                    <p style="margin: 0.5em 0; font-size: 0.85em;">
+                        <strong>Consenso:</strong> Procesar BRONZE en edge reduce tráfico WAN 60-70%. SILVER/GOLD en cloud para analítica multi-planta.
+                    </p>
+                    <p style="margin: 0; font-size: 0.75em; color: var(--text-dim);">
+                        Participantes: @arquitecto-datos, @data-engineer, @experto-redes
+                    </p>
+                </div>
+
+                <div class="tech-box" style="margin-bottom: 1em;">
+                    <h4>Decisión 3: Confluent Cloud vs Self-Managed</h4>
+                    <p style="margin: 0.5em 0; font-size: 0.85em;">
+                        <strong>Consenso:</strong> Confluent Cloud en GCP (hub/dr). Confluent Platform self-managed en GDC Edge (autonomía). Cluster Linking para conectar.
+                    </p>
+                    <p style="margin: 0; font-size: 0.75em; color: var(--text-dim);">
+                        Participantes: @arquitecto-plataforma, @finanzas, @data-engineer
+                    </p>
+                </div>
+
+                <div class="tech-box">
+                    <h4>Decisión 4: Dual Interconnect 2x1Gbps</h4>
+                    <p style="margin: 0.5em 0; font-size: 0.85em;">
+                        <strong>Consenso:</strong> Upgrade a Dual Interconnect es <strong>requisito indispensable</strong> para throughput 50-150 Mbps/planta + redundancia.
+                    </p>
+                    <p style="margin: 0; font-size: 0.75em; color: var(--text-dim);">
+                        Participantes: @experto-redes, @arquitecto-plataforma, @finanzas
+                    </p>
+                </div>
+            </section>
+
+            <!-- Slide 13: Supuestos Críticos a Validar -->
+            <section>
+                <h2>Supuestos Críticos a Validar (30 días)</h2>
+
+                <h3>Top 8 Supuestos de Riesgo Alto</h3>
+                <table style="font-size: 0.55em;">
+                    <thead>
+                        <tr>
+                            <th style="width: 8%;">ID</th>
+                            <th style="width: 32%;">Supuesto</th>
+                            <th style="width: 12%;">Valor</th>
+                            <th style="width: 28%;">Impacto si Incorrecto</th>
+                            <th style="width: 20%;">Validar con</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td><strong>AP-1</strong></td>
+                            <td>GDC Edge disponible en México</td>
+                            <td>Sí</td>
+                            <td><span class="badge badge-critical">CRÍTICO</span> Arquitectura inviable sin GDC Edge</td>
+                            <td>Google Account Team</td>
+                        </tr>
+                        <tr>
+                            <td><strong>AP-2</strong></td>
+                            <td>Confluent Platform en GKE Edge funcional</td>
+                            <td>Sí</td>
+                            <td><span class="badge badge-critical">CRÍTICO</span> Requiere validación en PoC</td>
+                            <td>Confluent SA</td>
+                        </tr>
+                        <tr>
+                            <td><strong>AP-3</strong></td>
+                            <td>Dual Interconnect 2x1Gbps aprobado</td>
+                            <td>$72K/año</td>
+                            <td><span class="badge badge-critical">CRÍTICO</span> Sin esto, replicación limitada</td>
+                            <td>CFO, CIO</td>
+                        </tr>
+                        <tr>
+                            <td><strong>AP-6</strong></td>
+                            <td>Sizing GKE Edge: 4-6 nodos</td>
+                            <td>16 vCPU/nodo</td>
+                            <td><span class="badge badge-critical">CRÍTICO</span> Afecta CAPEX y performance</td>
+                            <td>Google GKE Team (PoC)</td>
+                        </tr>
+                        <tr>
+                            <td><strong>AP-10</strong></td>
+                            <td>Cluster Linking latencia &lt;50ms</td>
+                            <td>&lt;50ms</td>
+                            <td><span class="badge badge-critical">CRÍTICO</span> Impacta RPO real edge→cloud</td>
+                            <td>Confluent SA (PoC)</td>
+                        </tr>
+                        <tr>
+                            <td><strong>AP-13</strong></td>
+                            <td>Throughput edge→cloud 50-150 Mbps/planta</td>
+                            <td>50-150 Mbps</td>
+                            <td><span class="badge badge-critical">CRÍTICO</span> Diseño Interconnect depende de esto</td>
+                            <td>Data Engineer (PoC)</td>
+                        </tr>
+                        <tr>
+                            <td><strong>AP-17</strong></td>
+                            <td>GKE Edge 100% offline-capable</td>
+                            <td>7+ días</td>
+                            <td><span class="badge badge-critical">CRÍTICO</span> Autonomía planta en riesgo</td>
+                            <td>Google GDC Team (PoC)</td>
+                        </tr>
+                        <tr>
+                            <td><strong>AP-18</strong></td>
+                            <td>Kafka Connect para SCADA legacy</td>
+                            <td>Disponible</td>
+                            <td><span class="badge badge-critical">CRÍTICO</span> Ingesta SCADA inviable</td>
+                            <td>Admin Legados (PoC)</td>
+                        </tr>
+                    </tbody>
+                </table>
+
+                <div class="critical-box" style="margin-top: 1em; font-size: 0.85em;">
+                    <strong>ACCIÓN REQUERIDA:</strong> Validar estos 8 supuestos en próximos 30 días mediante PoC y confirmación con vendors (Google, Confluent).
+                </div>
+            </section>
+
+            <!-- Slide 14: Plan de Implementación Técnico -->
+            <section>
+                <h2>Plan de Implementación Técnico</h2>
+
+                <h3>Próximos 90 Días - Hitos Técnicos</h3>
+                <table style="font-size: 0.6em;">
+                    <thead>
+                        <tr>
+                            <th style="width: 10%;">Día</th>
+                            <th style="width: 35%;">Hito Técnico</th>
+                            <th style="width: 25%;">Responsable</th>
+                            <th style="width: 30%;">Entregable</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td><strong>7</strong></td>
+                            <td>Contactar Google GDC Edge Team</td>
+                            <td>Arquitecto Cloud</td>
+                            <td>Confirmación disponibilidad México + cronograma</td>
+                        </tr>
+                        <tr>
+                            <td><strong>20</strong></td>
+                            <td>Cotización GDC Edge hardware</td>
+                            <td>Arquitecto Cloud</td>
+                            <td>Cotización formal 3 plantas + pricing</td>
+                        </tr>
+                        <tr>
+                            <td><strong>20</strong></td>
+                            <td>Validar Confluent Cloud pricing</td>
+                            <td>FinOps Lead</td>
+                            <td>Pricing via GCP Marketplace + Cluster Linking</td>
+                        </tr>
+                        <tr>
+                            <td><strong>30</strong></td>
+                            <td>Diseño detallado de red (Interconnect)</td>
+                            <td>Experto Redes</td>
+                            <td>Topología física + VLAN + QoS config</td>
+                        </tr>
+                        <tr>
+                            <td><strong>45</strong></td>
+                            <td>PoC Debezium en SQL Server test</td>
+                            <td>Data Engineer</td>
+                            <td>Validación &lt;5% CPU/IO impact + replicación OK</td>
+                        </tr>
+                        <tr>
+                            <td><strong>60</strong></td>
+                            <td>Despliegue Dual Interconnect</td>
+                            <td>Experto Redes</td>
+                            <td>2x1Gbps activo, latencia &lt;10ms validada</td>
+                        </tr>
+                        <tr>
+                            <td><strong>75</strong></td>
+                            <td>Despliegue Anthos en proyectos GCP</td>
+                            <td>DevSecOps</td>
+                            <td>3 GKE clusters registrados en Anthos Fleet</td>
+                        </tr>
+                        <tr>
+                            <td><strong>90</strong></td>
+                            <td>Primera app IIS containerizada en prod</td>
+                            <td>Legacy Systems Team</td>
+                            <td>1 app .NET corriendo en GKE Edge</td>
+                        </tr>
+                    </tbody>
+                </table>
+
+                <div class="tech-box" style="margin-top: 1em; font-size: 0.85em;">
+                    <strong>Criterio de Éxito (Día 90):</strong> PoC Debezium exitoso + Interconnect activo + Anthos desplegado + Primera app containerizada en producción.
+                </div>
+            </section>
+
+            <!-- Slide 15: Próximos Pasos y Aprobaciones -->
+            <section>
+                <h2>Próximos Pasos y Aprobaciones</h2>
+
+                <h3>Decisiones Técnicas Requeridas</h3>
+                <div class="tech-box" style="font-size: 0.9em;">
+                    <ol style="line-height: 1.8;">
+                        <li><strong>✅ Aprobación de Arquitectura:</strong> Validar diseño Edge-First con GDC Edge + Confluent Kafka</li>
+                        <li><strong>✅ Aprobación de Stack Tecnológico:</strong> GCP nativo (Anthos, GKE, Dataproc, BigQuery)</li>
+                        <li><strong>✅ Aprobación de Estrategia de Migración:</strong> 3 ondas, CDC con Debezium, containerización</li>
+                        <li><strong>⚠️ Aprobación de Upgrade Interconnect:</strong> Dual 2x1Gbps ($72K/año) - Requiere aprobación CFO/CIO</li>
+                    </ol>
+                </div>
+
+                <h3 style="margin-top: 1.5em;">Validaciones Técnicas Críticas (30 días)</h3>
+                <div class="grid-2" style="font-size: 0.8em;">
+                    <div class="warning-box">
+                        <h4>PoCs Requeridos</h4>
+                        <ul style="margin: 0;">
+                            <li>Debezium CDC en SQL Server (&lt;5% impacto)</li>
+                            <li>Confluent Platform en GKE Edge</li>
+                            <li>Cluster Linking latencia edge→cloud</li>
+                            <li>GDC Edge autonomía offline (7+ días)</li>
+                        </ul>
+                    </div>
+                    <div class="warning-box">
+                        <h4>Confirmaciones Vendor</h4>
+                        <ul style="margin: 0;">
+                            <li>Google: GDC Edge disponibilidad México</li>
+                            <li>Google: Pricing GDC Edge hardware</li>
+                            <li>Confluent: Pricing Cloud + Cluster Linking</li>
+                            <li>Google: Cronograma entrega GDC Edge</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="tech-box" style="margin-top: 1.5em; text-align: center; font-size: 1.1em;">
+                    <strong>Meta:</strong> Iniciar Onda 1 en 90 días con todas las validaciones completadas
+                </div>
+            </section>
+
+            <!-- Slide 16: Q&A -->
+            <section class="title-slide">
+                <h1>¿Preguntas?</h1>
+                <p style="margin-top: 3em; font-size: 1.2em;">Discusión Técnica</p>
+                <hr style="width: 50%; margin: 2em auto; border: 1px solid var(--tech-blue);">
+                <p style="font-size: 0.8em; color: var(--text-dim); margin-top: 3em;">
+                    <strong>Documentación Técnica Disponible:</strong>
+                </p>
+                <ul style="text-align: center; list-style: none; font-size: 0.7em; color: var(--text-dim);">
+                    <li>Arquitectura de Plataforma (arquitectura-plataforma.md)</li>
+                    <li>Arquitectura de Redes (arquitectura-redes.md)</li>
+                    <li>Arquitectura de Datos (arquitectura-datos.md)</li>
+                    <li>DevSecOps y Gobierno (devsecops-gobierno.md)</li>
+                    <li>Migración de Legados (migracion-legados.md)</li>
+                    <li>Decisiones Consensuadas (decisiones-consensuadas.md)</li>
+                </ul>
+            </section>
+
+        </div>
+    </div>
+
+    <!-- Reveal.js Scripts -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/reveal.js/4.3.1/reveal.min.js"></script>
+    <script type="module">
+        import mermaid from 'https://cdn.jsdelivr.net/npm/mermaid@11/dist/mermaid.esm.min.mjs';
+
+        // Initialize Mermaid
+        mermaid.initialize({
+            startOnLoad: false,
+            theme: 'dark',
+            themeVariables: {
+                primaryColor: '#1a1e35',
+                primaryTextColor: '#f8f8f2',
+                primaryBorderColor: '#00d9ff',
+                lineColor: '#00d9ff',
+                secondaryColor: '#0a0e27',
+                tertiaryColor: '#2a2e45',
+                fontSize: '14px',
+                fontFamily: 'Roboto, sans-serif'
+            },
+            flowchart: {
+                useMaxWidth: true,
+                htmlLabels: true,
+                curve: 'basis',
+                padding: 15,
+                nodeSpacing: 50,
+                rankSpacing: 80,
+                diagramPadding: 20
+            }
+        });
+
+        // Initialize Reveal
+        Reveal.initialize({
+            hash: true,
+            slideNumber: 'c/t',
+            transition: 'slide',
+            transitionSpeed: 'fast',
+            backgroundTransition: 'fade',
+            center: false,
+            width: 1280,
+            height: 720,
+            margin: 0.04,
+            minScale: 0.2,
+            maxScale: 2.0,
+            controls: true,
+            progress: true,
+            history: true,
+            keyboard: true,
+            overview: true,
+            touch: true
+        });
+
+        // Function to render Mermaid diagrams
+        let mermaidCounter = 0;
+        async function renderMermaidDiagrams() {
+            const currentSlide = Reveal.getCurrentSlide();
+            const mermaidDivs = currentSlide.querySelectorAll('.mermaid:not([data-processed])');
+
+            for (const div of mermaidDivs) {
+                try {
+                    const uniqueId = `mermaid-diagram-${mermaidCounter++}`;
+                    const { svg } = await mermaid.render(uniqueId, div.textContent);
+                    div.innerHTML = svg;
+                    div.setAttribute('data-processed', 'true');
+                } catch (error) {
+                    console.error('Mermaid rendering error:', error);
+                    div.innerHTML = `<pre style="color: #ff5555;">Error rendering diagram: ${error.message}</pre>`;
+                }
+            }
+        }
+
+        // Render Mermaid diagrams after each slide change
+        Reveal.on('slidechanged', renderMermaidDiagrams);
+
+        // Initial render for first slide
+        Reveal.on('ready', renderMermaidDiagrams);
+    </script>
+</body>
+</html>
