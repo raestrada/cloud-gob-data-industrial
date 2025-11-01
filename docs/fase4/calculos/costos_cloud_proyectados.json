@@ -1,0 +1,45 @@
+{
+  "info": "Desglose de costos operativos anuales (OPEX) para la nueva arquitectura en la nube, en estado estable (run rate).",
+  "costos_anuales": [
+    {
+      "componente": "Cómputo (GKE + GDC Edge)",
+      "valor": 489148,
+      "fuente": "Cálculo: Basado en 1900 vCPU y 12.8TB RAM con 20% right-sizing y 40% CUD a 3 años, usando precios del Caso de Negocio."
+    },
+    {
+      "componente": "Almacenamiento (GCS + Block)",
+      "valor": 436224,
+      "fuente": "Cálculo: Basado en 200TB Block y 500TB Object Storage, usando precios del Caso de Negocio."
+    },
+    {
+      "componente": "Red (Dual Interconnect)",
+      "valor": 72000,
+      "fuente": "[SUPUESTO] Costo de $6,000/mes para 2x1Gbps, extrapolado del Caso de Negocio."
+    },
+    {
+      "componente": "Servicio Gestionado: Confluent Platform",
+      "valor": 200000,
+      "fuente": "[SUPUESTO] Estimación basada en precios de lista para 5 clústeres (2 Cloud, 3 Edge)."
+    },
+    {
+      "componente": "Servicio Gestionado: Licenciamiento GDC Edge",
+      "valor": 67500,
+      "fuente": "[SUPUESTO] 15% del CAPEX de hardware GDC ($450k) como costo anual."
+    },
+    {
+      "componente": "Servicio Gestionado: Harness Platform",
+      "valor": 100000,
+      "fuente": "[SUPUESTO] Estimación para licenciamiento nivel Enterprise para CI/CD y Gobierno."
+    },
+    {
+      "componente": "Soporte GCP Enterprise",
+      "valor": 150000,
+      "fuente": "[DATO VALIDADO] Caso de Negocio ($12,500/mes)."
+    },
+    {
+      "componente": "Personal (Equipo de Operaciones Cloud)",
+      "valor": 800000,
+      "fuente": "[SUPUESTO] Reducción de 12 a 8 FTEs, con un costo promedio de $100k/FTE (ver baseline-financiero.md)."
+    }
+  ]
+}

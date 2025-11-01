@@ -1,0 +1,32 @@
+{
+  "opex_on_prem_anual": {
+    "hardware_mantenimiento": 1560000,
+    "licenciamiento": 1515000,
+    "energia_espacio": 420000,
+    "personal_operacion_12_fte": 1200000,
+    "wan_enlaces": 300000,
+    "otros_contratos": 250000,
+    "total": 5245000
+  },
+  "tco_on_prem_3_anios": 15735000,
+  "capacidades": {
+    "vms": 420,
+    "vcpu": 1900,
+    "ram_tb": 12.8
+  },
+  "gcp_precios": {
+    "compute_vcpu_mes": 24,
+    "compute_ram_gb_mes": 3,
+    "sql_managed_multiplier": 1.6,
+    "storage_block_gb_mes": 0.12,
+    "storage_object_gb_mes": 0.023,
+    "storage_snapshots_gb_mes": 0.05,
+    "network_interconnect_2_puertos_mes": 3000,
+    "network_egress_gb": 0.05,
+    "support_mes": 12500,
+    "cloud_ops_team_mes": 75000
+  },
+  "costos_one_time": {
+    "servicios_proyecto_capacitacion_datos": 1700000
+  }
+}
