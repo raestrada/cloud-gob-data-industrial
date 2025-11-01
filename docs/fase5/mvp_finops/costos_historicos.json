@@ -1,0 +1,16 @@
+{
+  "serie_historica_costos": [
+    {"mes": "M1", "total": 218300},
+    {"mes": "M2", "total": 234600},
+    {"mes": "M3", "total": 254800},
+    {"mes": "M4", "total": 279200},
+    {"mes": "M5", "total": 300400},
+    {"mes": "M6", "total": 316700},
+    {"mes": "M7", "total": 322300},
+    {"mes": "M8", "total": 312900},
+    {"mes": "M9", "total": 306100},
+    {"mes": "M10", "total": 316700},
+    {"mes": "M11", "total": 317850},
+    {"mes": "M12", "total": 313609}
+  ]
+}
