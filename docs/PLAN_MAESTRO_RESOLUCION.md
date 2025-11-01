@@ -133,51 +133,51 @@ graph TD
 #### Secuencia de Ejecución
 
 **2.1 Arquitecto de Plataforma** (Primera ejecución, 90 min)
-- **Tarea**: Diseñar arquitectura de plataforma distribuida basada en Kafka
+- **Tarea**: Diseñar arquitectura de plataforma distribuida basada en Google Distributed Cloud (GDC) Edge y Kafka.
 - **Input**: Inventario de legados (Fase 1.1), conectividad (Fase 1.3)
 - **Entregables**:
-  - Topología de clusters Kafka (on-prem + GCP multi-región)
-  - Justificación: Confluent Kafka vs Pub/Sub vs Spanner
+  - Topología de clusters Kafka (GDC Edge + GCP multi-región)
+  - Justificación: Confluent Platform sobre GKE en GDC Edge
   - Justificación: Cluster Linking vs MirrorMaker 2 (RPO/RTO=0)
-  - Patrón HA/DR para sistemas críticos (activo-activo/activo-pasivo)
-  - Estrategia edge computing para SCADA antiguos
+  - Patrón HA/DR para sistemas críticos (activo-activo local, activo-pasivo a cloud)
+  - Estrategia edge computing para SCADA con GDC Edge
   - Diagrama Mermaid de arquitectura
 - **Output**: `docs/fase2/arquitectura-plataforma.md`
 
 **2.2 Arquitecto de Datos** (Primera ejecución, 90 min)
-- **Tarea**: Diseñar data hub y capas medallion
+- **Tarea**: Diseñar data hub y capas medallion distribuidas (edge y cloud).
 - **Input**: Arquitectura de plataforma (2.1), inventario legados (1.1)
 - **Entregables**:
-  - Flujo de datos end-to-end (diagrama Mermaid)
-  - Capas medallion: RAW → Bronze → Silver → Gold (justificar cuántas)
-  - Catálogo de tópicos Kafka (naming, particiones, retención)
+  - Flujo de datos end-to-end (edge-to-cloud, diagrama Mermaid)
+  - Capas medallion distribuidas: RAW/Bronze (Edge), Silver/Gold (Cloud)
+  - Catálogo de tópicos Kafka (con prefijos `edge.` y `cloud.`)
   - Estrategia de particionamiento (por planta, sensor, etc.)
   - Schema management (Avro, Protobuf, JSON)
   - Lakehouse vs BigQuery (análisis comparativo)
 - **Output**: `docs/fase2/arquitectura-datos.md`
 
 **2.3 Experto en Redes** (Segunda ejecución, 90 min)
-- **Tarea**: Diseñar backbone de red con Cloudflare Zero Trust
+- **Tarea**: Diseñar la arquitectura de red y seguridad nativa de GCP para la topología GDC Edge.
 - **Input**: Arquitectura plataforma (2.1), arquitectura datos (2.2), conectividad actual (1.3)
 - **Entregables**:
-  - Arquitectura Cloudflare Zero Trust (3 capas: Access, Private Networks, WARP VPN)
-  - Justificación: NO usar Layer 3 tradicional, Interconnect/VPN solo como habilitador
-  - Diagrama de red (Mermaid)
-  - Matriz de latencias (todos los trayectos críticos)
-  - Dimensionamiento de ancho de banda (¿1Gbps suficiente o upgrade?)
-  - Políticas de Cloudflare Access (OAuth, mTLS)
+  - Arquitectura de conectividad privada con Private Service Connect (PSC) y Anthos Service Mesh (mTLS).
+  - Diseño de acceso Zero-Trust con Identity-Aware Proxy (IAP) para usuarios.
+  - Justificación: NO usar VPNs de cliente ni exponer servicios a internet.
+  - Diagrama de red detallado (Mermaid) mostrando PSC, IAP, Interconnect y flujos de tráfico.
+  - Re-validación del dimensionamiento de ancho de banda (Dual 2x1Gbps Interconnect).
+  - Políticas de red (Network Policies) para segmentación de tráfico en GKE (Edge y Cloud).
 - **Output**: `docs/fase2/arquitectura-redes.md`
 
 **2.4 Sesión de Revisión Arquitectónica** (60 min)
 - **Participantes**: Arquitecto Plataforma, Arquitecto Datos, Experto Redes, Admin Legados
 - **Tarea**: Validación cruzada de decisiones arquitectónicas
   - **Arquitecto Datos cuestiona a Arquitecto Plataforma**:
-    - "¿Por qué 4 clusters Kafka y no 3? ¿Justifica el costo?"
+    - "¿Por qué 5 clusters Kafka y no 3? ¿Justifica el costo de los clusters edge?"
     - "¿Cluster Linking realmente ofrece sub-segundo o es marketing?"
   - **Experto Redes cuestiona a Arquitecto Plataforma**:
-    - "El throughput agregado de Kafka replicación es 2.5 Gbps, Interconnect es 1Gbps, ¿cómo resuelves?"
+    - "El throughput agregado de Kafka replicación es 2.5 Gbps, Interconnect es 2Gbps, ¿cómo gestionamos los picos?"
   - **Admin Legados cuestiona a todos**:
-    - "SCADA antiguos tienen latencia <10ms on-prem, en cloud será >50ms, ¿operación local-first es realmente suficiente?"
+    - "SCADA antiguos tienen latencia <10ms on-prem, GDC Edge lo garantiza, pero ¿cómo aseguramos que el hardware GDC cumple los requisitos de la planta?"
 - **Decisiones**: Ajustes a arquitectura basados en retroalimentación
 - **Output**: `docs/fase2/revision-arquitectonica-v1.md`
 
@@ -211,7 +211,7 @@ graph TD
 - **Tarea**: Definir GitOps, Harness, OPA y gobierno
 - **Input**: Arquitectura plataforma v2 (2.5), arquitectura datos v2 (2.5)
 - **Entregables**:
-  - Arquitectura GitOps (Harness + Tanzu + GKE, diagrama Mermaid)
+  - Arquitectura GitOps (Harness + GDC Edge + GKE, diagrama Mermaid)
   - Justificación: Harness vs ArgoCD/Flux
   - Especificación de políticas OPA (cuotas, seguridad, compliance)
   - Catálogo de experimentos Chaos Engineering (RPO/RTO=0)
@@ -229,7 +229,7 @@ graph TD
   - Matriz de decisión: migración SQL Server (Cloud SQL vs SQL MI vs GCE)
   - Estrategia CDC con Debezium (configuración, monitoreo, rollback)
   - Plan de transformación .exe locales (contenedores, Cloud Functions)
-  - Topología VMware Tanzu on-premise (sizing, workloads, integración GKE)
+  - Configuración de Google Distributed Cloud (GDC) Edge on-premise (sizing, workloads, integración GKE)
   - Plan de migración por ondas (3 ondas con detalle)
   - Runbooks de escalación (failover, rollback, troubleshooting)
 - **Output**: `docs/fase3/migracion-legados.md`
@@ -243,7 +243,7 @@ graph TD
   - **Admin Legados cuestiona a Data Engineer**:
     - "CDC de Debezium genera 500 Mbps, ¿pipeline KSQL puede procesar sin lag?"
   - **Arquitecto Plataforma cuestiona a Admin Legados**:
-    - "Edge gateway para SCADA, ¿hardware dedicado o VM? ¿Costo?"
+    - "Hardware para GDC Edge, ¿cumple los requisitos de Google? ¿Costo?"
 - **Decisiones**: Ajustes a diseño de implementación
 - **Output**: `docs/fase3/validacion-tecnica-v1.md`
 
@@ -278,10 +278,10 @@ graph TD
 - **Participantes**: Finanzas (líder), Arquitecto Plataforma, Experto Redes, Data Engineer
 - **Tarea**: Validar supuestos de costos y optimizaciones
   - **Arquitecto Plataforma valida**:
-    - Costo Confluent Cloud (4 clusters): ¿USD 200K/año es realista?
-    - Cast.ai 40% ahorro: ¿Benchmarks reales o estimado?
+    - Costo Confluent Cloud (2 clusters cloud): ¿USD 150K/año es realista?
+    - Costo GDC Edge (hardware + licencias): ¿Está incluido en el CAPEX?
   - **Experto Redes valida**:
-    - Costo Cloudflare Zero Trust: ¿USD 7/usuario/mes × cuántos usuarios?
+    - Costo de PSC y tráfico de Anthos Service Mesh: ¿Está considerado?
     - ¿Interconnect upgrade a 10Gbps necesario? (+USD 7K/mes)
   - **Data Engineer valida**:
     - Costo BigQuery: ¿Streaming insert vs load job? (diferencia de costos)
@@ -309,7 +309,7 @@ graph TD
   - **Forecast de costos**: Algoritmo (Prophet + regresión), código Python, accuracy
   - **Detección de anomalías**: Umbrales dinámicos (Z-score), flujo de respuesta, código
   - **NLP etiquetado**: Reglas + clasificador (TF-IDF + Logistic Regression), código
-  - **Arquitectura MLOps**: Vertex.ai (cloud + on-prem con Tanzu), diagrama Mermaid
+  - **Arquitectura MLOps**: Vertex.ai (cloud + edge con GDC), diagrama Mermaid
   - **FinOps LLM**: Cast.ai LLM cache, LangFuse + LangChain, políticas OPA cuotas
   - **Catálogo de modelos**: Casos de uso ML (producción, calidad, mantenimiento)
   - Notebooks Jupyter con implementaciones
@@ -355,24 +355,24 @@ graph TD
 **Temas de discusión obligatorios:**
 
 1. **RPO/RTO=0 es realmente alcanzable**:
-   - Arquitecto Plataforma defiende: "Cluster Linking sub-segundo + activo-activo"
-   - Admin Legados cuestiona: "¿Y si Interconnect cae? ¿VPN puede manejar tráfico?"
-   - Experto Redes propone: "Doble Interconnect 1Gbps en vez de uno de 10Gbps"
+   - Arquitecto Plataforma defiende: "RPO/RTO=0 se garantiza localmente en GDC Edge. La replicación a la nube es para DR y analytics, con un RPO de segundos."
+   - Admin Legados cuestiona: "¿Y si el cluster GDC Edge local falla? ¿Cuál es el RTO local?"
+   - Experto Redes propone: "Doble Interconnect 1Gbps en vez de uno de 10Gbps para redundancia de la conexión a la nube."
 
 2. **Número de capas medallion**:
-   - Arquitecto Datos propone: "5 capas (RAW, Bronze, Silver, Gold, Platinum)"
-   - Data Engineer cuestiona: "¿Complejidad operacional justifica 5 vs 3 capas?"
-   - Consenso: Definir mínimo viable (3 capas) + roadmap evolutivo (5 capas)
+   - Arquitecto Datos propone: "4 capas (RAW/Bronze en Edge, Silver/Gold en Cloud)"
+   - Data Engineer cuestiona: "¿La complejidad de mantener pipelines en dos entornos (edge/cloud) justifica el ahorro de ancho de banda?"
+   - Consenso: Iniciar con procesamiento Bronze en el edge y validar performance. Si es complejo, moverlo a la nube.
 
 3. **Costos Confluent vs Self-Managed**:
-   - Finanzas cuestiona: "Confluent Cloud USD 200K/año, self-managed USD 80K/año, ¿justifica?"
-   - Arquitecto Plataforma defiende: "Managed reduce OpEx personal, USD 120K/año de ahorro en FTEs"
-   - Consenso: Confluent Cloud con revisión anual de costos
+   - Finanzas cuestiona: "Confluent Cloud USD 150K/año, self-managed USD 80K/año, ¿justifica?"
+   - Arquitecto Plataforma defiende: "Managed reduce OpEx personal, USD 120K/año de ahorro en FTEs, y se integra con la factura de GCP."
+   - Consenso: Confluent Cloud con revisión anual de costos.
 
 4. **Interconnect 1Gbps vs 10Gbps**:
-   - Experto Redes propone: "Upgrade a 10Gbps (USD 10K/mes) para holgura"
-   - Finanzas cuestiona: "¿Realmente necesario? Dual 1Gbps (USD 6K/mes) da redundancia + capacidad"
-   - Consenso: Dual 1Gbps (redundancia + 2Gbps capacidad)
+   - Experto Redes propone: "Upgrade a Dual 2x1Gbps (USD 6K/mes) para redundancia y capacidad suficiente para picos."
+   - Finanzas cuestiona: "¿Es el gasto óptimo? ¿Podemos empezar con 1Gbps y usar QoS?"
+   - Consenso: Dual 1Gbps es la opción más segura para cumplir los objetivos de replicación sin arriesgar el RPO.
 
 **Decisiones documentadas**: `docs/fase6/decisiones-consensuadas.md`
 
@@ -382,8 +382,8 @@ graph TD
   1. **Arquitectura de Alto Nivel** (end-to-end)
   2. **Topología Kafka** (clusters, Cluster Linking, replicación)
   3. **Flujo de Datos** (fuentes → RAW → capas medallion → persistencia → consumidores)
-  4. **Arquitectura de Red** (Cloudflare, Interconnect, VPN, plantas, GCP)
-  5. **GitOps Workflow** (Git repos → Harness → OPA → Tanzu/GKE → deploy)
+  4. **Arquitectura de Red** (GDC Edge, PSC, IAP, Interconnect, GCP)
+  5. **GitOps Workflow** (Git repos → Harness → OPA → GDC Edge/GKE → deploy)
   6. **MLOps Architecture** (data sources → feature store → training → registry → deployment)
   7. **FinOps Dashboard** (costos, forecast, anomalías, unit economics)
 
@@ -399,12 +399,12 @@ graph TD
 1. Latencia OT/SCADA (Admin Legados)
 2. Viabilidad RPO/RTO=0 inter-región (Arquitecto Plataforma)
 3. .exe locales en stored procedures (Admin Legados)
-4. Brecha de skills GCP/FinOps (DevSecOps)
+4. Brecha de skills GCP/Anthos (DevSecOps)
 5. Interconnect capacidad insuficiente (Experto Redes)
 6. Over-commitment CUD/RI (Finanzas)
 7. Accuracy forecast <90% (Data Scientist)
 8. Pipeline lag en KSQL/Spark (Data Engineer)
-9. Adopción Cloudflare Zero Trust (Experto Redes)
+9. Complejidad de configuración de Anthos Service Mesh (Experto Redes)
 10. Costos Confluent mayores a estimado (Finanzas)
 11. Chaos Engineering disruption (DevSecOps)
 12. Data quality <98% (Arquitecto Datos)
@@ -436,7 +436,7 @@ graph TD
   2. **Situación Actual** (inventario, problemas, restricciones) - Admin Legados
   3. **Principios de Arquitectura** (high-level, no exhaustivo) - Arquitecto Plataforma
   4. **Arquitectura de Datos** (data hub, medallion) - Arquitecto Datos
-  5. **Arquitectura de Red** (Cloudflare Zero Trust) - Experto Redes
+  5. **Arquitectura de Red** (PSC, IAP, Anthos Service Mesh) - Experto Redes
   6. **GitOps y DevSecOps** (Harness, OPA, Chaos) - DevSecOps
   7. **Pipelines de Datos** (KSQL, Spark) - Data Engineer
   8. **Modelo Financiero 3 años** (TCO, CUD/RI, unit economics, escenarios) - Finanzas
