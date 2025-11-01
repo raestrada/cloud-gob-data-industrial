@@ -3,8 +3,8 @@
 
 ---
 
-**Última actualización**: 2025-11-01 11:00:00
-**Fase actual**: Fase 2 completada, listo para iniciar Fase 3
+**Última actualización**: 2025-11-01 12:00:00
+**Fase actual**: Fase 3 completada, listo para iniciar Fase 4
 **Agentes disponibles**: 8 agentes especializados creados
 
 ---
@@ -12,7 +12,7 @@
 ## Progreso General
 
 ```
-[████████████░░░░░░░░] 60% - Fase 2 Completada
+[████████████████░░░░] 80% - Fase 3 Completada
 ```
 
 ## Fases del Proyecto
@@ -20,7 +20,7 @@
 - [x] **Fase 0**: Preparación
 - [x] **Fase 1**: Análisis de Situación Actual
 - [x] **Fase 2**: Diseño Arquitectónico de Alto Nivel
-- [ ] **Fase 3**: Diseño Detallado e Implementación
+- [x] **Fase 3**: Diseño Detallado e Implementación
 - [ ] **Fase 4**: Análisis Financiero y Optimización
 - [ ] **Fase 5**: MVP de IA para FinOps
 - [ ] **Fase 6**: Consolidación y Retroalimentación Final
@@ -49,30 +49,31 @@
 - [x] `docs/fase2/arquitectura-redes.md`
 - [x] `docs/fase2/revision-arquitectonica-v1.md`
 
-### Fase 3: Diseño Detallado
-- [ ] `docs/fase3/pipelines-datos.md`
-- [ ] `docs/fase3/devsecops-gobierno.md`
-- [ ] `docs/fase3/migracion-legados.md`
-- [ ] `docs/fase3/validacion-tecnica.md`
+### Fase 3: Diseño Detallado ✅
+- [x] `docs/fase3/pipelines-datos.md`
+- [x] `docs/fase3/devsecops-gobierno.md`
+- [x] `docs/fase3/migracion-legados.md`
+- [x] `docs/fase3/validacion-tecnica-v1.md`
 
 ---
 
 ## Próxima Acción
 
-### Iniciar Fase 3: Diseño Detallado e Implementación
+### Iniciar Fase 4: Análisis Financiero y Optimización
 
-**Agentes a invocar en orden**:
+**Agentes a invocar**:
 
-1. **Data Engineer** (90 min)
-   - **Tarea**: Diseñar los pipelines de datos con KSQL y Spark Streaming para implementar las capas medallion.
-   - **Input**: `docs/fase2/arquitectura-datos.md`
+1. **Finanzas** (120 min)
+   - **Tarea**: Crear el modelo financiero completo a 3 años, incluyendo TCO, CAPEX/OPEX, unit economics, y análisis de sensibilidad.
+   - **Input**: Todos los documentos de arquitectura de las Fases 2 y 3.
    - **Entregables**:
-     - Catálogo de pipelines (KSQL vs Spark)
-     - Implementación de capas medallion (código de ejemplo)
-     - Estrategia de windowing y manejo de datos tardíos.
-   - **Output**: `docs/fase3/pipelines-datos.md`
+     - Modelo TCO 3 años (on-prem vs cloud)
+     - Plan CUD/RI por ola de migración
+     - Payback y ROI
+     - Business case para la dirección.
+   - **Output**: `docs/fase4/modelo-financiero.md`
 
 **Comando para iniciar**:
 ```
-@data-engineer: Lee el documento de arquitectura de datos y diseña los pipelines de datos para implementar las capas medallion como se describe en tu perfil y en el plan maestro. Genera el entregable docs/fase3/pipelines-datos.md.
+@finanzas: Lee todos los documentos de diseño de las Fases 2 y 3. Basado en ellos y en tu perfil, crea el modelo financiero del proyecto y genera el entregable docs/fase4/modelo-financiero.md.
 ```
