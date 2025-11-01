@@ -261,64 +261,71 @@ Caso de negocio para liderar la migración y operación de infraestructura indus
 - Carga operativa manejada por Confluent + GCP
 - No requiere programación custom de resiliencia/recuperación
 
-### ¿Por qué Google Distributed Cloud Edge + GCP Nativo vs VMware/Cloudflare?
+### ¿Por qué Google Distributed Cloud Edge + Stack 100% GCP Nativo?
 
-**Decisión arquitectónica**: Pasar de Cloudflare Tunnels + vSphere/Tanzu a GDC Edge + GCP 100% nativo
+**Decisión arquitectónica**: GDC Edge (on-premise) + GKE (cloud) + Anthos unificado
 
 **Razones clave**:
 
-1. **Resiliencia Industrial Real**:
-   - GDC Edge permite operación local **offline-capable** (plantas pueden operar sin cloud)
-   - VMware/Tanzu requería conectividad para gestión centralizada
-   - RPO/RTO ≈ 0 local, no dependiente de latencia cloud
+1. **Resiliencia Industrial Real (Offline-Capable)**:
+   - GDC Edge permite operación local **sin dependencia de cloud**
+   - Plantas pueden continuar operando durante cortes de conectividad
+   - RPO/RTO ≈ 0 local, procesamiento crítico no depende de latencia cloud
+   - Ideal para entornos industriales con requisitos de disponibilidad extremos
 
-2. **Stack 100% GCP Nativo**:
-   - **Antes**: VMware vSphere + Tanzu + Cloudflare + GCP (4 proveedores)
-   - **Ahora**: Google Distributed Cloud Edge + GKE + Anthos (1 proveedor)
-   - Menor complejidad operativa, FinOps unificado
+2. **Stack 100% GCP Nativo (Un Solo Proveedor)**:
+   - Google Distributed Cloud Edge + GKE + Anthos (ecosistema unificado)
+   - Menor complejidad operativa: un solo vendor, un solo contrato
+   - FinOps unificado: todo facturado en cuenta GCP Marketplace
+   - Menor brecha de skills: mismo stack edge + cloud (Kubernetes/Anthos)
 
-3. **Zero-Trust Nativo sin Cloudflare**:
-   - **Antes**: Cloudflare Access + Tunnels (L7 proxy externo, costo adicional)
-   - **Ahora**: IAP + Identity Platform (federación SAML/OIDC nativa, sin costo extra)
-   - Anthos Service Mesh con mTLS automático (sin configuración Cloudflare)
+3. **Zero-Trust Nativo (IAP + Identity Platform)**:
+   - Identity-Aware Proxy para accesos humanos sin VPN tradicional
+   - Federación SAML/OIDC con AD corporativo/SSO nativa
+   - Anthos Service Mesh con mTLS automático para todo el tráfico
+   - Sin necesidad de soluciones de terceros (menor costo, menor complejidad)
 
-4. **Conectividad Privada Simplificada**:
-   - **Antes**: Cloudflare Tunnels como proxy L7, Interconnect solo como "habilitador"
-   - **Ahora**: Private Service Connect (PSC) directo, mTLS nativo
-   - Sin overlaps de IPs, sin exponer públicas, menor latencia (sin proxy intermedio)
+4. **Conectividad Privada (PSC + Interconnect)**:
+   - Private Service Connect (PSC) para conectividad edge ↔ cloud privada
+   - Sin overlaps de IPs entre plantas y cloud
+   - Sin exponer IPs públicas, comunicación 100% privada
+   - Interconnect 1Gbps + Cloud VPN HA como respaldo redundante
 
 5. **Procesamiento Edge-First Estratégico**:
-   - Procesar **localmente lo máximo posible** (pre-procesamiento, filtrado, priorización)
+   - Procesar **localmente lo máximo posible y razonable** en planta
+   - Pre-procesamiento, filtrado, priorización en edge (KSQL)
    - Reducir volumen de datos hacia cloud (solo críticos/agregados)
-   - **Ahora**: Métricas multi-planta, analítica global en cloud
-   - **Edge**: Datos sensibles permanecen on-prem, cumplimiento y privacidad
+   - Cloud para métricas multi-planta, analítica global, ML/AI
+   - Datos sensibles permanecen on-prem (cumplimiento, privacidad)
 
-6. **Replicación Asíncrona Priorizada** (no automática/total):
-   - Alarmas/telemetría → **alta prioridad** (Pub/Sub Lite → Pub/Sub)
-   - Batch/analítica → **media prioridad** (Dataflow programado)
-   - Logs/históricos → **baja prioridad** (Storage Transfer nocturno)
-   - **Antes (Cloudflare)**: Todo replicado con misma prioridad
+6. **Replicación Asíncrona Priorizada**:
+   - **Alta prioridad**: Alarmas/telemetría (Pub/Sub Lite → Pub/Sub)
+   - **Media prioridad**: Batch/analítica (Dataflow programado)
+   - **Baja prioridad**: Logs/históricos (Storage Transfer nocturno)
+   - Optimiza uso de Interconnect 1Gbps con tráfico inteligente
 
-7. **Gestión Unificada Anthos**:
-   - **Antes**: Tanzu Control Plane (on-prem) + GKE Control Plane (cloud) + Cloudflare Dashboard
-   - **Ahora**: Anthos Config Management único para edge + cloud
-   - GitOps unificado, Policy Controller (OPA) centralizado
+7. **Gestión Unificada (Anthos Config Management)**:
+   - GitOps único para GDC Edge + GKE cloud
+   - Anthos Config Management: despliegues declarativos centralizados
+   - Policy Controller (OPA integrado): gobierno unificado
+   - Un solo control plane para toda la infraestructura
 
-8. **Costos Reducidos**:
-   - Elimina licencias VMware vSphere/Tanzu
-   - Elimina suscripción Cloudflare Zero Trust
-   - Elimina costo proxy Cloudflare Tunnels (egreso)
-   - FinOps unificado: todo en una factura GCP Marketplace
+8. **Costos Optimizados y Predecibles**:
+   - Sin licencias de terceros (todo incluido en GCP)
+   - Facturación consolidada GCP Marketplace (Confluent, Dataproc)
+   - Cast.ai optimiza dinámicamente GKE + Dataproc (~40% ahorro)
+   - Modelo OPEX predictible, sin sorpresas de múltiples vendors
 
-9. **Observabilidad Nativa**:
-   - **Antes**: Cloudflare Analytics + logs locales dispersos
-   - **Ahora**: Cloud Operations Suite unificado (edge + cloud)
-   - Anthos Service Mesh observability (tracing distribuido automático)
+9. **Observabilidad Nativa Unificada**:
+   - Cloud Operations Suite: métricas, logs, traces edge + cloud
+   - Anthos Service Mesh observability: latencias L7 automáticas
+   - OpenTelemetry: instrumentación estándar
+   - Visibilidad end-to-end sin herramientas dispersas
 
 **Trade-offs aceptados**:
-- Dependencia de un solo proveedor (GCP) vs multi-cloud
-- Requiere Interconnect funcional (ya operativo según caso de negocio pág. 4)
-- Menor flexibilidad para futuro multi-cloud (mitigado por Kubernetes/Anthos portabilidad)
+- Dependencia de un solo proveedor (GCP) vs estrategia multi-cloud
+- Requiere Interconnect funcional (✅ ya operativo según caso de negocio pág. 4)
+- Menor flexibilidad para futuro multi-cloud (mitigado: Kubernetes/Anthos portabilidad)
 
 ### ¿Por qué Harness?
 
