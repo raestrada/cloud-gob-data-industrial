@@ -62,12 +62,12 @@ La inversión es financieramente muy atractiva y supera holgadamente todos los o
 | Métrica Financiera | Objetivo del Negocio | Resultado Proyectado | Estado |
 |:---|:---|:---|:---|
 | **TCO a 3 Años** | Reducción >30% | **Reducción del 49.6%** ($7.8M ahorro) | ✅ **Excede objetivo** |
-| **ROI a 3 Años** | >15% | **98.24%** | ✅ **Excede objetivo 6.5x** |
+| **ROI a 3 Años** | >15% | **113.8%** | ✅ **Excede objetivo 7.6x** |
 | **Periodo de Payback** | <24 meses | **~12 meses** | ✅ **Excede objetivo** |
 | **OPEX Anual Cloud** | <$5.2M | **$2.21M (57.8% reducción)** | ✅ **Excede objetivo** |
 | **CAPEX Requerido** | <$2.0M | **$2.15M** | ⚠️ **Déficit de $150K (7.5%)** |
 
-**Nota sobre CAPEX**: El ligero sobrecosto se debe al supuesto de **[SC-01]** para el hardware de GDC Edge. Dada la magnitud excepcional del ROI (98%), este déficit es estratégicamente aceptable y puede ser gestionado mediante negociaciones con Google o faseamiento de la compra de hardware.
+**Nota sobre CAPEX**: El ligero sobrecosto se debe al supuesto de **[SC-01]** para el hardware de GDC Edge. Dada la magnitud excepcional del ROI (113.8%), este déficit es estratégicamente aceptable y puede ser gestionado mediante negociaciones con Google o faseamiento de la compra de hardware.
 
 ### La Decisión Requerida
 
@@ -102,9 +102,8 @@ Se solicita al Comité Ejecutivo:
 | Versión SQL Server | Instancias | Estado de Soporte | Prioridad de Migración |
 |:---|:---|:---|:---|
 | **SQL Server 2008/2012** | 100 | ❌ **Fuera de Soporte** | **CRÍTICA** (Onda 1 - Meses 1-6) |
-| **SQL Server 2019 (No Críticas)** | 90 | ✅ Con Soporte | Media (Onda 2 - Meses 7-12) |
 | **SQL Server 2019 (Críticas)** | 120 | ✅ Con Soporte | Alta (Onda 3 - Meses 13-18) |
-| **TOTAL** | **310** | - | **[DATO VALIDADO]** |
+| **TOTAL** | **220** | - | **[DATO VALIDADO - PDF pág. 1-2]** |
 
 **Observación Crítica**: Las 100 instancias de SQL 2008/2012 representan un **riesgo de seguridad inaceptable** al no recibir parches de vulnerabilidades. Su migración es la máxima prioridad de la Onda 1.
 
@@ -147,7 +146,8 @@ Se solicita al Comité Ejecutivo:
 
 - **Distribución de Costos Actuales**: **[DATO VALIDADO]** 87% de los costos de TI son fijos ($4,558,000 de $5,245,000 OPEX anual).
 - **Componentes Fijos**:
-  - Hardware, energía, refrigeración: **[DATO VALIDADO]** $1,980,000
+  - Hardware y mantenimiento: **[DATO VALIDADO - PDF pág. 3]** $1,560,000
+  - Energía, espacio, enfriamiento: **[DATO VALIDADO - PDF pág. 3]** $420,000
   - Licenciamiento perpetuo (SQL Server, Windows Server): **[DATO VALIDADO]** $1,515,000
   - Personal de operaciones (12 FTEs): **[DATO VALIDADO]** $1,200,000
 - **Limitación de Negocio**: Imposibilidad de reducir costos durante periodos de baja demanda o escalar rápidamente para nuevas iniciativas.
@@ -434,8 +434,9 @@ PLANTA TIJUANA (GDC Edge)            │
 
 | Categoría de Costo | Año 1 | Año 2 | Año 3 | Total 3 Años | % del Total |
 |:---|---:|---:|---:|---:|---:|
-| **Hardware y Mantenimiento** | $1,980,000 | $1,980,000 | $1,980,000 | $5,940,000 | 38% |
+| **Hardware y Mantenimiento** | $1,560,000 | $1,560,000 | $1,560,000 | $4,680,000 | 30% |
 | **Licenciamiento de Software** | $1,515,000 | $1,515,000 | $1,515,000 | $4,545,000 | 29% |
+| **Energía/Espacio/Enfriamiento** | $420,000 | $420,000 | $420,000 | $1,260,000 | 8% |
 | **Personal de Operaciones (12 FTEs)** | $1,200,000 | $1,200,000 | $1,200,000 | $3,600,000 | 23% |
 | **Red y Conectividad WAN** | $300,000 | $300,000 | $300,000 | $900,000 | 6% |
 | **Soporte y Otros Servicios** | $250,000 | $250,000 | $250,000 | $750,000 | 5% |
@@ -514,7 +515,8 @@ PLANTA TIJUANA (GDC Edge)            │
 
 | Categoría | On-Premise | Cloud | Cambio Absoluto | Cambio % |
 |:---|---:|---:|---:|---:|
-| **Hardware, Energía, Refrigeración** | $1,980,000 | $0 | -$1,980,000 | **-100%** ✅ Eliminado |
+| **Hardware y Mantenimiento** | $1,560,000 | $0 | -$1,560,000 | **-100%** ✅ Eliminado |
+| **Energía, Espacio, Enfriamiento** | $420,000 | $0 | -$420,000 | **-100%** ✅ Eliminado |
 | **Cómputo y Storage (como servicio)** | - | $925,372 | +$925,372 | **Nuevo** ⚡ Pay-per-use |
 | **Licenciamiento de Software** | $1,515,000 | $417,500 | -$1,097,500 | **-72%** ✅ |
 | **Personal de Operaciones** | $1,200,000 | $800,000 | -$400,000 | **-33%** ✅ |
@@ -638,8 +640,7 @@ PLANTA TIJUANA (GDC Edge)            │
 
 #### 6.2.1. Sistemas en Scope
 
-**[DATO VALIDADO - inventario-sistemas-legados.md]**
-- **90 instancias SQL Server 2019 no críticas** (con CDC Debezium)
+**[DATO VALIDADO - PDF pág. 1-2]**
 - **60 aplicaciones IIS** (mayoría de las apps web)
 - **25 SCADA modernos** (complementar conectores OPC-UA)
 - **Activar capas SILVER y GOLD** (procesamiento en cloud)

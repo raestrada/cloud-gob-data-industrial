@@ -241,7 +241,7 @@ El análisis demuestra que este proyecto:
 
 ### Si Postergamos la Decisión
 
-- **Riesgo de seguridad:** 140 bases de datos SQL 2008-2012 sin soporte siguen expuestas
+- **Riesgo de seguridad:** 100 bases de datos SQL 2008-2012 sin soporte siguen expuestas
 - **Pérdidas operacionales:** $3.2M/año continúan por cortes de energía
 - **Costo de oportunidad:** $2.9M/año en ahorros no materializados
 - **Rigidez estratégica:** 87% costos fijos imposibilitan agilidad de negocio

@@ -726,7 +726,7 @@ El Caso de Negocio establece objetivos financieros a nivel de proyecto completo:
 
 | Métrica | Objetivo Proyecto | Resultado MVP FinOps | Contribución |
 |:---|:---:|:---:|:---|
-| **ROI 3 Años** | 98.24% | 1,182% | Supera en 12x |
+| **ROI 3 Años** | 113.8% | 1,182% | Supera en 10.4x |
 | **Payback Period** | ~12 meses | ~3 meses | 4x más rápido |
 | **OPEX Reduction** | 57.8% | $132K ahorro | ~2.4% del OPEX total |
 
