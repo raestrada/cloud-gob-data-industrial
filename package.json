@@ -1,0 +1,15 @@
+{
+  "name": "cloud-gob-data-industrial",
+  "version": "1.0.0",
+  "description": "Dependencies for building project deliverables",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo "Error: no test specified" && exit 1"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "@mermaid-js/mermaid-cli": "^10.6.1",
+    "decktape": "^3.8.2"
+  }
+}

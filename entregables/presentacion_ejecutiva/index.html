@@ -324,34 +324,36 @@
 
             <!-- Slide 2: Decisión Requerida -->
             <section>
-                <h2>Decisión Requerida</h2>
+                <h2 style="margin-bottom: 0.5em;">Decisión Requerida</h2>
 
-                <div class="success-box" style="margin: 2em 0; text-align: center;">
-                    <h3 style="margin-top: 0;">Aprobación de Migración a Plataforma Cloud Híbrida (GCP)</h3>
-                    <p style="font-size: 1.3em; margin: 0.5em 0;">
-                        <strong>Inversión:</strong> $2.15M CAPEX |
-                        <strong>ROI:</strong> 114% a 3 años |
-                        <strong>Payback:</strong> 11 meses
+                <div class="success-box" style="margin: 0.6em 0; text-align: center; padding: 0.5em 1em;">
+                    <h3 style="margin: 0; font-size: 0.95em;">Aprobación Migración Cloud Híbrida (GCP)</h3>
+                    <p style="font-size: 0.85em; margin: 0.2em 0;">
+                        <strong>Inversión:</strong> $2.15M | <strong>ROI:</strong> 114% (3a) | <strong>Payback:</strong> 11m
                     </p>
                 </div>
 
-                <h3>¿Qué estamos solicitando?</h3>
-                <ul>
-                    <li>✅ Aprobación del proyecto y cronograma (18 meses)</li>
-                    <li>✅ Autorización de inversión (CAPEX $2.15M)</li>
-                    <li>✅ Aprobación del plan de capacitación y staffing</li>
-                </ul>
+                <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 2em; margin-top: 0.8em; font-size: 0.95em; text-align: left; max-width: 90%; margin-left: auto; margin-right: auto;">
+                    <div>
+                        <h3 style="margin: 0 0 0.5em 0; font-size: 1.2em;">¿Qué estamos solicitando?</h3>
+                        <ul style="margin: 0; line-height: 1.5; padding-left: 1.5em;">
+                            <li>✅ Aprobación proyecto (18 meses)</li>
+                            <li>✅ Autorización inversión ($2.15M)</li>
+                            <li>✅ Aprobación capacitación/staffing</li>
+                        </ul>
+                    </div>
 
-                <h3>¿Por qué ahora?</h3>
-                <div class="alert-box">
-                    <ul style="margin: 0;">
-                        <li>⚠️ <strong>35% de bases de datos fuera de soporte</strong> (riesgo de seguridad crítico)</li>
-                        <li>⚠️ <strong>$3.2M anuales perdidos</strong> por cortes de energía en plantas</li>
-                        <li>⚠️ <strong>87% de costos TI son fijos</strong> (imposibilita agilidad de negocio)</li>
-                    </ul>
+                    <div>
+                        <h3 style="margin: 0 0 0.5em 0; font-size: 1.2em;">¿Por qué ahora?</h3>
+                        <ul style="margin: 0; line-height: 1.5; padding-left: 1.5em; background: rgba(255,100,100,0.1); padding: 0.6em 0.6em 0.6em 1.8em; border-left: 3px solid #ff6b6b;">
+                            <li>⚠️ <strong>35% BD sin soporte</strong> (riesgo crítico)</li>
+                            <li>⚠️ <strong>$3.2M/año perdidos</strong> (cortes energía)</li>
+                            <li>⚠️ <strong>87% costos fijos</strong> (sin agilidad)</li>
+                        </ul>
+                    </div>
                 </div>
 
-                <p class="center-text small"><em>[DATO VALIDADO - modelo-financiero.md] Ahorro proyectado: <strong>$8.4M a 3 años</strong></em></p>
+                <p class="center-text small" style="margin-top: 0.5em; font-size: 0.75em;"><em>Ahorro proyectado: <strong>$8.4M a 3 años</strong></em></p>
             </section>
 
             <!-- Slide 3: El Problema -->
@@ -420,10 +422,9 @@
 
             <!-- Slide 4: La Solución -->
             <section>
-                <h2>La Solución - Arquitectura "Edge-First"</h2>
+                <h2 style="margin-bottom: 0.5em;">La Solución - Arquitectura "Edge-First"</h2>
 
-                <h3>Principios de Diseño</h3>
-                <div class="mermaid">
+                <div class="mermaid" style="margin-top: 0.5em;">
 flowchart LR
     subgraph edge["EDGE (3 Plantas - GDC Edge)"]
         direction LR
@@ -441,24 +442,23 @@ flowchart LR
     style C4 fill:#2196F3,color:#fff,stroke:#1565C0,stroke-width:3px
                 </div>
 
-                <h3>Componentes Clave</h3>
-                <table style="font-size: 0.65em;">
+                <table style="font-size: 0.6em; margin-top: 0.8em;">
                     <thead>
                         <tr>
-                            <th style="width: 30%;">Componente</th>
-                            <th style="width: 30%;">Tecnología</th>
-                            <th style="width: 40%;">Beneficio Clave</th>
+                            <th style="width: 28%;">Componente</th>
+                            <th style="width: 35%;">Tecnología</th>
+                            <th style="width: 37%;">Beneficio Clave</th>
                         </tr>
                     </thead>
                     <tbody>
                         <tr>
                             <td><strong>Operación Local</strong></td>
-                            <td>Google Distributed Cloud (GDC) Edge</td>
+                            <td>GDC Edge</td>
                             <td>RPO/RTO=0 para producción</td>
                         </tr>
                         <tr>
-                            <td><strong>Plataforma de Eventos</strong></td>
-                            <td>Confluent Kafka (5 clusters Hub-and-Spoke)</td>
+                            <td><strong>Plataforma Eventos</strong></td>
+                            <td>Confluent Kafka (5 clusters)</td>
                             <td>Desacopla sistemas, habilita innovación</td>
                         </tr>
                         <tr>
@@ -468,8 +468,8 @@ flowchart LR
                         </tr>
                         <tr>
                             <td><strong>Datos Consolidados</strong></td>
-                            <td>Lakehouse (GCS) + Data Warehouse (BigQuery)</td>
-                            <td>Analítica multi-planta por primera vez</td>
+                            <td>Lakehouse (GCS) + BigQuery</td>
+                            <td>Analítica multi-planta</td>
                         </tr>
                         <tr>
                             <td><strong>Gobierno Unificado</strong></td>
@@ -486,161 +486,145 @@ flowchart LR
 
             <!-- Slide 5: Caso de Negocio -->
             <section>
-                <h2>Caso de Negocio - ROI Excepcional</h2>
+                <h2 style="margin-bottom: 0.3em; font-size: 1.6em;">Caso de Negocio - ROI Excepcional</h2>
 
-                <h3>Comparativa de TCO a 3 Años</h3>
-                <div class="two-columns" style="font-size: 0.7em;">
+                <div class="two-columns" style="font-size: 0.55em; margin-top: 0.3em; gap: 1em;">
                     <div>
-                        <h4>ON-PREMISE (Actual)</h4>
-                        <div style="background: #ffebee; padding: 1em; border-radius: 8px;">
-                            <p style="font-size: 2em; font-weight: 800; color: var(--alert-red); text-align: center; margin: 0;">$15,735,000</p>
-                            <ul style="margin-top: 1em;">
-                                <li>Hardware: $5.9M (38%)</li>
-                                <li>Licencias: $4.5M (29%)</li>
-                                <li>Personal: $3.6M (23%)</li>
-                                <li>Red/Otros: $1.7M (10%)</li>
+                        <h4 style="margin: 0 0 0.3em 0; font-size: 1.05em;">ON-PREMISE</h4>
+                        <div style="background: #ffebee; padding: 0.5em; border-radius: 5px;">
+                            <p style="font-size: 1.5em; font-weight: 800; color: var(--alert-red); text-align: center; margin: 0;">$15.7M</p>
+                            <ul style="margin: 0.4em 0 0 0; padding-left: 1.2em; line-height: 1.25;">
+                                <li>Hardware: $5.9M</li>
+                                <li>Licencias: $4.5M</li>
+                                <li>Personal: $3.6M</li>
                             </ul>
                         </div>
                     </div>
                     <div>
-                        <h4>CLOUD (Proyectado)</h4>
-                        <div style="background: #e8f5e9; padding: 1em; border-radius: 8px;">
-                            <p style="font-size: 2em; font-weight: 800; color: var(--success-green); text-align: center; margin: 0;">$7,358,462</p>
-                            <ul style="margin-top: 1em;">
-                                <li>CAPEX (one-time): $2.15M</li>
-                                <li>Cómputo/Storage: $2.8M</li>
-                                <li>Confluent/Harness: $0.9M</li>
-                                <li>Personal: $1.5M</li>
+                        <h4 style="margin: 0 0 0.3em 0; font-size: 1.05em;">CLOUD</h4>
+                        <div style="background: #e8f5e9; padding: 0.5em; border-radius: 5px;">
+                            <p style="font-size: 1.5em; font-weight: 800; color: var(--success-green); text-align: center; margin: 0;">$7.4M</p>
+                            <ul style="margin: 0.4em 0 0 0; padding-left: 1.2em; line-height: 1.25;">
+                                <li>CAPEX: $2.15M</li>
+                                <li>Cómputo: $2.8M</li>
+                                <li>SaaS: $0.9M</li>
                             </ul>
                         </div>
                     </div>
                 </div>
 
-                <div class="success-box center-text" style="margin: 1em 0; font-size: 1.3em;">
-                    <strong>AHORRO: $8.4M (53.2%)</strong>
+                <div class="success-box center-text" style="margin: 0.4em 0; font-size: 0.9em; padding: 0.35em;">
+                    <strong>AHORRO: $8.4M (53%)</strong>
                 </div>
 
-                <h3>Métricas Financieras</h3>
-                <table style="font-size: 0.7em;">
+                <table style="font-size: 0.5em; margin-top: 0.4em;">
                     <thead>
                         <tr>
-                            <th style="width: 30%;">Métrica</th>
-                            <th style="width: 20%; text-align: right;">Objetivo</th>
-                            <th style="width: 20%; text-align: right;">Resultado</th>
-                            <th style="width: 30%; text-align: center;">Estado</th>
+                            <th style="width: 24%;">Métrica</th>
+                            <th style="width: 14%; text-align: right;">Objetivo</th>
+                            <th style="width: 18%; text-align: right;">Resultado</th>
+                            <th style="width: 44%; text-align: center;">Estado</th>
                         </tr>
                     </thead>
                     <tbody>
                         <tr>
-                            <td><strong>ROI a 3 Años</strong></td>
+                            <td><strong>ROI 3a</strong></td>
                             <td style="text-align: right;">&gt;15%</td>
-                            <td style="text-align: right; color: var(--success-green); font-weight: 700; font-size: 1.2em;">113.8%</td>
+                            <td style="text-align: right; color: var(--success-green); font-weight: 700; font-size: 1.1em;">114%</td>
                             <td style="text-align: center;">✅ <strong>Excede 7.5x</strong></td>
                         </tr>
                         <tr>
                             <td><strong>Payback</strong></td>
-                            <td style="text-align: right;">&lt;24 meses</td>
-                            <td style="text-align: right; color: var(--success-green); font-weight: 700; font-size: 1.2em;">11 meses</td>
+                            <td style="text-align: right;">&lt;24m</td>
+                            <td style="text-align: right; color: var(--success-green); font-weight: 700; font-size: 1.1em;">11m</td>
                             <td style="text-align: center;">✅ <strong>Excede 2x</strong></td>
                         </tr>
                         <tr>
-                            <td><strong>OPEX Anual</strong></td>
+                            <td><strong>OPEX/año</strong></td>
                             <td style="text-align: right;">&lt;$5.2M</td>
-                            <td style="text-align: right; color: var(--success-green); font-weight: 700; font-size: 1.2em;">$2.3M</td>
-                            <td style="text-align: center;">✅ <strong>Reducción 56%</strong></td>
+                            <td style="text-align: right; color: var(--success-green); font-weight: 700; font-size: 1.1em;">$2.3M</td>
+                            <td style="text-align: center;">✅ <strong>↓56%</strong></td>
                         </tr>
                         <tr>
                             <td><strong>CAPEX</strong></td>
-                            <td style="text-align: right;">&lt;$2.0M</td>
-                            <td style="text-align: right; color: var(--warning-orange); font-weight: 700; font-size: 1.2em;">$2.15M</td>
+                            <td style="text-align: right;">&lt;$2M</td>
+                            <td style="text-align: right; color: var(--warning-orange); font-weight: 700; font-size: 1.1em;">$2.15M</td>
                             <td style="text-align: center;">⚠️ <strong>Déficit $150K</strong></td>
                         </tr>
                     </tbody>
                 </table>
 
-                <p class="center-text small" style="margin-top: 1em;">
-                    <strong>Reducción de Costo por Unidad Producida:</strong> $3.36 → $1.54 (54% ahorro)<br>
-                    <em>[DATO VALIDADO - modelo-financiero.md] Calculado con script Python auditable sobre datos validados</em>
+                <p class="center-text small" style="margin-top: 0.5em; font-size: 0.7em; line-height: 1.3;">
+                    <strong>Costo/Unidad:</strong> $3.36 → $1.54 (54% ↓)
                 </p>
             </section>
 
             <!-- Slide 6: Análisis de Sensibilidad -->
             <section>
-                <h2>Análisis de Sensibilidad - Robustez Financiera</h2>
+                <h2 style="margin-bottom: 0.3em; font-size: 1.4em;">Sensibilidad y Robustez Financiera</h2>
 
-                <h3>¿Qué pasa si los supuestos están equivocados?</h3>
-                <table style="font-size: 0.7em;">
+                <table style="font-size: 0.55em; margin-top: 0.3em;">
                     <thead>
                         <tr>
-                            <th style="width: 15%;">Escenario</th>
-                            <th style="width: 40%;">Supuestos</th>
-                            <th style="width: 15%; text-align: right;">ROI</th>
-                            <th style="width: 15%; text-align: right;">Payback</th>
-                            <th style="width: 15%; text-align: center;">¿Cumple?</th>
+                            <th style="width: 12%;">Caso</th>
+                            <th style="width: 46%;">Supuestos</th>
+                            <th style="width: 14%; text-align: right;">ROI</th>
+                            <th style="width: 14%; text-align: right;">Payback</th>
+                            <th style="width: 14%; text-align: center;">✓</th>
                         </tr>
                     </thead>
                     <tbody>
                         <tr style="background: rgba(52, 168, 83, 0.1);">
-                            <td><strong>Mejor Caso</strong></td>
+                            <td><strong>Mejor</strong></td>
                             <td>GDC=$100K/planta, Confluent=$150K/año, 6 FTEs</td>
-                            <td style="text-align: right; font-weight: 700; font-size: 1.2em; color: var(--success-green);">144%</td>
-                            <td style="text-align: right; font-weight: 700;">8 meses</td>
-                            <td style="text-align: center; font-size: 1.5em;">✅</td>
+                            <td style="text-align: right; font-weight: 700; font-size: 1.1em; color: var(--success-green);">144%</td>
+                            <td style="text-align: right; font-weight: 700;">8m</td>
+                            <td style="text-align: center; font-size: 1.2em;">✅</td>
                         </tr>
                         <tr>
-                            <td><strong>Caso Base</strong></td>
+                            <td><strong>Base</strong></td>
                             <td>GDC=$150K/planta, Confluent=$200K/año, 8 FTEs</td>
-                            <td style="text-align: right; font-weight: 700; font-size: 1.2em; color: var(--success-green);">114%</td>
-                            <td style="text-align: right; font-weight: 700;">11 meses</td>
-                            <td style="text-align: center; font-size: 1.5em;">✅</td>
+                            <td style="text-align: right; font-weight: 700; font-size: 1.1em; color: var(--success-green);">114%</td>
+                            <td style="text-align: right; font-weight: 700;">11m</td>
+                            <td style="text-align: center; font-size: 1.2em;">✅</td>
                         </tr>
                         <tr style="background: rgba(251, 188, 4, 0.1);">
-                            <td><strong>Peor Caso</strong></td>
+                            <td><strong>Peor</strong></td>
                             <td>GDC=$200K/planta, Confluent=$300K/año, 10 FTEs</td>
-                            <td style="text-align: right; font-weight: 700; font-size: 1.2em; color: var(--warning-orange);">84%</td>
-                            <td style="text-align: right; font-weight: 700;">15 meses</td>
-                            <td style="text-align: center; font-size: 1.5em;">✅</td>
+                            <td style="text-align: right; font-weight: 700; font-size: 1.1em; color: var(--warning-orange);">84%</td>
+                            <td style="text-align: right; font-weight: 700;">15m</td>
+                            <td style="text-align: center; font-size: 1.2em;">✅</td>
                         </tr>
                     </tbody>
                 </table>
 
-                <h3 style="margin-top: 1.5em;">Sensibilidad al Costo de GDC Edge (Supuesto Crítico)</h3>
-                <pre style="font-size: 0.5em; line-height: 1.6;">
-ROI según Costo de Hardware GDC Edge por Planta
+                <pre style="font-size: 0.45em; line-height: 1.4; margin-top: 0.6em;">
+ROI según Costo GDC Edge/Planta
 
 160% │
-     │
-140% │                    ● $100K (optimista)
-     │
-120% │              ● $150K (caso base)
-     │
-100% │        ● $200K (pesimista)
-     │
- 80% ├────┼────┼────┼────┼────┼────►
-     $100K   $150K   $200K
-
-     OBJETIVO: >15% ────────────────────
+140% │                ● $100K
+120% │          ● $150K
+100% │    ● $200K
+ 80% ├────┼────┼────►
+     $100K  $150K  $200K
                 </pre>
 
-                <div class="success-box" style="margin-top: 1em;">
-                    <h3 style="margin-top: 0;">Conclusión Crítica</h3>
-                    <p style="margin: 0; font-size: 1.1em;">
-                        <strong>Incluso en el peor escenario razonable</strong> (todos los supuestos críticos se desvían -33%),
-                        el proyecto sigue generando <strong>ROI del 84%</strong> (5.6x el objetivo) y <strong>payback de 15 meses</strong>
-                        (dentro del objetivo de 24 meses).
+                <div class="success-box" style="margin-top: 0.5em; padding: 0.5em 0.8em;">
+                    <p style="margin: 0; font-size: 0.8em; line-height: 1.25;">
+                        <strong>Peor escenario (-33%):</strong> ROI <strong>84%</strong> (5.6x meta) y payback <strong>15m</strong> (dentro 24m).
                     </p>
-                    <p class="center-text" style="margin-top: 0.5em; font-size: 1.3em; font-weight: 700; color: var(--success-green);">
-                        El proyecto es financieramente robusto.
+                    <p class="center-text" style="margin: 0.3em 0 0 0; font-size: 0.95em; font-weight: 700; color: var(--success-green);">
+                        ✅ Proyecto financieramente robusto
                     </p>
                 </div>
             </section>
 
             <!-- Slide 7: Arquitectura de Alto Nivel -->
             <section>
-                <h2>Arquitectura de Alto Nivel</h2>
+                <h2 style="margin-bottom: 0.5em;">Arquitectura de Alto Nivel</h2>
 
-                <h3>Vista End-to-End: Del Sensor al Dashboard Ejecutivo</h3>
-                <div class="mermaid">
+                <h3 style="margin-bottom: 0.5em;">Vista End-to-End: Del Sensor al Dashboard Ejecutivo</h3>
+                <div class="mermaid" style="margin-top: 0.5em;">
 flowchart LR
     subgraph edge["EDGE (Planta)"]
         direction LR
@@ -664,8 +648,8 @@ flowchart LR
     style J fill:#FF9800,color:#fff,stroke:#EF6C00,stroke-width:3px
                 </div>
 
-                <h3>Beneficios de la Arquitectura Medallion Distribuida</h3>
-                <table style="font-size: 0.7em;">
+                <h3 style="margin-top: 1em; margin-bottom: 0.5em;">Beneficios de la Arquitectura Medallion Distribuida</h3>
+                <table style="font-size: 0.65em;">
                     <thead>
                         <tr>
                             <th style="width: 25%;">Capa</th>
@@ -687,17 +671,17 @@ flowchart LR
                     </tbody>
                 </table>
 
-                <p class="center-text small" style="margin-top: 1em;">
-                    <em>[DATO VALIDADO - decisiones-consensuadas.md] Diseño consensuado por el equipo multidisciplinario tras debate técnico</em>
+                <p class="center-text small" style="margin-top: 0.8em; font-size: 0.75em;">
+                    <em>Diseño consensuado por el equipo multidisciplinario</em>
                 </p>
             </section>
 
             <!-- Slide 8: Plan de Migración -->
             <section>
-                <h2>Plan de Migración - 3 Ondas en 18 Meses</h2>
+                <h2 style="margin-bottom: 0.5em;">Plan de Migración - 3 Ondas en 18 Meses</h2>
 
-                <h3>Timeline y Presupuesto por Onda</h3>
-                <div class="timeline">MES:  1   2   3   4   5   6   7   8   9  10  11  12  13  14  15  16  17  18
+                <h3 style="margin-bottom: 0.5em;">Timeline y Presupuesto por Onda</h3>
+                <div class="timeline" style="font-size: 0.55em;">MES:  1   2   3   4   5   6   7   8   9  10  11  12  13  14  15  16  17  18
 
 ONDA 1 (30%): ████████████████░░░░░░░░░░░░░░░░░░░░░░░░
 - 100 SQL 2008/2012 ⚠️ FUERA DE SOPORTE
@@ -713,8 +697,8 @@ ONDA 3 (10%):                     ░░░░░░░░░░░░███�
 
 FREEZE:   ░░░░░░░░ (15-Nov a 05-Ene - Sin cambios críticos)</div>
 
-                <h3>Hitos Go/No-Go Críticos</h3>
-                <table style="font-size: 0.65em;">
+                <h3 style="margin-top: 0.8em; margin-bottom: 0.5em;">Hitos Go/No-Go Críticos</h3>
+                <table style="font-size: 0.6em;">
                     <thead>
                         <tr>
                             <th style="width: 10%; text-align: center;">Mes</th>
@@ -725,19 +709,19 @@ FREEZE:   ░░░░░░░░ (15-Nov a 05-Ene - Sin cambios críticos)</di
                     </thead>
                     <tbody>
                         <tr>
-                            <td style="text-align: center; font-weight: 700; font-size: 1.2em;">3</td>
+                            <td style="text-align: center; font-weight: 700; font-size: 1.15em;">3</td>
                             <td><strong>PoC Debezium</strong></td>
                             <td>Impacto &lt;5% CPU/IO en DB origen</td>
                             <td><span class="badge badge-alert">CRÍTICO</span> Cambiar a estrategia snapshot+downtime</td>
                         </tr>
                         <tr>
-                            <td style="text-align: center; font-weight: 700; font-size: 1.2em;">6</td>
+                            <td style="text-align: center; font-weight: 700; font-size: 1.15em;">6</td>
                             <td><strong>100 SQL 2008-12 migradas</strong></td>
                             <td>100% migradas, calidad &gt;98%</td>
                             <td>Pausar Onda 2 hasta resolver</td>
                         </tr>
                         <tr>
-                            <td style="text-align: center; font-weight: 700; font-size: 1.2em;">18</td>
+                            <td style="text-align: center; font-weight: 700; font-size: 1.15em;">18</td>
                             <td><strong>Decomisionamiento on-prem</strong></td>
                             <td>100% sistemas en cloud</td>
                             <td>Operación BAU retrasada</td>
@@ -745,17 +729,16 @@ FREEZE:   ░░░░░░░░ (15-Nov a 05-Ene - Sin cambios críticos)</di
                     </tbody>
                 </table>
 
-                <p class="center-text small" style="margin-top: 1em;">
-                    <em>[DATO VALIDADO - Plan_Gantt.md] Presupuesto total: <strong>$5.76M a 18 meses</strong> (incluye OPEX on-prem residual)</em>
+                <p class="center-text small" style="margin-top: 0.8em; font-size: 0.75em;">
+                    <em>Presupuesto total: <strong>$5.76M a 18 meses</strong> (incluye OPEX on-prem residual)</em>
                 </p>
             </section>
 
             <!-- Slide 9: Riesgos y Mitigaciones -->
             <section>
-                <h2>Riesgos y Mitigaciones</h2>
+                <h2 style="margin-bottom: 0.5em;">Top 5 Riesgos Críticos/Altos</h2>
 
-                <h3>Top 5 Riesgos Críticos/Altos</h3>
-                <table style="font-size: 0.6em;">
+                <table style="font-size: 0.4em; margin-top: 0.5em;">
                     <thead>
                         <tr>
                             <th style="width: 8%; text-align: center;">ID</th>
@@ -810,8 +793,7 @@ FREEZE:   ░░░░░░░░ (15-Nov a 05-Ene - Sin cambios críticos)</di
                     </tbody>
                 </table>
 
-                <h3 style="margin-top: 1.5em;">Plan de Rollback por Onda</h3>
-                <table style="font-size: 0.7em;">
+                <table style="font-size: 0.6em;">
                     <thead>
                         <tr>
                             <th style="width: 15%; text-align: center;">Onda</th>
@@ -849,62 +831,62 @@ FREEZE:   ░░░░░░░░ (15-Nov a 05-Ene - Sin cambios críticos)</di
 
             <!-- Slide 10: Decisión y Próximos 30 Días -->
             <section>
-                <h2>Decisión Requerida y Próximos 30 Días</h2>
+                <h2 style="margin-bottom: 0.5em;">Decisión Requerida y Próximos 30 Días</h2>
 
-                <h3>¿Qué necesitamos del Comité Ejecutivo HOY?</h3>
-                <div class="info-box">
-                    <ol style="font-size: 1.1em; line-height: 1.6;">
-                        <li><strong>✅ Aprobación del Proyecto</strong> - Luz verde para iniciar Fase de Movilización (Onda 1)</li>
-                        <li><strong>✅ Aprobación de Inversión</strong> - CAPEX de $2.15M (o estrategia de ajuste a $2.0M)</li>
-                        <li><strong>✅ Aprobación de Staffing</strong> - Capacitación de 12 FTEs existentes + Contratación de 1-2 expertos externos GCP/Anthos</li>
-                    </ol>
+                <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 1.5em; margin-top: 0.5em;">
+                    <div>
+                        <h3 style="margin: 0 0 0.5em 0; font-size: 1.1em;">¿Qué necesitamos HOY?</h3>
+                        <div class="info-box" style="padding: 0.6em;">
+                            <ol style="font-size: 0.7em; line-height: 1.1; margin: 0; padding-left: 1.3em;">
+                                <li><strong>✅ Aprobación del Proyecto</strong> - Luz verde Onda 1</li>
+                                <li><strong>✅ Aprobación de Inversión</strong> - CAPEX $2.15M</li>
+                                <li><strong>✅ Aprobación de Staffing</strong> - Capacitación 12 FTEs + 1-2 expertos GCP</li>
+                            </ol>
+                        </div>
+                    </div>
+
+                    <div>
+                        <h3 style="margin: 0 0 0.5em 0; font-size: 1.1em;">Acciones Críticas - Primeros 30 Días</h3>
+                        <table style="font-size: 0.5em;">
+                            <thead>
+                                <tr>
+                                    <th style="width: 12%; text-align: center;">#</th>
+                                    <th style="width: 48%;">Acción</th>
+                                    <th style="width: 40%; text-align: center;">Fecha</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td style="text-align: center; font-weight: 700;">1</td>
+                                    <td><strong>Presentar Caso</strong></td>
+                                    <td style="text-align: center; font-weight: 700;">Día 15</td>
+                                </tr>
+                                <tr>
+                                    <td style="text-align: center; font-weight: 700;">2</td>
+                                    <td><strong>Cotización GDC Edge</strong></td>
+                                    <td style="text-align: center; font-weight: 700;">Día 20</td>
+                                </tr>
+                                <tr>
+                                    <td style="text-align: center; font-weight: 700;">3</td>
+                                    <td><strong>Cotización Confluent</strong></td>
+                                    <td style="text-align: center; font-weight: 700;">Día 20</td>
+                                </tr>
+                                <tr>
+                                    <td style="text-align: center; font-weight: 700;">4</td>
+                                    <td><strong>Kick-off Capacitación</strong></td>
+                                    <td style="text-align: center; font-weight: 700;">Día 25</td>
+                                </tr>
+                                <tr>
+                                    <td style="text-align: center; font-weight: 700;">5</td>
+                                    <td><strong>Contratación Expertos</strong></td>
+                                    <td style="text-align: center; font-weight: 700;">Día 30</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
                 </div>
 
-                <h3>Acciones Críticas - Primeros 30 Días</h3>
-                <table style="font-size: 0.7em;">
-                    <thead>
-                        <tr>
-                            <th style="width: 8%; text-align: center;">#</th>
-                            <th style="width: 40%;">Acción</th>
-                            <th style="width: 32%;">Responsable</th>
-                            <th style="width: 20%; text-align: center;">Fecha Límite</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <tr>
-                            <td style="text-align: center; font-weight: 700; font-size: 1.2em;">1</td>
-                            <td><strong>Presentar Caso de Negocio</strong></td>
-                            <td>CIO</td>
-                            <td style="text-align: center; font-weight: 700;">Día 15</td>
-                        </tr>
-                        <tr>
-                            <td style="text-align: center; font-weight: 700; font-size: 1.2em;">2</td>
-                            <td><strong>Cotización GDC Edge</strong></td>
-                            <td>Arquitecto Cloud</td>
-                            <td style="text-align: center; font-weight: 700;">Día 20</td>
-                        </tr>
-                        <tr>
-                            <td style="text-align: center; font-weight: 700; font-size: 1.2em;">3</td>
-                            <td><strong>Cotización Confluent</strong></td>
-                            <td>FinOps Lead</td>
-                            <td style="text-align: center; font-weight: 700;">Día 20</td>
-                        </tr>
-                        <tr>
-                            <td style="text-align: center; font-weight: 700; font-size: 1.2em;">4</td>
-                            <td><strong>Kick-off Capacitación</strong></td>
-                            <td>CIO</td>
-                            <td style="text-align: center; font-weight: 700;">Día 25</td>
-                        </tr>
-                        <tr>
-                            <td style="text-align: center; font-weight: 700; font-size: 1.2em;">5</td>
-                            <td><strong>Contratación Expertos</strong></td>
-                            <td>RRHH</td>
-                            <td style="text-align: center; font-weight: 700;">Día 30</td>
-                        </tr>
-                    </tbody>
-                </table>
-
-                <div class="two-columns" style="margin-top: 1.5em; font-size: 0.85em;">
+                <div class="two-columns" style="margin-top: 1.5em; font-size: 0.5em;">
                     <div class="success-box">
                         <h4 style="margin-top: 0;">¿Qué pasa si aprobamos?</h4>
                         <ul style="margin: 0;">
@@ -928,59 +910,63 @@ FREEZE:   ░░░░░░░░ (15-Nov a 05-Ene - Sin cambios críticos)</di
 
             <!-- Slide 11: Recomendación Final -->
             <section>
-                <h2>Recomendación Final</h2>
+                <h2 style="margin-bottom: 0.5em;">Recomendación Final</h2>
 
-                <div class="success-box center-text" style="margin: 2em 0; padding: 2em;">
-                    <h1 style="margin: 0; font-size: 2.5em; color: var(--success-green);">APROBAR</h1>
-                    <p style="font-size: 1.3em; margin: 0.5em 0 0 0;">el Proyecto de Migración a GCP</p>
+                <div class="success-box center-text" style="margin: 1em 0; padding: 1em;">
+                    <h1 style="margin: 0; font-size: 1em; color: var(--success-green);">APROBAR</h1>
+                    <p style="font-size: 0.7em; margin: 0.3em 0 0 0;">el Proyecto de Migración a GCP</p>
                 </div>
 
-                <h3>Resumen Ejecutivo</h3>
-                <table style="font-size: 0.7em;">
-                    <thead>
-                        <tr>
-                            <th style="width: 30%;">Aspecto</th>
-                            <th style="width: 70%;">Evaluación</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <tr>
-                            <td><strong>Caso Financiero</strong></td>
-                            <td>✅ <strong>ROI 114%</strong>, payback 11 meses, robusto incluso en peor escenario (ROI 84%)</td>
-                        </tr>
-                        <tr>
-                            <td><strong>Caso Técnico</strong></td>
-                            <td>✅ Arquitectura validada por 8 especialistas, consensuada por equipo multidisciplinario</td>
-                        </tr>
-                        <tr>
-                            <td><strong>Gestión de Riesgos</strong></td>
-                            <td>✅ 13 riesgos identificados con mitigaciones claras, 3 críticos con acciones en primeros 30 días</td>
-                        </tr>
-                        <tr>
-                            <td><strong>Presupuesto</strong></td>
-                            <td>⚠️ $2.15M (déficit $150K) - Resoluble con cotización de Google o ajuste de supuesto</td>
-                        </tr>
-                        <tr>
-                            <td><strong>Impacto en Personal</strong></td>
-                            <td>✅ Plan de capacitación de 6 meses, plan para 4 FTEs redundantes, soporte externo</td>
-                        </tr>
-                    </tbody>
-                </table>
+                <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 1.5em; margin-top: 0.8em;">
+                    <div>
+                        <table style="font-size: 0.55em;">
+                            <thead>
+                                <tr>
+                                    <th style="width: 35%;">Aspecto</th>
+                                    <th style="width: 65%;">Evaluación</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td><strong>Caso Financiero</strong></td>
+                                    <td>✅ <strong>ROI 114%</strong>, payback 11m, robusto (peor: ROI 84%)</td>
+                                </tr>
+                                <tr>
+                                    <td><strong>Caso Técnico</strong></td>
+                                    <td>✅ Arquitectura validada por 8 especialistas</td>
+                                </tr>
+                                <tr>
+                                    <td><strong>Riesgos</strong></td>
+                                    <td>✅ 13 riesgos con mitigaciones, 3 críticos acción 30d</td>
+                                </tr>
+                                <tr>
+                                    <td><strong>Presupuesto</strong></td>
+                                    <td>⚠️ $2.15M (déficit $150K) - Resoluble</td>
+                                </tr>
+                                <tr>
+                                    <td><strong>Personal</strong></td>
+                                    <td>✅ Plan capacitación 6m, 4 FTEs redundantes</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
 
-                <div class="info-box" style="margin-top: 1.5em; font-size: 1.1em;">
-                    <h4 style="margin-top: 0;">El Análisis de Sensibilidad Demuestra:</h4>
-                    <p style="margin: 0.5em 0;">
-                        <strong>Incluso si todos los supuestos están equivocados en -33%, el proyecto sigue generando ROI del 84%</strong>
-                        (5.6x el objetivo de 15%).
-                    </p>
-                    <p class="center-text" style="margin: 1em 0 0 0; font-size: 1.2em; font-weight: 700; color: var(--success-green);">
-                        El riesgo de inversión es mínimo. El potencial de retorno es excepcional.
-                    </p>
-                </div>
+                    <div style="display: flex; flex-direction: column; gap: 0.8em;">
+                        <div class="info-box" style="font-size: 0.7em; padding: 0.8em;">
+                            <h4 style="margin: 0 0 0.3em 0; font-size: 1em;">Análisis de Sensibilidad:</h4>
+                            <p style="margin: 0; line-height: 1.3;">
+                                <strong>Peor escenario (-33%):</strong> ROI <strong>84%</strong> (5.6x objetivo 15%).
+                            </p>
+                            <p class="center-text" style="margin: 0.5em 0 0 0; font-size: 0.95em; font-weight: 700; color: var(--success-green);">
+                                Riesgo mínimo. Retorno excepcional.
+                            </p>
+                        </div>
 
-                <div class="success-box center-text" style="margin-top: 1.5em; font-size: 1.2em;">
-                    <strong>La Recomendación es APROBAR y Proceder</strong><br>
-                    <span style="font-size: 0.9em;"><em>Siguiente Paso: Contactar Google (Día 7) y validar supuestos críticos (Día 20-30)</em></span>
+                        <div class="success-box center-text" style="font-size: 0.8em; padding: 0.8em;">
+                            <strong>Recomendación: APROBAR y Proceder</strong><br>
+                            <span style="font-size: 0.85em;"><em>Siguiente: Contactar Google (D7) y validar supuestos (D20-30)</em></span>
+                        </div>
+                    </div>
                 </div>
             </section>
 

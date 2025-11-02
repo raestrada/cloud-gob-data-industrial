@@ -1,0 +1,39 @@
+version: '3'
+
+vars:
+  APELLIDO: ESTRADA
+  OUTPUT_DIR: entregables/compilados
+
+tasks:
+  build:
+    desc: "Compila todos los entregables a PDF."
+    deps:
+      - build:memo
+      - build:caso
+      - build:mvp
+      - build:deck
+
+  build:memo:
+    desc: "Compila Memo Ejecutivo a PDF."
+    cmds:
+      - pandoc entregables/Memo_Ejecutivo_LiderCloudFinOps_ESTRADA.md -o {{.OUTPUT_DIR}}/Memo_Ejecutivo_LiderCloudFinOps_{{.APELLIDO}}.pdf --filter pandoc-mermaid
+
+  build:caso:
+    desc: "Compila Caso de Negocio a PDF."
+    cmds:
+      - pandoc entregables/Caso_Negocio_LiderCloudFinOps_ESTRADA.md -o {{.OUTPUT_DIR}}/Caso_Negocio_LiderCloudFinOps_{{.APELLIDO}}.pdf --filter pandoc-mermaid
+
+  build:mvp:
+    desc: "Compila MVP IA FinOps a PDF."
+    cmds:
+      - pandoc entregables/MVP_IA_FinOps_ESTRADA.md -o {{.OUTPUT_DIR}}/MVP_IA_FinOps_{{.APELLIDO}}.pdf --filter pandoc-mermaid
+
+  build:deck:
+    desc: "Compila Deck Ejecutivo a PDF."
+    cmds:
+      - decktape entregables/presentacion_ejecutiva/index.html {{.OUTPUT_DIR}}/Deck_Ejecutivo_{{.APELLIDO}}.pdf
+
+  clean:
+    desc: "Limpia los archivos compilados."
+    cmds:
+      - rm -rf {{.OUTPUT_DIR}}
