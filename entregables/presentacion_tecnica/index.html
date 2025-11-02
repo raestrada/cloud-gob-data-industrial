@@ -383,40 +383,28 @@
                 <h3>Principios de Diseño</h3>
                 <div class="mermaid">
 flowchart LR
-    subgraph edge1["PLANTA MONTERREY"]
-        direction TB
-        GDC1["GDC Edge<br/>GKE + Kafka"] --> OPS1["Operación Autónoma<br/>100% Local"]
+    subgraph edge["3 PLANTAS EDGE"]
+        direction LR
+        MTY["MTY"] & GDL["GDL"] & TIJ["TIJ"]
     end
 
-    subgraph edge2["PLANTA GUADALAJARA"]
-        direction TB
-        GDC2["GDC Edge<br/>GKE + Kafka"] --> OPS2["Operación Autónoma<br/>100% Local"]
+    subgraph gcp["CLOUD (GCP)"]
+        direction LR
+        HUB["Kafka Hub"] --> LAKE[Analytics]
+        HUB --> DR["DR"]
     end
 
-    subgraph edge3["PLANTA TIJUANA"]
-        direction TB
-        GDC3["GDC Edge<br/>GKE + Kafka"] --> OPS3["Operación Autónoma<br/>100% Local"]
-    end
+    MTY & GDL & TIJ -.->|"Cluster Linking<br/>2Gbps Interconnect"| HUB
 
-    subgraph gcp["GOOGLE CLOUD PLATFORM"]
-        direction TB
-        HUB["Kafka Hub<br/>us-central1"] --> LAKE[Data Lakehouse<br/>BigQuery]
-        DR["Kafka DR<br/>us-west1"]
-    end
-
-    edge1 -.->|"Cluster Linking<br/>Dual Interconnect 2Gbps"| HUB
-    edge2 -.->|"Cluster Linking<br/>Dual Interconnect 2Gbps"| HUB
-    edge3 -.->|"Cluster Linking<br/>Dual Interconnect 2Gbps"| HUB
-    HUB -.->|Replicación| DR
-
-    style OPS1 fill:#00ff88,color:#000,stroke:#00ff88,stroke-width:3px
-    style OPS2 fill:#00ff88,color:#000,stroke:#00ff88,stroke-width:3px
-    style OPS3 fill:#00ff88,color:#000,stroke:#00ff88,stroke-width:3px
+    style MTY fill:#00ff88,color:#000,stroke:#00ff88,stroke-width:3px
+    style GDL fill:#00ff88,color:#000,stroke:#00ff88,stroke-width:3px
+    style TIJ fill:#00ff88,color:#000,stroke:#00ff88,stroke-width:3px
     style LAKE fill:#00d9ff,color:#000,stroke:#00d9ff,stroke-width:3px
                 </div>
 
-                <div class="tech-box">
-                    <strong>Edge-First:</strong> Cada planta opera 100% autónoma con GDC Edge. RPO/RTO=0 garantizado localmente. Cloud para analítica multi-planta y DR.
+                <div class="tech-box" style="margin-top: 1em; font-size: 0.85em;">
+                    <strong>Cada Planta (MTY/GDL/TIJ):</strong> GDC Edge + GKE + Kafka local • 100% Autónoma (7+ días offline) • RPO/RTO=0 local<br>
+                    <strong>Cloud (GCP):</strong> Kafka Hub (us-central1) + DR (us-west1) • Analítica multi-planta • BigQuery Data Warehouse
                 </div>
             </section>
 
