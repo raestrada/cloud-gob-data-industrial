@@ -1,0 +1,12 @@
+{"timestamp": "2025-01-01T00:00:00Z", "period": "monthly", "month": "M1", "production_units": 130000, "total_cost_usd": 218300.0, "cost_per_unit": 1.6792, "labels": {"business_unit": "industrial-operations"}}
+{"timestamp": "2025-02-01T00:00:00Z", "period": "monthly", "month": "M2", "production_units": 130000, "total_cost_usd": 234600.0, "cost_per_unit": 1.8046, "labels": {"business_unit": "industrial-operations"}}
+{"timestamp": "2025-03-01T00:00:00Z", "period": "monthly", "month": "M3", "production_units": 130000, "total_cost_usd": 254800.0, "cost_per_unit": 1.96, "labels": {"business_unit": "industrial-operations"}}
+{"timestamp": "2025-04-01T00:00:00Z", "period": "monthly", "month": "M4", "production_units": 130000, "total_cost_usd": 279200.0, "cost_per_unit": 2.1477, "labels": {"business_unit": "industrial-operations"}}
+{"timestamp": "2025-05-01T00:00:00Z", "period": "monthly", "month": "M5", "production_units": 130000, "total_cost_usd": 300400.0, "cost_per_unit": 2.3108, "labels": {"business_unit": "industrial-operations"}}
+{"timestamp": "2025-06-01T00:00:00Z", "period": "monthly", "month": "M6", "production_units": 130000, "total_cost_usd": 316700.0, "cost_per_unit": 2.4362, "labels": {"business_unit": "industrial-operations"}}
+{"timestamp": "2025-07-01T00:00:00Z", "period": "monthly", "month": "M7", "production_units": 130000, "total_cost_usd": 322300.0, "cost_per_unit": 2.4792, "labels": {"business_unit": "industrial-operations"}}
+{"timestamp": "2025-08-01T00:00:00Z", "period": "monthly", "month": "M8", "production_units": 130000, "total_cost_usd": 312900.0, "cost_per_unit": 2.4069, "labels": {"business_unit": "industrial-operations"}}
+{"timestamp": "2025-09-01T00:00:00Z", "period": "monthly", "month": "M9", "production_units": 130000, "total_cost_usd": 306100.0, "cost_per_unit": 2.3546, "labels": {"business_unit": "industrial-operations"}}
+{"timestamp": "2025-10-01T00:00:00Z", "period": "monthly", "month": "M10", "production_units": 130000, "total_cost_usd": 316700.0, "cost_per_unit": 2.4362, "labels": {"business_unit": "industrial-operations"}}
+{"timestamp": "2025-11-01T00:00:00Z", "period": "monthly", "month": "M11", "production_units": 130000, "total_cost_usd": 317850.0, "cost_per_unit": 2.445, "labels": {"business_unit": "industrial-operations"}}
+{"timestamp": "2025-12-01T00:00:00Z", "period": "monthly", "month": "M12", "production_units": 130000, "total_cost_usd": 313609.0, "cost_per_unit": 2.4124, "labels": {"business_unit": "industrial-operations"}}
