@@ -98,6 +98,7 @@ def generate_billing_events(csv_file: str, output_file: str):
                 "project_id": "prod-industrial-fleet",  # Proyecto consolidado
                 "service": service,
                 "sku": config['sku'],
+                "resource_name": f"{service}-{config['sku']}-{timestamp.strftime('%Y%m%d')}",
                 "cost_usd": cost,
                 "usage_amount": usage_amount,
                 "usage_unit": config['usage_unit'],
