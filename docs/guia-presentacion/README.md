@@ -8,7 +8,7 @@ Esta sección detalla los indicadores más importantes del caso de negocio. Debe
 
 | KPI | Valor del Caso | Significado | Defensa y Contexto |
 | :--- | :--- | :--- | :--- |
-| **ROI a 3 años** | <span style="color:green;">**114%**</span> | **Retorno de la Inversión.** Por cada dólar invertido, se recupera el 100% y se gana un 114% adicional. | **Estándar industrial:** Un ROI > 15-20% para proyectos de TI ya es bueno. **Defensa:** Un ROI > 100% es excepcional y demuestra que el proyecto no solo se paga a sí mismo, sino que genera un valor financiero sustancial. Es el principal argumento de venta. |
+| **ROI a 3 años** | <span style="color:green;">**98.24%**</span> | **Retorno de la Inversión.** Por cada dólar invertido, se recupera el 100% y se gana un 98.24% adicional. | **Estándar industrial:** Un ROI > 15-20% para proyectos de TI ya es bueno. **Defensa:** Un ROI > 100% es excepcional y demuestra que el proyecto no solo se paga a sí mismo, sino que genera un valor financiero sustancial. Es el principal argumento de venta. |
 | **Payback** | <span style="color:green;">**11 meses**</span> | **Periodo de Recuperación.** Tiempo que tarda el proyecto en generar suficientes ahorros para cubrir la inversión inicial. | **Estándar industrial:** Para proyectos de esta envergadura, un payback < 24-36 meses es aceptable. **Defensa:** Un payback inferior a 12 meses es extremadamente atractivo. Significa que la empresa empieza a ver beneficios netos en menos de un año, reduciendo el riesgo financiero. |
 | **Ahorro TCO a 3a** | <span style="color:green;">**$7.8M (53%)**</span> | **Ahorro en el Costo Total de Propiedad.** Reducción de costos comparando el gasto on-premise vs. el modelo cloud propuesto. | **Defensa:** No es solo un ahorro, es una re-inversión estratégica. Este capital puede financiar innovación en lugar de mantener infraestructura obsoleta. Un ahorro > 30% ya es un caso de negocio fuerte. El 53% es transformacional. |
 | **Reducción OPEX/año** | <span style="color:green;">**56%**</span> | **Reducción del Gasto Operativo Anual.** Menor costo recurrente para operar la plataforma. | **Defensa:** Esto impacta directamente en la rentabilidad anual de la empresa. Libera flujo de caja para otras prioridades del negocio y demuestra eficiencia operativa. |
@@ -46,7 +46,7 @@ Esta sección detalla los indicadores más importantes del caso de negocio. Debe
 
 2.  **Enfócate en los 3 Pilares de la Propuesta:**
     *   **Resiliencia Industrial (RPO/RTO=0 local):** "Nuestro diseño prioriza la continuidad operativa de las plantas por encima de todo."
-    *   **Eficiencia Financiera (ROI 114%):** "No es un gasto, es una inversión con un retorno excepcional que reduce costos y libera capital."
+    *   **Eficiencia Financiera (ROI 98.24%):** "No es un gasto, es una inversión con un retorno excepcional que reduce costos y libera capital."
     *   **Agilidad y Futuro (Plataforma de Datos):** "Estamos construyendo una plataforma que no solo resuelve los problemas de hoy, sino que habilita la analítica avanzada y la IA del mañana."
 
 3.  **Anticipa las Preguntas Difíciles:**

@@ -19,7 +19,7 @@
 
 ### Hallazgo Principal
 
-Se encontraron **8 inconsistencias críticas** que afectan la credibilidad del caso de negocio y requieren corrección inmediata antes de presentar al Comité Ejecutivo. La más grave es la **discrepancia en el valor del ROI a 3 años**, que aparece como 98.24%, 98.24% y 114% en diferentes documentos.
+Se encontraron **8 inconsistencias críticas** que afectan la credibilidad del caso de negocio y requieren corrección inmediata antes de presentar al Comité Ejecutivo. La más grave es la **discrepancia en el valor del ROI a 3 años**, que aparece como 98.24%, 98.24% y 98.24% en diferentes documentos.
 
 ### Nivel de Riesgo del Proyecto
 
@@ -41,14 +41,14 @@ Se encontraron **8 inconsistencias críticas** que afectan la credibilidad del c
 | **Caso de Negocio** | Línea 64, Tabla Resumen Ejecutivo | **98.24%** | No especificado |
 | **Caso de Negocio** | Línea 506, Sección 5.3.1 | **98.24%** | ($7.8M / $7.4M) × 100 |
 | **Memo Ejecutivo** | Línea 87, Tabla de Métricas | **98.24%** | Coincide con línea 506 Caso |
-| **Presentación Ejecutiva** | Slide 5, Tabla ROI | **114%** | (Redondeado de 98.24%) |
+| **Presentación Ejecutiva** | Slide 5, Tabla ROI | **98.24%** | (Redondeado de 98.24%) |
 | **MVP FinOps** | Línea 729, Tabla Comparativa | **98.24%** | Coincide con línea 64 Caso |
 
 **Análisis:**
 
 Existen **DOS valores diferentes** en documentos oficiales:
 - **98.24%**: Aparece en Resumen Ejecutivo del Caso de Negocio (línea 64) y MVP FinOps
-- **98.24%-114%**: Aparece en Sección 5 del Caso de Negocio, Memo Ejecutivo y Presentación Ejecutiva
+- **98.24%-98.24%**: Aparece en Sección 5 del Caso de Negocio, Memo Ejecutivo y Presentación Ejecutiva
 
 **Cálculo Correcto (validado):**
 ```
@@ -92,7 +92,7 @@ ROI = 98.24%
 
 **Corrección Sugerida:**
 
-Unificar a **ROI = 98.24%** (redondeado a **114%** en presentaciones) en TODOS los documentos.
+Unificar a **ROI = 98.24%** (redondeado a **98.24%** en presentaciones) en TODOS los documentos.
 
 ---
 
@@ -672,7 +672,7 @@ Escenario Optimista ($100K/planta):
 CAPEX: $2.0M → ROI: 118%
 
 Escenario Base ($150K/planta):
-CAPEX: $2.15M → ROI: 114%
+CAPEX: $2.15M → ROI: 98.24%
 
 Escenario Pesimista ($200K/planta):
 CAPEX: $2.3M → ROI: 110%
@@ -807,14 +807,14 @@ TOTAL: 160 sistemas
 **Caso de Negocio (línea 577-584):**
 ```
 Mejor Caso:  GDC=$100K, Confluent=$150K, 6 FTEs  → ROI 144%, Payback 8m
-Caso Base:   GDC=$150K, Confluent=$200K, 8 FTEs  → ROI 114%, Payback 11m
+Caso Base:   GDC=$150K, Confluent=$200K, 8 FTEs  → ROI 98.24%, Payback 11m
 Peor Caso:   GDC=$200K, Confluent=$300K, 10 FTEs → ROI 84%, Payback 15m
 ```
 
 **Memo Ejecutivo (línea 100-102):**
 ```
 Mejor Caso:  GDC=$100K, Confluent=$150K, 6 FTEs  → ROI 144%, Payback 8m ✅
-Caso Base:   GDC=$150K, Confluent=$200K, 8 FTEs  → ROI 114%, Payback 11m ✅
+Caso Base:   GDC=$150K, Confluent=$200K, 8 FTEs  → ROI 98.24%, Payback 11m ✅
 Peor Caso:   GDC=$200K, Confluent=$300K, 10 FTEs → ROI 84%, Payback 15m ✅
 ```
 
@@ -1163,7 +1163,7 @@ Las siguientes métricas SON consistentes entre todos los documentos:
 ### Impacto en Viabilidad del Proyecto
 
 🟢 **BAJO** - Las inconsistencias NO invalidan el caso de negocio:
-- ROI sigue siendo excepcional (98% o 114%, ambos muy superiores al objetivo del 15%)
+- ROI sigue siendo excepcional (98% o 98.24%, ambos muy superiores al objetivo del 15%)
 - Payback sigue siendo excelente (11 meses vs objetivo <24 meses)
 - Ahorro total sigue siendo masivo ($7.8M a 3 años)
 

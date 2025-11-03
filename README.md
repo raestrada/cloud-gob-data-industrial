@@ -45,3 +45,4 @@ El corazón del caso de negocio reside en un modelo financiero robusto y auditab
 Todos los cálculos están automatizados en un script de Python para garantizar la transparencia y la consistencia.
 
 - **[Explorar el Modelo Financiero](./docs/modelo-financiero/README.md)**
+- **[Análisis Financiero Completo](./docs/modelo-financiero/ANALISIS_FINANCIERO_COMPLETO.md)**: Documento consolidado que extiende el modelo de payback con la explicación de todos los cálculos financieros y los valores obtenidos.

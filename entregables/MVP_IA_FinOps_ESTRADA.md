@@ -9,6 +9,14 @@
 
 ---
 
+> ⚠️ **Advertencia sobre Sobreajuste (Overfitting) y Datos Sintéticos**
+>
+> Los resultados presentados en este MVP se basan en un **dataset sintético y controlado**, como se especifica en el caso de negocio. Las métricas perfectas (100% de precisión) son un fuerte indicador de que los modelos están **sobreajustados** a estos datos limpios.
+>
+> **Estos resultados no son representativos del rendimiento esperado en un entorno de producción con datos reales.** La siguiente fase del proyecto (integración con datos de Kafka) será crucial para validar la robustez y capacidad de generalización de los modelos.
+
+---
+
 ## Resumen Ejecutivo
 
 Este documento presenta los resultados del **MVP de IA para FinOps**, desarrollado como parte de la Fase 5 del proyecto de migración a Google Cloud Platform. El MVP demuestra la viabilidad técnica y el valor de negocio de aplicar técnicas avanzadas de Machine Learning y procesamiento de eventos en tiempo real para la gestión financiera de la plataforma cloud.

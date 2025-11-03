@@ -368,7 +368,7 @@ Aclarar en TODO el documento:
 Caso de Negocio (línea 64): 98.24% ❌
 Caso de Negocio (línea 506): 98.24% ❌
 Memo Ejecutivo (línea 87): 98.24% ❌
-Presentación Ejecutiva (Slide 5): 114% ❌
+Presentación Ejecutiva (Slide 5): 98.24% ❌
 ```
 
 **Problema:** El PDF NO especifica el ROI esperado, solo contiene datos base para calcularlo.
@@ -395,7 +395,7 @@ ROI = ($8,376,538 - $2,150,000) / $2,150,000 × 100 = 289.6% ✓
 
 **Corrección Requerida:**
 ```
-Unificar a 98.24% (o 114% redondeado) en TODOS los documentos.
+Unificar a 98.24% (o 98.24% redondeado) en TODOS los documentos.
 Eliminar el valor 98.24% que aparece en Caso de Negocio línea 64.
 
 Agregar nota de cálculo:
@@ -1136,7 +1136,7 @@ Las correcciones requeridas son:
 
 - [ ] **IR-07:** Unificar ROI en todos los documentos:
   - [ ] Caso de Negocio línea 64: Eliminar 98.24%
-  - [ ] Unificar a 98.24% (o 114% redondeado)
+  - [ ] Unificar a 98.24% (o 98.24% redondeado)
   - [ ] Agregar nota explicativa del cálculo
 
 - [ ] **IR-11:** Unificar CAPEX:

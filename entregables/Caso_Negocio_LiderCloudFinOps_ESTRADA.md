@@ -244,15 +244,34 @@ La arquitectura diseñada se basa en **cinco principios fundamentales** que abor
 
 **[DATO VALIDADO - arquitectura-plataforma.md]** La plataforma se basa en 5 clústeres de Kafka interconectados mediante Cluster Linking:
 
-```
-PLANTA MONTERREY (GDC Edge)          ┐
-  └─ kafka-edge-mty                  │
-                                      │
-PLANTA GUADALAJARA (GDC Edge)        ├──► KAFKA HUB (us-central1)
-  └─ kafka-edge-gdl                  │      └─ Cluster Linking DR ──► KAFKA DR (us-west1)
-                                      │
-PLANTA TIJUANA (GDC Edge)            │
-  └─ kafka-edge-tij                  ┘
+```mermaid
+graph TD
+     subgraph "Plantas (On-Premise)"
+         subgraph "PLANTA MONTERREY (GDC Edge)"
+             kafka_mty["kafka-edge-mty"]
+         end
+         subgraph "PLANTA GUADALAJARA (GDC Edge)"
+             kafka_gdl["kafka-edge-gdl"]
+         end
+         subgraph "PLANTA TIJUANA (GDC Edge)"
+             kafka_tij["kafka-edge-tij"]
+         end
+     end
+ 
+     subgraph "GCP Cloud"
+         subgraph "Región Principal (us-central1)"
+             kafka_hub["KAFKA HUB"]
+         end
+         subgraph "Región de Desastres (us-west1)"
+             kafka_dr["KAFKA DR"]
+         end
+     end
+ 
+     kafka_mty -- "Cluster Linking" --> kafka_hub
+     kafka_gdl -- "Cluster Linking" --> kafka_hub
+     kafka_tij -- "Cluster Linking" --> kafka_hub
+ 
+     kafka_hub -- "Cluster Linking para DR" --> kafka_dr
 ```
 
 **Configuración de Cluster Linking**:
@@ -536,11 +555,11 @@ PLANTA TIJUANA (GDC Edge)            │
 |:---|:---|:---|:---|:---|
 | **A. Ajustar supuesto de GDC Edge** | Reducir estimación de $150K/planta a $100K/planta | **Cumple presupuesto** ($2.0M) | Sin impacto | ⭐ **RECOMENDADA** |
 | **B. Fasear compra de hardware** | Comprar 2 plantas en Año 1, 1 en Año 2 | Año 1: $2.0M, Año 2: +$150K | Retrasa Onda 2 en 3 meses | Aceptable como backup |
-| **C. Solicitar incremento de presupuesto** | Justificar con ROI excepcional (114%) | $2.15M | Sin impacto | Viable dada la magnitud del ROI |
+| **C. Solicitar incremento de presupuesto** | Justificar con ROI excepcional (98.24%) | $2.15M | Sin impacto | Viable dada la magnitud del ROI |
 
 **Decisión Recomendada**: **Opción A** - Ajustar el supuesto de costo de GDC Edge a $100K/planta ($300K total) para cumplir el presupuesto de $2.0M. Este ajuste convierte el **SC-01** en el riesgo financiero más crítico del proyecto, requiriendo validación inmediata con Google.
 
-**Plan de Contingencia**: Si la cotización real de Google excede $100K/planta, ejecutar **Opción C** (solicitar incremento de presupuesto) presentando el análisis de ROI del 114% al CFO.
+**Plan de Contingencia**: Si la cotización real de Google excede $100K/planta, ejecutar **Opción C** (solicitar incremento de presupuesto) presentando el análisis de ROI del 98.24% al CFO.
 
 ### 5.5. Análisis de Sensibilidad Financiera
 
@@ -551,7 +570,7 @@ PLANTA TIJUANA (GDC Edge)            │
 | Costo por Planta | CAPEX Total | TCO 3 Años | Ahorro | ROI | Payback |
 |---:|---:|---:|---:|---:|---:|
 | **$100,000** (optimista) | $2,000,000 | $7,208,462 | $8,526,538 | **118%** | 10 meses |
-| **$150,000** (caso base) | $2,150,000 | $7,358,462 | $8,376,538 | **114%** | 11 meses |
+| **$150,000** (caso base) | $2,150,000 | $7,358,462 | $8,376,538 | **98.24%** | 11 meses |
 | **$200,000** (pesimista) | $2,300,000 | $7,508,462 | $8,226,538 | **110%** | 12 meses |
 
 **Conclusión**: Incluso en el escenario pesimista (+33% vs. caso base), el ROI sigue siendo excepcional (110%) y cumple holgadamente el objetivo del negocio (>15%).
@@ -561,7 +580,7 @@ PLANTA TIJUANA (GDC Edge)            │
 | Costo Anual Confluent | OPEX Anual | TCO 3 Años | Ahorro | ROI | Payback |
 |---:|---:|---:|---:|---:|---:|
 | **$150,000** (optimista -25%) | $2,264,872 | $7,208,462 | $8,526,538 | **118%** | 11 meses |
-| **$200,000** (caso base) | $2,314,872 | $7,358,462 | $8,376,538 | **114%** | 11 meses |
+| **$200,000** (caso base) | $2,314,872 | $7,358,462 | $8,376,538 | **98.24%** | 11 meses |
 | **$300,000** (pesimista +50%) | $2,414,872 | $7,658,462 | $8,076,538 | **105%** | 12 meses |
 
 **Conclusión**: El costo de Confluent tiene impacto moderado. Incluso con un incremento del 50%, el ROI sigue siendo excelente (105%).
@@ -571,7 +590,7 @@ PLANTA TIJUANA (GDC Edge)            │
 | FTEs Post-Migración | OPEX Personal | OPEX Anual Total | TCO 3 Años | Ahorro | ROI | Payback |
 |---:|---:|---:|---:|---:|---:|---:|
 | **6 FTEs** (reducción agresiva 50%) | $600,000 | $2,114,872 | $6,758,462 | $8,976,538 | **133%** | 9 meses |
-| **8 FTEs** (caso base - reducción 33%) | $800,000 | $2,314,872 | $7,358,462 | $8,376,538 | **114%** | 11 meses |
+| **8 FTEs** (caso base - reducción 33%) | $800,000 | $2,314,872 | $7,358,462 | $8,376,538 | **98.24%** | 11 meses |
 | **10 FTEs** (reducción conservadora 17%) | $1,000,000 | $2,514,872 | $7,958,462 | $7,776,538 | **98%** | 13 meses |
 
 **Conclusión**: La reducción de personal tiene impacto significativo en el ROI. Se recomienda validar con RRHH la viabilidad de reducir de 12 a 8 FTEs mediante re-capacitación y automatización.
@@ -581,7 +600,7 @@ PLANTA TIJUANA (GDC Edge)            │
 | Escenario | Supuestos | TCO 3 Años | Ahorro | ROI | Payback |
 |:---|:---|---:|---:|---:|---:|
 | **Mejor Caso** | GDC=$100K, Confluent=$150K, 6 FTEs | $6,458,462 | $9,276,538 | **144%** | 8 meses |
-| **Caso Base** | GDC=$150K, Confluent=$200K, 8 FTEs | $7,358,462 | $8,376,538 | **114%** | 11 meses |
+| **Caso Base** | GDC=$150K, Confluent=$200K, 8 FTEs | $7,358,462 | $8,376,538 | **98.24%** | 11 meses |
 | **Peor Caso** | GDC=$200K, Confluent=$300K, 10 FTEs | $8,558,462 | $7,176,538 | **84%** | 15 meses |
 
 **Conclusión Crítica**: Incluso en el peor escenario razonable (todos los supuestos críticos se desvían negativamente), el proyecto sigue generando un ROI del 84% y un payback de 15 meses, **cumpliendo todos los objetivos del negocio**. Esto valida la robustez financiera del proyecto.
@@ -1026,7 +1045,7 @@ violation[{"msg": msg}] {
 
 El Comité Ejecutivo debe aprobar:
 
-1. ✅ **El caso de negocio financiero**: ROI del 114%, payback de 11 meses, cumple todos los objetivos.
+1. ✅ **El caso de negocio financiero**: ROI del 98.24%, payback de 11 meses, cumple todos los objetivos.
 2. ✅ **La estrategia técnica**: Arquitectura Edge-First con GDC Edge + GCP, validada por 8 agentes especializados.
 3. ✅ **El plan de gestión de riesgos**: 13 riesgos identificados con mitigaciones claras, riesgos críticos tienen acciones en primeros 30 días.
 4. ⚠️ **El presupuesto de inversión**: $2.15M CAPEX (déficit de $150K a resolver con cotización de Google o ajuste de supuesto).
@@ -1039,7 +1058,7 @@ El Comité Ejecutivo debe aprobar:
 Este proyecto de migración a una plataforma cloud híbrida basada en Google Cloud Platform representa una transformación estratégica para la organización, no solo una modernización tecnológica.
 
 **Los beneficios son claros e inmediatos**:
-- **Financieros**: $7.8M de ahorro a 3 años, ROI del 114%, payback en 11 meses.
+- **Financieros**: $7.8M de ahorro a 3 años, ROI del 98.24%, payback en 11 meses.
 - **Operacionales**: Eliminación de 35% de sistemas fuera de soporte, reducción del 100% de incidentes por cortes de energía en plantas.
 - **Estratégicos**: Habilitación de analítica multi-planta, agilidad para innovación futura (IA, IoT), cumplimiento de regulaciones de residencia de datos.
 
@@ -1089,7 +1108,7 @@ Este proyecto de migración a una plataforma cloud híbrida basada en Google Clo
 | **Arquitectura de Redes** | `docs/fase2/arquitectura-redes.md` | Dual Interconnect, PSC, ASM |
 | **Modelo de Gobierno** | `docs/fase3/devsecops-gobierno.md` | GitOps, OPA doble validación, plan FinOps 30-60-90 |
 | **Estrategia de Migración** | `docs/fase3/migracion-legados.md` | 3 ondas, PoC Debezium, containerización .exe |
-| **Modelo Financiero** | `docs/fase4/modelo-financiero.md` | Script Python de TCO, ROI del 114% |
+| **Modelo Financiero** | `docs/fase4/modelo-financiero.md` | Script Python de TCO, ROI del 98.24% |
 | **Estructura de Costos** | `docs/fase4/estructura-costos-cloud.md` | Desglose CAPEX/OPEX detallado |
 | **Matriz de Riesgos** | `docs/fase6/matriz-riesgos.md` | 13 riesgos con mitigaciones |
 | **Decisiones Consensuadas** | `docs/fase6/decisiones-consensuadas.md` | 4 decisiones arquitectónicas clave |

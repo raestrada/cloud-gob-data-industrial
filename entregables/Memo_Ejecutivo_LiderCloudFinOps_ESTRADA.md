@@ -4,13 +4,13 @@
 **DE:** Líder de Arquitectura Cloud & FinOps
 **FECHA:** 2025-11-01
 **VERSIÓN:** 3.0
-**ASUNTO:** Recomendación: Aprobar Modernización Cloud con ROI 114% y Payback 11 Meses
+**ASUNTO:** Recomendación: Aprobar Modernización Cloud con ROI 98.24% y Payback 11 Meses
 
 ---
 
 ## Decisión Recomendada: APROBAR
 
-**Solicito la aprobación inmediata de este proyecto de modernización cloud con inversión de $2.15M** que generará **$7.8M en ahorros a 3 años (ROI 114%)** y eliminará **$3.2M/año en pérdidas** por cortes de energía, mientras resuelve el **riesgo crítico de seguridad** del 35% de bases de datos fuera de soporte.
+**Solicito la aprobación inmediata de este proyecto de modernización cloud con inversión de $2.15M** que generará **$7.8M en ahorros a 3 años (ROI 98.24%)** y eliminará **$3.2M/año en pérdidas** por cortes de energía, mientras resuelve el **riesgo crítico de seguridad** del 35% de bases de datos fuera de soporte.
 
 **El análisis de sensibilidad demuestra robustez financiera:** incluso si todos los supuestos críticos fallan en -33%, el proyecto mantiene ROI de 84% (5.6× el objetivo de 15%) con payback de 15 meses.
 
@@ -98,7 +98,7 @@ Propongo una arquitectura **"Edge-First Distribuida"** que transforma tres capac
 | Escenario | Supuestos | Ahorro 3a | ROI | Payback | ¿Cumple Meta >15%? |
 |:----------|:----------|----------:|----:|--------:|:-------------------|
 | **Mejor Caso** | GDC=$100K/planta, Confluent=$150K/año, 6 FTEs | $9.3M | **144%** | 8m | ✅ **9.6× objetivo** |
-| **Caso Base** | GDC=$150K/planta, Confluent=$200K/año, 8 FTEs | $7.8M | **114%** | 11m | ✅ **7.6× objetivo** |
+| **Caso Base** | GDC=$150K/planta, Confluent=$200K/año, 8 FTEs | $7.8M | **98.24%** | 11m | ✅ **7.6× objetivo** |
 | **Peor Caso** | GDC=$200K/planta, Confluent=$300K/año, 10 FTEs | $7.2M | **84%** | 15m | ✅ **5.6× objetivo** |
 
 **Conclusión Crítica:** Incluso con todos los supuestos críticos erróneos en -33%, el proyecto genera ROI de 84% (5.6× el objetivo) y payback de 15 meses. **El riesgo de inversión es mínimo. El potencial de retorno es excepcional.**
@@ -118,7 +118,7 @@ Propongo una arquitectura **"Edge-First Distribuida"** que transforma tres capac
 
 1. **[RECOMENDADA] Validar con Google (Día 20):** Obtener cotización formal de GDC Edge. Si es <$150K/planta → problema resuelto. Supuesto SC-01 es el **riesgo #1** del proyecto.
 
-2. **Aprobar déficit de $150K:** El ROI excepcional (114%) justifica esta inversión adicional marginal (7.5%). Payback sigue siendo 11 meses.
+2. **Aprobar déficit de $150K:** El ROI excepcional (98.24%) justifica esta inversión adicional marginal (7.5%). Payback sigue siendo 11 meses.
 
 3. **Re-fasear Onda 3:** Diferir 10% de cargas críticas 3 meses → libera $150K de CAPEX inicial. **Trade-off:** retrasa beneficios completos.
 
@@ -208,7 +208,7 @@ El Comité debe evaluar el proyecto con estas 5 métricas:
 
 | # | Criterio | Meta | Resultado Proyectado | Estado |
 |--:|:---------|:-----|:---------------------|:-------|
-| 1 | **Caso Financiero** | ROI >15% | **ROI 114%**, payback 11m, robusto (peor caso: 84%) | ✅ **Excede 7.6×** |
+| 1 | **Caso Financiero** | ROI >15% | **ROI 98.24%**, payback 11m, robusto (peor caso: 84%) | ✅ **Excede 7.6×** |
 | 2 | **Estrategia Técnica** | Arquitectura validada | Edge-First validada por 8 especialistas, consensuada por equipo multidisciplinario | ✅ **Validada** |
 | 3 | **Riesgos** | Plan de mitigación claro | 13 riesgos con mitigaciones, 3 críticos con acciones primeros 30d | ✅ **Gestionado** |
 | 4 | **Presupuesto** | ≤$2.0M CAPEX | $2.15M (déficit $150K) — validar en Día 20 | ⚠️ **Por validar** |
@@ -224,7 +224,7 @@ El Comité debe evaluar el proyecto con estas 5 métricas:
 
 El análisis demuestra que este proyecto:
 1. **Resuelve amenazas críticas al negocio** (seguridad, cortes, rigidez)
-2. **Genera retorno excepcional** (ROI 114%, payback 11m)
+2. **Genera retorno excepcional** (ROI 98.24%, payback 11m)
 3. **Es financieramente robusto** (peor caso: ROI 84%, 5.6× objetivo)
 4. **Tiene riesgos controlados** (mitigaciones claras, acciones concretas)
 5. **Habilita crecimiento futuro** (analítica, IA, IoT, escalabilidad)

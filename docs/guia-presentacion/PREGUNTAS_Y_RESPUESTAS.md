@@ -6,7 +6,7 @@ Este documento consolida las preguntas más probables que pueden surgir durante 
 
 ## A. Preguntas Financieras (ROI, Costos, Presupuesto)
 
-**P1: El ROI del 114% parece muy alto. ¿Es realista para un proyecto de este tipo?**
+**P1: El ROI del 98.24% parece muy alto. ¿Es realista para un proyecto de este tipo?**
 
 **Respuesta:** Sí, es un ROI alto pero completamente realista y defendible para este caso específico. La razón es que no estamos haciendo una simple migración, sino una transformación que resuelve problemas de negocio extremadamente costosos. Nuestro punto de partida es uno de alta ineficiencia y riesgo, lo que magnifica el retorno de la inversión.
 
