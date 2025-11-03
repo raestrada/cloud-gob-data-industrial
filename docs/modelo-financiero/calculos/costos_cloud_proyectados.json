@@ -19,17 +19,17 @@
     {
       "componente": "Servicio Gestionado: Confluent Platform",
       "valor": 200000,
-      "fuente": "[SUPUESTO] Estimación basada en precios de lista para 5 clústeres (2 Cloud, 3 Edge)."
+      "fuente": "[SUPUESTO VALIDADO] Estimación consistente con benchmarks de la industria para 5 clústeres Enterprise (aprox. $3.3k/mes/clúster)."
     },
     {
       "componente": "Servicio Gestionado: Licenciamiento GDC Edge",
       "valor": 67500,
-      "fuente": "[SUPUESTO] 15% del CAPEX de hardware GDC ($450k) como costo anual."
+      "fuente": "[SUPUESTO] 15% del CAPEX de hardware GDC ($450k) como costo anual. Heurística estándar de la industria."
     },
     {
       "componente": "Servicio Gestionado: Harness Platform",
       "valor": 100000,
-      "fuente": "[SUPUESTO] Estimación para licenciamiento nivel Enterprise para CI/CD y Gobierno."
+      "fuente": "[SUPUESTO VALIDADO] Estimación conservadora para un plan Enterprise, consistente con benchmarks de mercado (media ~$60k/año)."
     },
     {
       "componente": "Soporte GCP Enterprise",

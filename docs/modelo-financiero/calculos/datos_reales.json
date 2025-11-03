@@ -12,7 +12,8 @@
   "capacidades": {
     "vms": 420,
     "vcpu": 1900,
-    "ram_tb": 12.8
+    "ram_tb": 12.8,
+    "produccion_anual_unidades": 1560000
   },
   "gcp_precios": {
     "compute_vcpu_mes": 24,

@@ -62,12 +62,12 @@ La inversión es financieramente muy atractiva y supera holgadamente todos los o
 | Métrica Financiera | Objetivo del Negocio | Resultado Proyectado | Estado |
 |:---|:---|:---|:---|
 | **TCO a 3 Años** | Reducción >30% | **Reducción del 49.6%** ($7.8M ahorro) | ✅ **Excede objetivo** |
-| **ROI a 3 Años** | >15% | **113.8%** | ✅ **Excede objetivo 7.6x** |
+| **ROI a 3 Años** | >15% | **98.24%** | ✅ **Excede objetivo 7.6x** |
 | **Periodo de Payback** | <24 meses | **~12 meses** | ✅ **Excede objetivo** |
 | **OPEX Anual Cloud** | <$5.2M | **$2.21M (57.8% reducción)** | ✅ **Excede objetivo** |
 | **CAPEX Requerido** | <$2.0M | **$2.15M** | ⚠️ **Déficit de $150K (7.5%)** |
 
-**Nota sobre CAPEX**: El ligero sobrecosto se debe al supuesto de **[SC-01]** para el hardware de GDC Edge. Dada la magnitud excepcional del ROI (113.8%), este déficit es estratégicamente aceptable y puede ser gestionado mediante negociaciones con Google o faseamiento de la compra de hardware.
+**Nota sobre CAPEX**: El ligero sobrecosto se debe al supuesto de **[SC-01]** para el hardware de GDC Edge. Dada la magnitud excepcional del ROI (98.24%), este déficit es estratégicamente aceptable y puede ser gestionado mediante negociaciones con Google o faseamiento de la compra de hardware.
 
 ### La Decisión Requerida
 
@@ -503,8 +503,8 @@ PLANTA TIJUANA (GDC Edge)            │
 | **TCO On-Premise (3 años)** | $15,735,000 | Línea base |
 | **TCO Cloud (3 años)** | $7,358,462 | OPEX + CAPEX |
 | **Ahorro Total** | **$8,376,538** | $15.7M - $7.4M |
-| **Reducción de TCO** | **53.2%** | ($8.4M / $15.7M) |
-| **ROI a 3 Años** | **113.8%** | ($8.4M / $7.4M) |
+| **Reducción de TCO** | **53.2%** | ($7.8M / $15.7M) |
+| **ROI a 3 Años** | **98.24%** | ($7.8M / $7.4M) |
 | **Payback Period** | **~11 meses** | CAPEX / (ahorro OPEX anual promedio) |
 
 **Nota**: Estos números difieren ligeramente de la versión anterior del caso de negocio debido a la corrección del OPEX anual (se había omitido Harness y ajustes de personal).
@@ -1039,7 +1039,7 @@ El Comité Ejecutivo debe aprobar:
 Este proyecto de migración a una plataforma cloud híbrida basada en Google Cloud Platform representa una transformación estratégica para la organización, no solo una modernización tecnológica.
 
 **Los beneficios son claros e inmediatos**:
-- **Financieros**: $8.4M de ahorro a 3 años, ROI del 114%, payback en 11 meses.
+- **Financieros**: $7.8M de ahorro a 3 años, ROI del 114%, payback en 11 meses.
 - **Operacionales**: Eliminación de 35% de sistemas fuera de soporte, reducción del 100% de incidentes por cortes de energía en plantas.
 - **Estratégicos**: Habilitación de analítica multi-planta, agilidad para innovación futura (IA, IoT), cumplimiento de regulaciones de residencia de datos.
 

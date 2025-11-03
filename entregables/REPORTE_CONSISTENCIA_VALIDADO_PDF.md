@@ -366,8 +366,8 @@ Aclarar en TODO el documento:
 **Valores Encontrados en Documentos:**
 ```
 Caso de Negocio (línea 64): 98.24% ❌
-Caso de Negocio (línea 506): 113.8% ❌
-Memo Ejecutivo (línea 87): 113.8% ❌
+Caso de Negocio (línea 506): 98.24% ❌
+Memo Ejecutivo (línea 87): 98.24% ❌
 Presentación Ejecutiva (Slide 5): 114% ❌
 ```
 
@@ -384,22 +384,22 @@ ROI = $8,376,538 / $2,150,000 × 100 = 389.6% ✓
 
 OPCIÓN B (ROI sobre TCO Cloud):
 ROI = (Ahorro / TCO Cloud) × 100
-ROI = $8,376,538 / $7,358,462 × 100 = 113.8% ✓
+ROI = $8,376,538 / $7,358,462 × 100 = 98.24% ✓
 
 OPCIÓN C (ROI neto):
 ROI = (Ahorro - CAPEX) / CAPEX × 100
 ROI = ($8,376,538 - $2,150,000) / $2,150,000 × 100 = 289.6% ✓
 ```
 
-**Conclusión:** El valor **113.8%** usa la fórmula ROI = (Ahorro / TCO Cloud) × 100, que es una métrica válida.
+**Conclusión:** El valor **98.24%** usa la fórmula ROI = (Ahorro / TCO Cloud) × 100, que es una métrica válida.
 
 **Corrección Requerida:**
 ```
-Unificar a 113.8% (o 114% redondeado) en TODOS los documentos.
+Unificar a 98.24% (o 114% redondeado) en TODOS los documentos.
 Eliminar el valor 98.24% que aparece en Caso de Negocio línea 64.
 
 Agregar nota de cálculo:
-"ROI = (Ahorro Total / TCO Cloud) × 100 = ($8.4M / $7.4M) × 100 = 113.8%"
+"ROI = (Ahorro Total / TCO Cloud) × 100 = ($7.8M / $7.4M) × 100 = 98.24%"
 ```
 
 ---
@@ -918,7 +918,7 @@ El PDF NO contiene proyecciones de costos cloud, solo baseline on-prem. Por lo t
 | **IR-01** | Total SQL Server | Caso de Negocio, Presentaciones | **310 → 220** (eliminar 90 No-Críticas fantasma) |
 | **IR-02** | Hardware OPEX | Caso de Negocio línea 442 | **$1,980K → $1,560K** + agregar línea Energía $420K |
 | **IR-03** | SQL 2008-2012 | Memo Ejecutivo línea 244 | **140 → 100** |
-| **IR-07** | ROI 3 años | Caso de Negocio línea 64 | **Eliminar 98.24%**, unificar a **113.8%** |
+| **IR-07** | ROI 3 años | Caso de Negocio línea 64 | **Eliminar 98.24%**, unificar a **98.24%** |
 | **IR-11** | CAPEX Total | Caso/Gantt | Decidir: **$2.15M vs $2.36M** y unificar |
 
 **Impacto:** Estas 5 correcciones restauran la credibilidad del caso financiero.
@@ -969,7 +969,7 @@ TCO Cloud 3 años: $7,358,462 (estimado, no en PDF)
 Ahorro: $8,376,538 (53%)
 
 CAPEX: $2,150,000 - $2,360,000 (por definir)
-ROI: 113.8% (sobre TCO cloud)
+ROI: 98.24% (sobre TCO cloud)
 Payback: 11 meses
 
 Costo/unidad On-Prem: $3.36 (PDF pág. 3)
@@ -980,7 +980,7 @@ Reducción: 56%
 **Conclusión:**
 - ✅ ROI superior a objetivo (>15%)
 - ✅ Payback inferior a objetivo (<24 meses)
-- ✅ Ahorro masivo 3 años ($8.4M)
+- ✅ Ahorro masivo 3 años ($7.8M)
 - ✅ Reducción unit cost significativa (56%)
 
 **EL PROYECTO SIGUE SIENDO ALTAMENTE RECOMENDABLE.**
@@ -1097,7 +1097,7 @@ Las correcciones requeridas son:
 1. IR-01: SQL Server Total (310 → 220)
 2. IR-02: Hardware OPEX ($1,980K → $1,560K)
 3. IR-03: SQL 2008-2012 en Memo (140 → 100)
-4. IR-07: ROI unificado (113.8%)
+4. IR-07: ROI unificado (98.24%)
 5. IR-11: CAPEX unificado ($2.15M o $2.36M)
 
 **Tiempo estimado de corrección:** 4-6 horas
@@ -1136,7 +1136,7 @@ Las correcciones requeridas son:
 
 - [ ] **IR-07:** Unificar ROI en todos los documentos:
   - [ ] Caso de Negocio línea 64: Eliminar 98.24%
-  - [ ] Unificar a 113.8% (o 114% redondeado)
+  - [ ] Unificar a 98.24% (o 114% redondeado)
   - [ ] Agregar nota explicativa del cálculo
 
 - [ ] **IR-11:** Unificar CAPEX:

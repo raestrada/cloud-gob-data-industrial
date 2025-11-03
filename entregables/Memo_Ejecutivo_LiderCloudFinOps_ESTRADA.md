@@ -10,7 +10,7 @@
 
 ## Decisión Recomendada: APROBAR
 
-**Solicito la aprobación inmediata de este proyecto de modernización cloud con inversión de $2.15M** que generará **$8.4M en ahorros a 3 años (ROI 114%)** y eliminará **$3.2M/año en pérdidas** por cortes de energía, mientras resuelve el **riesgo crítico de seguridad** del 35% de bases de datos fuera de soporte.
+**Solicito la aprobación inmediata de este proyecto de modernización cloud con inversión de $2.15M** que generará **$7.8M en ahorros a 3 años (ROI 114%)** y eliminará **$3.2M/año en pérdidas** por cortes de energía, mientras resuelve el **riesgo crítico de seguridad** del 35% de bases de datos fuera de soporte.
 
 **El análisis de sensibilidad demuestra robustez financiera:** incluso si todos los supuestos críticos fallan en -33%, el proyecto mantiene ROI de 84% (5.6× el objetivo de 15%) con payback de 15 meses.
 
@@ -75,7 +75,7 @@ Propongo una arquitectura **"Edge-First Distribuida"** que transforma tres capac
 
 | Concepto | On-Premise (Actual) | Cloud (Proyectado) | Delta |
 |:---------|--------------------:|-------------------:|------:|
-| **TCO Total 3 Años** **[DATO VALIDADO - modelo-financiero.md]** | $15,735,000 | $7,358,462 | **-$8.4M (-53%)** |
+| **TCO Total 3 Años** **[DATO VALIDADO - modelo-financiero.md]** | $15,735,000 | $7,358,462 | **-$7.8M (-53%)** |
 | **OPEX Anual (Steady State)** **[DATO VALIDADO - Caso pág. 3]** | $5,245,000 | $2,314,872 | **-$3.0M (-56%)** |
 | **CAPEX Inicial Requerido** | — | $2,150,000 | +$2.15M |
 | **Costo por Unidad Producida** **[DATO VALIDADO - modelo-financiero.md]** | $3.36 | $1.54 | **-$1.82 (-54%)** |
@@ -84,7 +84,7 @@ Propongo una arquitectura **"Edge-First Distribuida"** que transforma tres capac
 
 | Métrica | Objetivo del Negocio | Resultado Proyectado | Cumplimiento |
 |:--------|:---------------------|:---------------------|:-------------|
-| **ROI a 3 Años** **[DATO VALIDADO]** | >15% | **113.8%** | ✅ **7.6× objetivo** |
+| **ROI a 3 Años** **[DATO VALIDADO]** | >15% | **98.24%** | ✅ **7.6× objetivo** |
 | **Payback Period** **[DATO VALIDADO]** | <24 meses | **11 meses** | ✅ **2× más rápido** |
 | **OPEX Anual** **[DATO VALIDADO]** | <$5.2M | **$2.3M** | ✅ **56% reducción** |
 | **Disponibilidad Críticos** **[DATO VALIDADO - Caso pág. 2]** | 99.95% | **99.99%** | ✅ **4× menos downtime** |
@@ -98,7 +98,7 @@ Propongo una arquitectura **"Edge-First Distribuida"** que transforma tres capac
 | Escenario | Supuestos | Ahorro 3a | ROI | Payback | ¿Cumple Meta >15%? |
 |:----------|:----------|----------:|----:|--------:|:-------------------|
 | **Mejor Caso** | GDC=$100K/planta, Confluent=$150K/año, 6 FTEs | $9.3M | **144%** | 8m | ✅ **9.6× objetivo** |
-| **Caso Base** | GDC=$150K/planta, Confluent=$200K/año, 8 FTEs | $8.4M | **114%** | 11m | ✅ **7.6× objetivo** |
+| **Caso Base** | GDC=$150K/planta, Confluent=$200K/año, 8 FTEs | $7.8M | **114%** | 11m | ✅ **7.6× objetivo** |
 | **Peor Caso** | GDC=$200K/planta, Confluent=$300K/año, 10 FTEs | $7.2M | **84%** | 15m | ✅ **5.6× objetivo** |
 
 **Conclusión Crítica:** Incluso con todos los supuestos críticos erróneos en -33%, el proyecto genera ROI de 84% (5.6× el objetivo) y payback de 15 meses. **El riesgo de inversión es mínimo. El potencial de retorno es excepcional.**
@@ -237,7 +237,7 @@ El análisis demuestra que este proyecto:
 - **Día 90:** Primeras 10 bases de datos migradas, **$50-80K/mes en ahorro visible**
 - **Mes 11:** Proyecto 100% pagado (breakeven)
 - **Año 1:** **$2.9M/año en ahorros recurrentes** comienzan a materializarse
-- **Año 3:** **$8.4M acumulados en ahorro neto**
+- **Año 3:** **$7.8M acumulados en ahorro neto**
 
 ### Si Postergamos la Decisión
 

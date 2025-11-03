@@ -16,7 +16,7 @@ Este documento consolida las preguntas más probables que pueden surgir durante 
 
 **P3: El CAPEX inicial de $2.15M es considerable. ¿Por qué es tan alto y cómo se justifica?**
 
-**Respuesta:** Es una inversión estratégica, no un gasto. Se justifica porque: 1) Es menos de la mitad de lo que costaría solo renovar el hardware on-premise ($5.9M). 2) Desbloquea un ahorro total de $8.4M a 3 años. 3) Se recupera en solo 11 meses gracias a los enormes ahorros operativos que genera. El componente principal es el hardware GDC Edge, que es la pieza clave para garantizar la autonomía y resiliencia de las plantas.
+**Respuesta:** Es una inversión estratégica, no un gasto. Se justifica porque: 1) Es menos de la mitad de lo que costaría solo renovar el hardware on-premise ($5.9M). 2) Desbloquea un ahorro total de $7.8M a 3 años. 3) Se recupera en solo 11 meses gracias a los enormes ahorros operativos que genera. El componente principal es el hardware GDC Edge, que es la pieza clave para garantizar la autonomía y resiliencia de las plantas.
 
 **P4: ¿Qué pasa si los costos de la nube son más altos de lo previsto? ¿Cómo evitamos el "bill shock"?**
 

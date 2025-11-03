@@ -36,6 +36,12 @@ La siguiente documentación proporciona el contexto y los detalles de la arquite
 
 - **[Baseline del Inventario](./docs/baseline-inventario/)**: Proporciona información sobre el estado actual de la infraestructura, incluyendo el baseline financiero, la conectividad y el inventario de sistemas legados.
 
-- **[Modelo Financiero](./docs/modelo-financiero/)**: Incluye los detalles del modelo financiero, la estructura de costos en la nube y los cálculos utilizados para el análisis TCO.
-
 - **[Migración y DevOps](./docs/migracion-devops/)**: Describe el enfoque de DevSecOps, la estrategia de migración de sistemas legados y los pipelines de datos.
+
+## Modelo Financiero y Validación
+
+El corazón del caso de negocio reside en un modelo financiero robusto y auditable. Esta sección contiene el análisis TCO, el cálculo de ROI y un modelo de payback refinado que justifica la viabilidad del proyecto.
+
+Todos los cálculos están automatizados en un script de Python para garantizar la transparencia y la consistencia.
+
+- **[Explorar el Modelo Financiero](./docs/modelo-financiero/README.md)**

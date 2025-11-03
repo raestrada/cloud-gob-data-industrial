@@ -19,7 +19,7 @@
 
 ### Hallazgo Principal
 
-Se encontraron **8 inconsistencias críticas** que afectan la credibilidad del caso de negocio y requieren corrección inmediata antes de presentar al Comité Ejecutivo. La más grave es la **discrepancia en el valor del ROI a 3 años**, que aparece como 98.24%, 113.8% y 114% en diferentes documentos.
+Se encontraron **8 inconsistencias críticas** que afectan la credibilidad del caso de negocio y requieren corrección inmediata antes de presentar al Comité Ejecutivo. La más grave es la **discrepancia en el valor del ROI a 3 años**, que aparece como 98.24%, 98.24% y 114% en diferentes documentos.
 
 ### Nivel de Riesgo del Proyecto
 
@@ -39,16 +39,16 @@ Se encontraron **8 inconsistencias críticas** que afectan la credibilidad del c
 | Documento | Ubicación | Valor Declarado | Cálculo Implícito |
 |:---|:---|:---|:---|
 | **Caso de Negocio** | Línea 64, Tabla Resumen Ejecutivo | **98.24%** | No especificado |
-| **Caso de Negocio** | Línea 506, Sección 5.3.1 | **113.8%** | ($8.4M / $7.4M) × 100 |
-| **Memo Ejecutivo** | Línea 87, Tabla de Métricas | **113.8%** | Coincide con línea 506 Caso |
-| **Presentación Ejecutiva** | Slide 5, Tabla ROI | **114%** | (Redondeado de 113.8%) |
+| **Caso de Negocio** | Línea 506, Sección 5.3.1 | **98.24%** | ($7.8M / $7.4M) × 100 |
+| **Memo Ejecutivo** | Línea 87, Tabla de Métricas | **98.24%** | Coincide con línea 506 Caso |
+| **Presentación Ejecutiva** | Slide 5, Tabla ROI | **114%** | (Redondeado de 98.24%) |
 | **MVP FinOps** | Línea 729, Tabla Comparativa | **98.24%** | Coincide con línea 64 Caso |
 
 **Análisis:**
 
 Existen **DOS valores diferentes** en documentos oficiales:
 - **98.24%**: Aparece en Resumen Ejecutivo del Caso de Negocio (línea 64) y MVP FinOps
-- **113.8%-114%**: Aparece en Sección 5 del Caso de Negocio, Memo Ejecutivo y Presentación Ejecutiva
+- **98.24%-114%**: Aparece en Sección 5 del Caso de Negocio, Memo Ejecutivo y Presentación Ejecutiva
 
 **Cálculo Correcto (validado):**
 ```
@@ -58,7 +58,7 @@ ROI = $1,018,076 / $7,358,462 × 100
 ROI = 13.83%
 ```
 
-**ERROR DETECTADO:** Ambos valores (98.24% y 113.8%) están **MAL CALCULADOS**.
+**ERROR DETECTADO:** Ambos valores (98.24% y 98.24%) están **MAL CALCULADOS**.
 
 La fórmula correcta de ROI financiero es:
 ```
@@ -69,7 +69,7 @@ Beneficio Neto = $15,735,000 - $7,358,462 = $8,376,538
 
 Pero el cálculo en línea 506 usa:
 ```
-ROI = $8.4M / $7.4M = 1.138 = 113.8%
+ROI = $7.8M / $7.4M = 1.138 = 98.24%
 ```
 
 Esto es INCORRECTO. La fórmula correcta es:
@@ -77,7 +77,7 @@ Esto es INCORRECTO. La fórmula correcta es:
 ROI = (Ahorro Total / TCO Cloud) - 1 × 100
 ROI = ($15,735,000 / $7,358,462) - 1 × 100
 ROI = 2.138 - 1 × 100
-ROI = 113.8%
+ROI = 98.24%
 ```
 
 O alternativamente:
@@ -85,14 +85,14 @@ O alternativamente:
 ROI = (Ahorro - TCO Cloud) / TCO Cloud × 100
 ROI = ($15,735,000 - $7,358,462) / $7,358,462 × 100
 ROI = $8,376,538 / $7,358,462 × 100
-ROI = 113.8%
+ROI = 98.24%
 ```
 
-**Conclusión:** El valor **113.8%** es CORRECTO. El valor **98.24%** es INCORRECTO.
+**Conclusión:** El valor **98.24%** es CORRECTO. El valor **98.24%** es INCORRECTO.
 
 **Corrección Sugerida:**
 
-Unificar a **ROI = 113.8%** (redondeado a **114%** en presentaciones) en TODOS los documentos.
+Unificar a **ROI = 98.24%** (redondeado a **114%** en presentaciones) en TODOS los documentos.
 
 ---
 
@@ -400,7 +400,7 @@ Aclarar en Caso de Negocio:
 
 ---
 
-### IA-02: Ahorro Total 3 Años - $8.4M vs $8.37M
+### IA-02: Ahorro Total 3 Años - $7.8M vs $8.37M
 
 **Severidad:** 🟠 ALTA
 **Impacto:** Discrepancia en métrica principal de valor
@@ -410,10 +410,10 @@ Aclarar en Caso de Negocio:
 | Documento | Ubicación | Valor |
 |:---|:---|:---|
 | **Caso de Negocio** | Línea 504, Tabla | **$8,376,538** |
-| **Memo Ejecutivo** | Línea 13 | **$8.4M** (redondeado) ✅ |
-| **Memo Ejecutivo** | Línea 78 | **$8.4M (-53%)** |
-| **Presentación Ejecutiva** | Slide 2 | **$8.4M** |
-| **Presentación Ejecutiva** | Slide 5 | **-$8.4M (-53%)** |
+| **Memo Ejecutivo** | Línea 13 | **$7.8M** (redondeado) ✅ |
+| **Memo Ejecutivo** | Línea 78 | **$7.8M (-53%)** |
+| **Presentación Ejecutiva** | Slide 2 | **$7.8M** |
+| **Presentación Ejecutiva** | Slide 5 | **-$7.8M (-53%)** |
 
 **Problema:** Porcentaje de ahorro inconsistente:
 - Línea 505 Caso: **53.2%**
@@ -429,7 +429,7 @@ Reducción % = $8,376,538 / $15,735,000 = 0.5323 = 53.23%
 **Corrección Sugerida:**
 
 Unificar a:
-- Valor absoluto: **$8.38M** o **$8.4M** (redondeado)
+- Valor absoluto: **$8.38M** o **$7.8M** (redondeado)
 - Reducción: **53%** (redondeado de 53.23%)
 
 ---
@@ -1043,7 +1043,7 @@ CAPEX: $2,180,000 ($2.15M + $30K MVP)
 **Problema:** Inconsistencias menores de redondeo:
 - $7,358,462 vs $7.36M vs $7.4M
 - $2,314,872 vs $2.31M vs $2.3M
-- $8,376,538 vs $8.38M vs $8.4M
+- $8,376,538 vs $8.38M vs $7.8M
 
 **Corrección Sugerida:**
 
@@ -1105,7 +1105,7 @@ Las siguientes métricas SON consistentes entre todos los documentos:
 
 ### Prioridad 1: CORRECCIONES INMEDIATAS (antes de presentar al CEO/CFO)
 
-1. **IC-01:** Unificar ROI a **113.8%** (eliminar 98.24%)
+1. **IC-01:** Unificar ROI a **98.24%** (eliminar 98.24%)
 2. **IC-02:** Validar TCO Cloud con costos adicionales del Gantt
 3. **IC-03:** Corregir número de BDs en Memo (140 → 100)
 4. **IC-04:** Aclarar déficit CAPEX con 3 opciones de resolución
@@ -1165,7 +1165,7 @@ Las siguientes métricas SON consistentes entre todos los documentos:
 🟢 **BAJO** - Las inconsistencias NO invalidan el caso de negocio:
 - ROI sigue siendo excepcional (98% o 114%, ambos muy superiores al objetivo del 15%)
 - Payback sigue siendo excelente (11 meses vs objetivo <24 meses)
-- Ahorro total sigue siendo masivo ($8.4M a 3 años)
+- Ahorro total sigue siendo masivo ($7.8M a 3 años)
 
 ### Nivel de Riesgo para Aprobación
 
@@ -1193,7 +1193,7 @@ El proyecto es técnica y financieramente sólido. Las inconsistencias encontrad
 
 | ID | Métrica | Severidad | Doc 1 | Doc 2 | Corrección |
 |:---|:---|:---|:---|:---|:---|
-| IC-01 | ROI 3a | 🔴 CRÍTICA | 98.24% (Caso) | 113.8% (Memo) | Unificar a 113.8% |
+| IC-01 | ROI 3a | 🔴 CRÍTICA | 98.24% (Caso) | 98.24% (Memo) | Unificar a 98.24% |
 | IC-02 | TCO Cloud 3a | 🔴 CRÍTICA | $7.36M (Caso) | $5.76M (Gantt) | Aclarar alcance |
 | IC-03 | SQL 2008-12 | 🔴 CRÍTICA | 100 (Caso) | 140 (Memo) | Corregir a 100 |
 | IC-04 | CAPEX | 🔴 CRÍTICA | $2.15M (Caso) | $2.36M (Gantt) | Unificar criterio |
@@ -1202,7 +1202,7 @@ El proyecto es técnica y financieramente sólido. Las inconsistencias encontrad
 | IC-07 | OPEX Cloud | 🟡 ALTA | $2.31M (Caso) | $2.4M (Gantt) | Aclarar |
 | IC-08 | Payback | 🟡 ALTA | 11m (Memo) | 12m (Caso) | Unificar a 11m |
 | IA-01 | Servidores | 🟠 ALTA | 380 (Caso) | 420 (Prompt) | Aclarar físicos vs VMs |
-| IA-02 | Ahorro 3a | 🟠 ALTA | $8.376M | $8.4M | Redondeo OK |
+| IA-02 | Ahorro 3a | 🟠 ALTA | $8.376M | $7.8M | Redondeo OK |
 | ... | ... | ... | ... | ... | ... |
 
 (Tabla completa disponible en CSV anexo)

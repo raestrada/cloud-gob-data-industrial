@@ -2,9 +2,9 @@ import json
 
 def calculate_tco():
     # --- 1. Cargar Archivos de Datos ---
-    with open('docs/fase4/calculos/datos_reales.json', 'r') as f:
+    with open('docs/modelo-financiero/calculos/datos_reales.json', 'r') as f:
         real_data = json.load(f)
-    with open('docs/fase4/calculos/costos_cloud_proyectados.json', 'r') as f:
+    with open('docs/modelo-financiero/calculos/costos_cloud_proyectados.json', 'r') as f:
         cloud_costs_data = json.load(f)
 
     # --- 2. Definir Supuestos (solo para la rampa de migración) ---
