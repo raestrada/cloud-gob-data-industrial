@@ -175,12 +175,13 @@ graph TD
     A[Cloud Scheduler] --> B(Cloud Function)
     B -- "Dispara Pipeline" --> C[Vertex AI Pipelines]
     
-    subgraph C
-        C1[Cargar Datos<br/>(desde BigQuery)] --> C2[Entrenar Modelo]
-        C2 --> C3[Evaluar Modelo]
-        C3 -- Si es bueno --> C4[Registrar en Model Registry]
+    subgraph PIPELINE["Pipeline en Vertex AI"]
+        C1["Cargar Datos\n(desde BigQuery)"] --> C2["Entrenar Modelo"]
+        C2 --> C3["Evaluar Modelo"]
+        C3 -- "Si es bueno" --> C4["Registrar en Model Registry"]
     end
 
+    C --> PIPELINE --> C4
     C4 --> D[Desplegar en Endpoint]
 ```
 
@@ -191,15 +192,15 @@ graph TD
 Este diagrama conceptual muestra las fuentes de datos y los KPIs clave que se visualizarían en el dashboard de FinOps en Looker.
 
 ```mermaid
-graph TD
+flowchart TD
     subgraph "Fuentes de Datos"
-        A[BigQuery<br/>(Datos de Facturación GCP)]
-        B[KubeCost<br/>(Costos por Pod/Namespace)]
-        C[Hojas de Cálculo<br/>(Presupuestos, Metas)]
+        A["BigQuery\n(Datos de Facturación GCP)"]
+        B["KubeCost\n(Costos por Pod/Namespace)"]
+        C["Hojas de Cálculo\n(Presupuestos, Metas)"]
     end
 
     subgraph "Dashboard FinOps en Looker"
-        D[KPIs Clave]
+        D["KPIs Clave"]
         D1["TCO (Cloud vs On-Prem)"]
         D2["ROI y Payback"]
         D3["Costo por Unidad Producida"]
