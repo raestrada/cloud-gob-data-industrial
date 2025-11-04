@@ -46,3 +46,21 @@ Todos los cálculos están automatizados en un script de Python para garantizar 
 
 - **[Explorar el Modelo Financiero](./docs/modelo-financiero/README.md)**
 - **[Análisis Financiero Completo](./docs/modelo-financiero/ANALISIS_FINANCIERO_COMPLETO.md)**: Documento consolidado que extiende el modelo de payback con la explicación de todos los cálculos financieros y los valores obtenidos.
+
+---
+
+## MVP de IA para FinOps
+
+Como parte de la Fase 5 del proyecto, se desarrolló un **MVP (Minimum Viable Product)** para demostrar la viabilidad y el valor de negocio de aplicar IA a los procesos de FinOps. El MVP se compone de tres casos de uso funcionales implementados en Jupyter Notebooks.
+
+Los resultados y la documentación completa del MVP se encuentran en el [entregable correspondiente](entregables/MVP_IA_FinOps_ESTRADA.md).
+
+### Notebooks del MVP
+
+Puede explorar y ejecutar los notebooks directamente:
+
+- **[00_data_generation.ipynb](MVP/notebooks/00_data_generation.ipynb)**: Script para generar el dataset sintético a partir del CSV histórico, validando la estrategia *Event-First*.
+- **[01_forecast_costos.ipynb](MVP/notebooks/01_forecast_costos.ipynb)**: Implementa y compara tres modelos de Machine Learning para predecir los costos mensuales con un MAPE < 10%.
+- **[02_deteccion_anomalias.ipynb](MVP/notebooks/02_deteccion_anomalias.ipynb)**: Utiliza Isolation Forest para detectar anomalías en los costos en tiempo real con un F1-Score > 85%.
+- **[03_nlp_etiquetado.ipynb](MVP/notebooks/03_nlp_etiquetado.ipynb)**: Demuestra cómo usar NLP para inferir y asignar etiquetas faltantes a recursos "huérfanos", con el objetivo de alcanzar un 100% de compliance.
+
